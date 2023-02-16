@@ -13,3 +13,8 @@ val Shapes = Shapes(
 val BottomBarVerticalPadding = 12.dp
 val BottomBarHorizontalPadding = 16.dp
 val BottomBarItemSize = 40.dp
+
+val TabLayoutDividerHeight = 3.dp
+val TabLayoutItemPadding = 4.dp
+val TabLayoutPadding = 16.dp
+val TabLayoutSpacerSize = 8.dp
