@@ -4,8 +4,8 @@ import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,7 +30,7 @@ fun PostCard(
             .fillMaxWidth()
             .padding(4.dp)
             .clip(MaterialTheme.shapes.small)
-            .background(MaterialTheme.colors.surface)
+            .background(MaterialTheme.colorScheme.surface)
     ) {
         Image(
             painter = painterResource(id = image),
@@ -49,14 +49,14 @@ fun PostCard(
             Icon(
                 painter = painterResource(id = R.drawable.more_icon),
                 contentDescription = "",
-                tint = MaterialTheme.colors.onSurface,
+                tint = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.weight(1f)
             )
             Spacer(modifier = Modifier.weight(1f))
             Icon(
                 painter = painterResource(id = R.drawable.more_icon),
                 contentDescription = "",
-                tint = MaterialTheme.colors.onSurface,
+                tint = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.weight(1f)
             )
         }

@@ -3,9 +3,9 @@ package com.example.pinterestclone.ui.homeScreen.tabLayout
 import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
@@ -22,7 +22,7 @@ fun TabLayoutItem(category: String) {
     Column(
         modifier = Modifier
             .height(TabLayoutItemHeight)
-            .background(MaterialTheme.colors.surface)
+            .background(MaterialTheme.colorScheme.surface)
             .padding(TabLayoutItemPadding)
             .width(IntrinsicSize.Max),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -30,7 +30,7 @@ fun TabLayoutItem(category: String) {
     ) {
         Text(
             text = category,
-            color = MaterialTheme.colors.onSurface,
+            color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier
                 .padding(horizontal = TabLayoutItemPadding)
                 .weight(1f)
@@ -42,7 +42,7 @@ fun TabLayoutItem(category: String) {
                 //.padding(top = TabLayoutItemPadding)
                 .height(TabLayoutDividerHeight)
                 .clip(MaterialTheme.shapes.small)
-                .background(MaterialTheme.colors.onSurface)
+                .background(MaterialTheme.colorScheme.onSurface),
         )
     }
 }
