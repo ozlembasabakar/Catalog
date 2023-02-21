@@ -1,4 +1,4 @@
-package com.example.pinterestclone.ui.homeScreen.postCard
+package com.example
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
@@ -13,23 +13,20 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.pinterestclone.R
-import com.example.pinterestclone.ui.theme.PinterestCloneTheme
+import com.example.feature.post.R
+import com.example.ui.theme.PinterestCloneTheme
+import com.example.ui.theme.Shapes
 
 @Composable
 fun PostCard(
     modifier: Modifier,
     image: Int,
 ) {
-/*    val width = LocalConfiguration.current.run {
-        ((screenWidthDp) / 2).dp
-    }*/
-
     Column(
         modifier = modifier
             .fillMaxWidth()
             .padding(4.dp)
-            .clip(MaterialTheme.shapes.small)
+            .clip(Shapes.small)
             .background(MaterialTheme.colorScheme.surface)
     ) {
         Image(
@@ -37,28 +34,28 @@ fun PostCard(
             contentDescription = "",
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(MaterialTheme.shapes.small),
-            contentScale = ContentScale.Crop
-        )
+                .clip(Shapes.small),
+            contentScale = ContentScale.Crop)
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 4.dp, horizontal = 8.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
+                .padding(8.dp),
+            horizontalArrangement = Arrangement.End
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.more_icon),
-                contentDescription = "",
+                contentDescription = "More options",
                 tint = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.weight(1f)
-            )
+                //modifier = Modifier.weight(1f)
+            )/*
             Spacer(modifier = Modifier.weight(1f))
             Icon(
                 painter = painterResource(id = R.drawable.more_icon),
-                contentDescription = "",
+                contentDescription = "More options",
                 tint = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.weight(1f)
-            )
+                modifier = Modifier.weight(1f),
+
+            )*/
         }
     }
 }

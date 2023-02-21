@@ -1,4 +1,4 @@
-package com.example.pinterestclone.ui.homeScreen
+package com.example
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
