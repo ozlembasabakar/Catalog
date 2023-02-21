@@ -1,4 +1,4 @@
-package com.example.pinterestclone.ui.homeScreen
+package com.example.pinterestclone.homeScreen
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
@@ -15,10 +15,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.PostCard
+import com.example.StaggeredVerticalGrid
 import com.example.pinterestclone.R
-import com.example.pinterestclone.ui.homeScreen.bottomBar.BottomBar
-import com.example.pinterestclone.ui.homeScreen.postCard.PostCard
-import com.example.pinterestclone.ui.homeScreen.tabLayout.TabLayout
+import com.example.pinterestclone.bottombar.BottomBar
+import com.example.pinterestclone.tabs.Tabs
 import com.example.pinterestclone.ui.theme.PinterestCloneTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -56,7 +57,7 @@ fun HomeScreen(modifier: Modifier) {
         containerColor = MaterialTheme.colorScheme.surface,
     ) {
         Column {
-            TabLayout(
+            Tabs(
                 modifier = Modifier
             )
             Column(

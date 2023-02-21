@@ -1,4 +1,4 @@
-package com.example.pinterestclone.ui.homeScreen.bottomBar
+package com.example.pinterestclone.bottombar
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.pinterestclone.R
 import com.example.pinterestclone.ui.theme.BottomBarHorizontalPadding
 import com.example.pinterestclone.ui.theme.BottomBarVerticalPadding
-import com.example.pinterestclone.ui.theme.PinterestCloneTheme
+import com.example.ui.theme.PinterestCloneTheme
 
 @Composable
 fun BottomBar(modifier: Modifier) {

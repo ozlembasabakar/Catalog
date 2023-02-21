@@ -1,4 +1,4 @@
-package com.example.pinterestclone.ui.tabs
+package com.example.pinterestclone.tabs
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
