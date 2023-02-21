@@ -1,4 +1,4 @@
-package com.example.pinterestclone.ui.homeScreen.tabLayout
+package com.example.pinterestclone.ui.tabs
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
@@ -17,7 +17,7 @@ import com.example.pinterestclone.ui.theme.TabLayoutItemHeight
 import com.example.pinterestclone.ui.theme.TabLayoutItemPadding
 
 @Composable
-fun TabLayoutItem(category: String) {
+fun TabItem(category: String) {
     Column(
         modifier = Modifier
             .height(TabLayoutItemHeight)
@@ -50,8 +50,8 @@ fun TabLayoutItem(category: String) {
 @Preview(name = "LightMode")
 @Preview(name = "DarkMode", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun TabLayoutItemPreview() {
+fun TabItemPreview() {
     PinterestCloneTheme {
-        TabLayoutItem(category = "Category")
+        TabItem(category = "Category")
     }
 }

@@ -1,4 +1,4 @@
-package com.example.pinterestclone.ui.homeScreen.tabLayout
+package com.example.pinterestclone.ui.tabs
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
@@ -15,14 +15,14 @@ import com.example.pinterestclone.ui.theme.TabLayoutPadding
 import com.example.pinterestclone.ui.theme.TabLayoutSpacerSize
 
 @Composable
-fun TabLayout(modifier: Modifier) {
+fun Tabs(modifier: Modifier) {
     LazyRow(
         modifier = modifier
             .background(MaterialTheme.colorScheme.surface)
             .padding(TabLayoutPadding)
     ) {
         items(15) {
-            TabLayoutItem(category = Category().category)
+            TabItem(category = Category().category)
             Spacer(modifier = Modifier.size(TabLayoutSpacerSize))
         }
     }
@@ -31,9 +31,9 @@ fun TabLayout(modifier: Modifier) {
 @Preview(name = "LightMode")
 @Preview(name = "DarkMode", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun TabLayoutPreview() {
+fun TabsPreview() {
     PinterestCloneTheme {
-        TabLayout(modifier = Modifier)
+        Tabs(modifier = Modifier)
     }
 }
 
