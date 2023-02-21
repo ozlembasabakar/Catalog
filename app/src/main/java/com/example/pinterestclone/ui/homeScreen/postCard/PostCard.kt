@@ -27,7 +27,7 @@ fun PostCard(
 
     Column(
         modifier = modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .padding(4.dp)
             .clip(MaterialTheme.shapes.small)
             .background(MaterialTheme.colors.surface)
@@ -36,7 +36,7 @@ fun PostCard(
             painter = painterResource(id = image),
             contentDescription = "",
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .clip(MaterialTheme.shapes.small),
             contentScale = ContentScale.Crop
         )

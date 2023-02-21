@@ -18,7 +18,7 @@ import com.example.pinterestclone.ui.theme.TabLayoutItemHeight
 import com.example.pinterestclone.ui.theme.TabLayoutItemPadding
 
 @Composable
-fun TabLayoutItem(category: Category) {
+fun TabLayoutItem(category: String) {
     Column(
         modifier = Modifier
             .height(TabLayoutItemHeight)
@@ -29,7 +29,7 @@ fun TabLayoutItem(category: Category) {
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = category.category,
+            text = category,
             color = MaterialTheme.colors.onSurface,
             modifier = Modifier
                 .padding(horizontal = TabLayoutItemPadding)
@@ -39,7 +39,7 @@ fun TabLayoutItem(category: Category) {
         )
         Divider(
             modifier = Modifier
-                .padding(top = TabLayoutItemPadding)
+                //.padding(top = TabLayoutItemPadding)
                 .height(TabLayoutDividerHeight)
                 .clip(MaterialTheme.shapes.small)
                 .background(MaterialTheme.colors.onSurface)
@@ -52,6 +52,6 @@ fun TabLayoutItem(category: Category) {
 @Composable
 fun TabLayoutItemPreview() {
     PinterestCloneTheme {
-        TabLayoutItem(category = Category("Category"))
+        TabLayoutItem(category = "Category")
     }
 }

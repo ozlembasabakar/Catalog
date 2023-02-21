@@ -21,9 +21,8 @@ fun TabLayout(modifier: Modifier) {
             .background(MaterialTheme.colors.surface)
             .padding(TabLayoutPadding)
     ) {
-
         items(15) {
-            TabLayoutItem(category = Category(category = "Category"))
+            TabLayoutItem(category = Category().category)
             Spacer(modifier = Modifier.size(TabLayoutSpacerSize))
         }
     }

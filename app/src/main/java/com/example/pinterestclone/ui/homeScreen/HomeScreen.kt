@@ -51,20 +51,27 @@ fun HomeScreen(modifier: Modifier) {
         },
         backgroundColor = MaterialTheme.colors.surface,
     ) {
-        Column(
-            modifier = Modifier
-                .padding(4.dp)
-                .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            TabLayout(modifier = Modifier)
-            StaggeredVerticalGrid(
-                numColumns = 2,
-                modifier = Modifier,
+        Column {
+            TabLayout(
+                modifier = Modifier
+            )
+            Column(
+                modifier = Modifier
+                    .padding(4.dp)
+                    .verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                items.forEach { icon ->
-                    PostCard(Modifier, icon)
+                StaggeredVerticalGrid(
+                    numColumns = 2,
+                    modifier = Modifier,
+                ) {
+                    items.forEach { icon ->
+                        PostCard(
+                            modifier = Modifier,
+                            image = icon
+                        )
+                    }
                 }
             }
         }
