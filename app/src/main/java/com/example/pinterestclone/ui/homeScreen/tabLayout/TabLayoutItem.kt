@@ -3,7 +3,6 @@ package com.example.pinterestclone.ui.homeScreen.tabLayout
 import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,10 +36,11 @@ fun TabLayoutItem(category: String) {
                 .wrapContentHeight(CenterVertically)
                 .wrapContentWidth(),
         )
-        Divider(
+        Box(
             modifier = Modifier
                 //.padding(top = TabLayoutItemPadding)
                 .height(TabLayoutDividerHeight)
+                .fillMaxWidth()
                 .clip(MaterialTheme.shapes.small)
                 .background(MaterialTheme.colorScheme.onSurface),
         )
