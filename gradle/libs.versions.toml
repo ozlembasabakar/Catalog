@@ -9,6 +9,7 @@ material3 = "1.0.1"
 junit = "4.13.2"
 ext-junit = "1.1.5"
 espresso = "3.5.1"
+splash-screen = "1.0.0-beta02"
 
 [libraries]
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
@@ -23,6 +24,7 @@ material3 = { module = "androidx.compose.material3:material3", version.ref = "ma
 junit = { module = "junit:junit", version.ref = "junit" }
 ext-junit = { module = "androidx.test.ext:junit", version.ref = "ext-junit" }
 espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
+splash-screen = { module = "androidx.core:core-splashscreen", version.ref = "splash-screen" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "gradleplugin" }

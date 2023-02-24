@@ -30,7 +30,7 @@ android {
                     appIcon     : "@mipmap/ic_launcher",
                     appIconRound: "@mipmap/ic_launcher",
                     appName     : "@string/app_name",
-                    appTheme    : "@style/Theme.PinterestClone"
+                    appTheme    : "@style/Theme.App.Starting"
             ]
         }
         debug {
@@ -39,7 +39,7 @@ android {
                     appIcon     : "@mipmap/ic_launcher_debug",
                     appIconRound: "@mipmap/ic_launcher_debug",
                     appName     : "@string/app_name_debug",
-                    appTheme    : "@style/Theme.PinterestClone"
+                    appTheme    : "@style/Theme.App.Starting"
             ]
         }
     }
@@ -78,4 +78,7 @@ dependencies {
     androidTestImplementation libs.compose.ui.test.junit4
     debugImplementation libs.compose.ui.tooling
     debugImplementation libs.compose.ui.test.manifest
+
+    //Splash Screen API
+    implementation libs.splash.screen
 }
