@@ -6,6 +6,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val DarkColorPalette = darkColorScheme(
     background = Color.Black,
@@ -30,6 +31,17 @@ fun PinterestCloneTheme(
         DarkColorPalette
     } else {
         LightColorPalette
+    }
+
+    val systemUiController = rememberSystemUiController()
+    if (darkTheme) {
+        systemUiController.setSystemBarsColor(
+            color = Color.Black
+        )
+    } else {
+        systemUiController.setSystemBarsColor(
+            color = Color.White
+        )
     }
 
     MaterialTheme(

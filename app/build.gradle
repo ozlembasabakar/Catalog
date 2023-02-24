@@ -81,4 +81,7 @@ dependencies {
 
     //Splash Screen API
     implementation libs.splash.screen
+
+    //System UI Controller
+    implementation libs.system.ui.controller
 }
