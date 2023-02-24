@@ -10,4 +10,6 @@ val Shapes = Shapes(
     large = RoundedCornerShape(0.dp)
 )
 
-val BottomBarHeight = 80.dp
+val BottomBarVerticalPadding = 12.dp
+val BottomBarHorizontalPadding = 16.dp
+val BottomBarItemSize = 40.dp
