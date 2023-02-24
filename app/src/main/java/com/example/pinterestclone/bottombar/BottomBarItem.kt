@@ -1,4 +1,4 @@
-package com.example.pinterestclone.ui.homeScreen.bottomBar
+package com.example.pinterestclone.bottombar
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
@@ -15,7 +15,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.pinterestclone.R
 import com.example.pinterestclone.ui.theme.BottomBarItemSize
-import com.example.pinterestclone.ui.theme.PinterestCloneTheme
+import com.example.ui.theme.PinterestCloneTheme
+import com.example.ui.theme.Shapes
 
 @Composable
 fun BottomBarItem(
@@ -26,7 +27,7 @@ fun BottomBarItem(
         modifier = modifier
             .size(BottomBarItemSize)
             .fillMaxSize()
-            .clip(shape = MaterialTheme.shapes.small)
+            .clip(shape = Shapes.small)
             .background(MaterialTheme.colorScheme.surface),
         contentAlignment = Alignment.Center
     ) {
@@ -43,6 +44,6 @@ fun BottomBarItem(
 @Composable
 fun BottomBarItemPreview() {
     PinterestCloneTheme {
-        BottomBarItem(Modifier, icon = R.drawable.ic_launcher_background)
+        BottomBarItem(Modifier, icon = R.drawable.home_icon)
     }
 }

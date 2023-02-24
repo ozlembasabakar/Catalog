@@ -1,15 +1,14 @@
 plugins {
-    alias libs.plugins.android.application
+    alias libs.plugins.android.library
     alias libs.plugins.kotlin.android
-    alias libs.plugins.kotlin.kapt
 }
 
 android {
-    namespace 'com.example.pinterestclone'
+    namespace 'com.example.feature.post'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.pinterestclone"
+        //applicationId "com.example.feature.postcard"
         minSdk 21
         targetSdk 33
         versionCode 1
@@ -48,8 +47,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":feature:post"))
-
     implementation libs.core.ktx
     implementation libs.lifecycle.runtime.ktx
     implementation libs.activity.compose
