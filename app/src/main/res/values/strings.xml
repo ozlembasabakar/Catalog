@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PinterestClone</string>
+    <string name="app_name_debug">PinterestCloneDebug</string>
 </resources>
