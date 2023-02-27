@@ -1,4 +1,14 @@
 <resources>
-    <string name="app_name">PinterestClone</string>
-    <string name="app_name_debug">PinterestCloneDebug</string>
+    <string name="app_name" translatable="false">PinterestClone</string>
+    <string name="app_name_debug" translatable="false">PinterestCloneDebug</string>
+    <string-array name="category">
+        <item>Travel</item>
+        <item>Animal</item>
+        <item>Art</item>
+        <item>Food</item>
+        <item>Health</item>
+        <item>Sport</item>
+        <item>Game</item>
+        <item>DIY</item>
+    </string-array>
 </resources>
