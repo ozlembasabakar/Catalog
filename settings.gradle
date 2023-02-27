@@ -16,3 +16,4 @@ rootProject.name = "PinterestClone"
 include ':app'
 include ':feature:post'
 include ':core:network'
+include ':core:data'
