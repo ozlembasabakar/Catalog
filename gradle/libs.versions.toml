@@ -11,6 +11,7 @@ ext-junit = "1.1.5"
 espresso = "3.5.1"
 splash-screen = "1.0.0-beta02"
 system-ui-controller = "0.27.0"
+hilt = "2.45"
 
 [libraries]
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
@@ -27,12 +28,12 @@ ext-junit = { module = "androidx.test.ext:junit", version.ref = "ext-junit" }
 espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 splash-screen = { module = "androidx.core:core-splashscreen", version.ref = "splash-screen" }
 system-ui-controller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "system-ui-controller" }
+hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "gradleplugin" }
 android-library = { id = "com.android.library", version.ref = "gradleplugin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
-
-
-
+dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
