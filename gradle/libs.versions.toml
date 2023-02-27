@@ -12,6 +12,7 @@ espresso = "3.5.1"
 splash-screen = "1.0.0-beta02"
 system-ui-controller = "0.27.0"
 hilt = "2.45"
+retrofit = "2.9.0"
 
 [libraries]
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
@@ -30,6 +31,8 @@ splash-screen = { module = "androidx.core:core-splashscreen", version.ref = "spl
 system-ui-controller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "system-ui-controller" }
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "gradleplugin" }
