@@ -13,6 +13,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.PostCard
@@ -58,7 +59,8 @@ fun HomeScreen(modifier: Modifier) {
     ) {
         Column {
             Tabs(
-                modifier = Modifier
+                modifier = Modifier,
+                category = stringArrayResource(R.array.category)
             )
             Column(
                 modifier = Modifier
