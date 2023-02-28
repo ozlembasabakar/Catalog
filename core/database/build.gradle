@@ -1,6 +1,8 @@
 plugins {
     alias libs.plugins.android.application
     alias libs.plugins.kotlin.android
+    alias libs.plugins.kotlin.kapt
+    alias libs.plugins.dagger.hilt
 }
 
 android {
@@ -60,4 +62,13 @@ dependencies {
     androidTestImplementation libs.compose.ui.test.junit4
     debugImplementation libs.compose.ui.tooling
     debugImplementation libs.compose.ui.test.manifest
+
+    //Room
+    implementation libs.room.runtime
+    kapt libs.room.compiler
+    implementation libs.room.ktx
+
+    //Dagger-Hilt
+    implementation libs.hilt
+    kapt libs.hilt.compiler
 }
