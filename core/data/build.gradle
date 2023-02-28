@@ -1,6 +1,8 @@
 plugins {
     alias libs.plugins.android.application
     alias libs.plugins.kotlin.android
+    alias libs.plugins.kotlin.kapt
+    alias libs.plugins.dagger.hilt
 }
 
 android {
@@ -47,6 +49,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:network"))
+    implementation(project(":core:model"))
 
     implementation libs.core.ktx
     implementation libs.lifecycle.runtime.ktx
@@ -60,4 +64,8 @@ dependencies {
     androidTestImplementation libs.compose.ui.test.junit4
     debugImplementation libs.compose.ui.tooling
     debugImplementation libs.compose.ui.test.manifest
+
+    //Dagger-Hilt
+    implementation libs.hilt
+    kapt libs.hilt.compiler
 }
