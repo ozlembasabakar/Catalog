@@ -49,9 +49,10 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:network"))
-    implementation(project(":core:model"))
-    implementation(project(":core:database"))
+
+    implementation project(path: ':core:network')
+    implementation project(path: ':core:model')
+    implementation project(path: ':core:database')
 
     implementation libs.core.ktx
     implementation libs.lifecycle.runtime.ktx
@@ -67,6 +68,9 @@ dependencies {
     debugImplementation libs.compose.ui.test.manifest
 
     //Dagger-Hilt
-    implementation libs.hilt
-    kapt libs.hilt.compiler
+    implementation libs.hilt.android
+    kapt libs.dagger.hilt.compiler
+    implementation libs.hilt.navigation.compose
+    kapt libs.hilt.android.compiler
+    kapt libs.hilt.hilt.compiler
 }
