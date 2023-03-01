@@ -2,18 +2,16 @@ package com.example.pinterestclone.homeScreen
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.PostCard
@@ -22,11 +20,18 @@ import com.example.pinterestclone.R
 import com.example.pinterestclone.bottombar.BottomBar
 import com.example.pinterestclone.tabs.Tabs
 import com.example.pinterestclone.ui.theme.PinterestCloneTheme
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.pinterestclone.retrofit.CatViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLifecycleComposeApi::class)
 @Composable
 fun HomeScreen(modifier: Modifier) {
+
+    val catViewModel: CatViewModel = hiltViewModel()
+    val catViewState by catViewModel.state.collectAsStateWithLifecycle()
 
     val items: List<Int> = listOf(
         R.drawable.images_1,
@@ -58,10 +63,7 @@ fun HomeScreen(modifier: Modifier) {
         containerColor = MaterialTheme.colorScheme.surface,
     ) {
         Column {
-            Tabs(
-                modifier = Modifier,
-                category = stringArrayResource(R.array.category)
-            )
+            Tabs(modifier = Modifier, category = catViewState.category)
             Column(
                 modifier = Modifier
                     .padding(4.dp)
