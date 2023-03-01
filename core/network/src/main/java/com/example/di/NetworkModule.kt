@@ -19,10 +19,11 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(): Retrofit.Builder {
 
-        val httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
         val gson = GsonBuilder().create()
 
-        return Retrofit.Builder().baseUrl("BASE_URL")
+        val httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
+
+        return Retrofit.Builder().baseUrl("https://api.thecatapi.com/v1/")
             .addConverterFactory(GsonConverterFactory.create(gson)).client(httpClient.build())
     }
 

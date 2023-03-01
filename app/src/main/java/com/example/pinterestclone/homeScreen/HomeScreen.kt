@@ -2,54 +2,39 @@ package com.example.pinterestclone.homeScreen
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.PostCard
 import com.example.StaggeredVerticalGrid
-import com.example.pinterestclone.R
 import com.example.pinterestclone.bottombar.BottomBar
 import com.example.pinterestclone.tabs.Tabs
 import com.example.pinterestclone.ui.theme.PinterestCloneTheme
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.PostCard
+import com.example.PostViewModel
+import com.example.pinterestclone.tabs.TabsViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLifecycleComposeApi::class)
 @Composable
 fun HomeScreen(modifier: Modifier) {
 
-    val items: List<Int> = listOf(
-        R.drawable.images_1,
-        R.drawable.images_2,
-        R.drawable.images_3,
-        R.drawable.images_4,
-        R.drawable.images_5,
-        R.drawable.images_1,
-        R.drawable.images_2,
-        R.drawable.images_3,
-        R.drawable.images_4,
-        R.drawable.images_5,
-        R.drawable.images_1,
-        R.drawable.images_2,
-        R.drawable.images_3,
-        R.drawable.images_4,
-        R.drawable.images_5,
-        R.drawable.images_1,
-        R.drawable.images_2,
-        R.drawable.images_3,
-        R.drawable.images_4,
-        R.drawable.images_5,
-    )
+    val tabsViewModel: TabsViewModel = hiltViewModel()
+    val tabsViewState by tabsViewModel.state.collectAsStateWithLifecycle()
+
+    val postViewModel: PostViewModel = hiltViewModel()
+    val postViewState by postViewModel.state.collectAsStateWithLifecycle()
 
     Scaffold(
         bottomBar = {
@@ -60,7 +45,7 @@ fun HomeScreen(modifier: Modifier) {
         Column {
             Tabs(
                 modifier = Modifier,
-                category = stringArrayResource(R.array.category)
+                category = tabsViewState.category
             )
             Column(
                 modifier = Modifier
@@ -73,10 +58,10 @@ fun HomeScreen(modifier: Modifier) {
                     numColumns = 2,
                     modifier = Modifier,
                 ) {
-                    items.forEach { icon ->
+                    postViewState.image.forEach { icon ->
                         PostCard(
                             modifier = Modifier,
-                            image = icon
+                            image = icon.url
                         )
                     }
                 }

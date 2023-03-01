@@ -64,8 +64,11 @@ dependencies {
     debugImplementation libs.compose.ui.test.manifest
 
     //Dagger-Hilt
-    implementation libs.hilt
-    kapt libs.hilt.compiler
+    implementation libs.hilt.android
+    kapt libs.dagger.hilt.compiler
+    implementation libs.hilt.navigation.compose
+    kapt libs.hilt.android.compiler
+    kapt libs.hilt.hilt.compiler
 
     //Retrofit
     implementation libs.retrofit

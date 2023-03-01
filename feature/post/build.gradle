@@ -1,6 +1,7 @@
 plugins {
     alias libs.plugins.android.library
     alias libs.plugins.kotlin.android
+    alias libs.plugins.kotlin.kapt
 }
 
 android {
@@ -47,6 +48,10 @@ android {
 }
 
 dependencies {
+
+    implementation project(path: ':core:data')
+    implementation project(path: ':core:model')
+
     implementation libs.core.ktx
     implementation libs.lifecycle.runtime.ktx
     implementation libs.activity.compose
@@ -59,4 +64,14 @@ dependencies {
     androidTestImplementation libs.compose.ui.test.junit4
     debugImplementation libs.compose.ui.tooling
     debugImplementation libs.compose.ui.test.manifest
+
+    //Glide
+    implementation libs.glide
+
+    //Dagger-Hilt
+    implementation libs.hilt.android
+    kapt libs.dagger.hilt.compiler
+    implementation libs.hilt.navigation.compose
+    kapt libs.hilt.android.compiler
+    kapt libs.hilt.hilt.compiler
 }

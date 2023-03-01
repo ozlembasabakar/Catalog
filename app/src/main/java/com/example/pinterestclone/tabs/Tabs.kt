@@ -10,22 +10,21 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.pinterestclone.R
+import com.example.model.Category
 import com.example.pinterestclone.ui.theme.PinterestCloneTheme
 import com.example.pinterestclone.ui.theme.TabLayoutPadding
 import com.example.pinterestclone.ui.theme.TabLayoutSpacerSize
 
 @Composable
-fun Tabs(modifier: Modifier, category: Array<String>) {
+fun Tabs(modifier: Modifier, category: List<Category>) {
     LazyRow(
         modifier = modifier
             .background(MaterialTheme.colorScheme.surface)
             .padding(TabLayoutPadding)
     ) {
-        items(category) {
-            TabItem(category = it)
+        items(category) { category ->
+            TabItem(category = category.name)
             Spacer(modifier = Modifier.size(TabLayoutSpacerSize))
         }
     }
@@ -36,9 +35,21 @@ fun Tabs(modifier: Modifier, category: Array<String>) {
 @Composable
 fun TabsPreview() {
     PinterestCloneTheme {
+
+        val categories = listOf(
+            Category(id = 0, name = "Travel"),
+            Category(id = 0, name = "Animal"),
+            Category(id = 0, name = "Art"),
+            Category(id = 0, name = "Food"),
+            Category(id = 0, name = "Health"),
+            Category(id = 0, name = "Sport"),
+            Category(id = 0, name = "Game"),
+            Category(id = 0, name = "DIY"),
+        )
+
         Tabs(
             modifier = Modifier,
-            category = stringArrayResource(id = R.array.category)
+            category = categories
         )
     }
 }
