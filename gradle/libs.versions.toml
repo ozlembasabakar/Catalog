@@ -12,10 +12,12 @@ ext-junit = "1.1.5"
 espresso = "3.5.1"
 splash-screen = "1.0.0-beta02"
 system-ui-controller = "0.27.0"
-hilt = "2.45"
-hilt-navigation = "1.0.0"
+dagger-hilt = "2.45"
+hilt = "1.0.0"
+hilt-android-compiler = "2.38.1"
 retrofit = "2.9.0"
 room = "2.5.0"
+glide = "1.5.2"
 
 [libraries]
 core-ktx = { group = "androidx.core",name = "core-ktx", version.ref = "core-ktx" }
@@ -33,18 +35,21 @@ ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "ext-ju
 espresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
 splash-screen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splash-screen" }
 system-ui-controller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "system-ui-controller" }
-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
-hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger-hilt" }
+dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger-hilt" }
+hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt-android-compiler" }
+hilt-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hilt" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+glide = { group = "com.github.skydoves", name = "landscapist-glide", version.ref = "glide"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "gradleplugin" }
 android-library = { id = "com.android.library", version.ref = "gradleplugin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
-dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger-hilt" }

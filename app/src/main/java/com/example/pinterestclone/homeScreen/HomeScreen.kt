@@ -21,6 +21,8 @@ import com.example.pinterestclone.ui.theme.PinterestCloneTheme
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.PostCard
+import com.example.PostViewModel
 import com.example.pinterestclone.tabs.TabsViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -30,30 +32,9 @@ fun HomeScreen(modifier: Modifier) {
 
     val tabsViewModel: TabsViewModel = hiltViewModel()
     val tabsViewState by tabsViewModel.state.collectAsStateWithLifecycle()
-    //val catImageViewState by catViewModel.catImagesState.collectAsStateWithLifecycle()
 
-    /*val items: List<Int> = listOf(
-        R.drawable.images_1,
-        R.drawable.images_2,
-        R.drawable.images_3,
-        R.drawable.images_4,
-        R.drawable.images_5,
-        R.drawable.images_1,
-        R.drawable.images_2,
-        R.drawable.images_3,
-        R.drawable.images_4,
-        R.drawable.images_5,
-        R.drawable.images_1,
-        R.drawable.images_2,
-        R.drawable.images_3,
-        R.drawable.images_4,
-        R.drawable.images_5,
-        R.drawable.images_1,
-        R.drawable.images_2,
-        R.drawable.images_3,
-        R.drawable.images_4,
-        R.drawable.images_5,
-    )*/
+    val postViewModel: PostViewModel = hiltViewModel()
+    val postViewState by postViewModel.state.collectAsStateWithLifecycle()
 
     Scaffold(
         bottomBar = {
@@ -77,14 +58,12 @@ fun HomeScreen(modifier: Modifier) {
                     numColumns = 2,
                     modifier = Modifier,
                 ) {
-                    /*
-                    catImageViewState.catImages.forEach { icon ->
+                    postViewState.image.forEach { icon ->
                         PostCard(
                             modifier = Modifier,
                             image = icon.url
                         )
                     }
-                   */
                 }
             }
         }

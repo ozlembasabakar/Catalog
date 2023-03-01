@@ -1,7 +1,6 @@
 package com.example
 
 import android.content.res.Configuration
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
@@ -16,11 +15,12 @@ import androidx.compose.ui.unit.dp
 import com.example.feature.post.R
 import com.example.ui.theme.PinterestCloneTheme
 import com.example.ui.theme.Shapes
+import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun PostCard(
     modifier: Modifier,
-    image: Int,
+    image: String,
 ) {
     Column(
         modifier = modifier
@@ -29,13 +29,15 @@ fun PostCard(
             .clip(Shapes.small)
             .background(MaterialTheme.colorScheme.surface)
     ) {
-        Image(
-            painter = painterResource(id = image),
+        GlideImage(
+            imageModel = image,
             contentDescription = "",
+            previewPlaceholder = R.drawable.images_1,
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(Shapes.small),
-            contentScale = ContentScale.Crop)
+            contentScale = ContentScale.Crop
+        )
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -47,15 +49,7 @@ fun PostCard(
                 contentDescription = "More options",
                 tint = MaterialTheme.colorScheme.onSurface,
                 //modifier = Modifier.weight(1f)
-            )/*
-            Spacer(modifier = Modifier.weight(1f))
-            Icon(
-                painter = painterResource(id = R.drawable.more_icon),
-                contentDescription = "More options",
-                tint = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.weight(1f),
-
-            )*/
+            )
         }
     }
 }
@@ -65,6 +59,6 @@ fun PostCard(
 @Composable
 fun PostCardPreview() {
     PinterestCloneTheme {
-        PostCard(modifier = Modifier, image = R.drawable.images_1)
+        //PostCard(modifier = Modifier, image = R.drawable.images_1)
     }
 }
