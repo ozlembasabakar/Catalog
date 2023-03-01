@@ -14,26 +14,25 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.PostCard
 import com.example.StaggeredVerticalGrid
-import com.example.pinterestclone.R
 import com.example.pinterestclone.bottombar.BottomBar
 import com.example.pinterestclone.tabs.Tabs
 import com.example.pinterestclone.ui.theme.PinterestCloneTheme
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.pinterestclone.retrofit.CatViewModel
+import com.example.pinterestclone.tabs.TabsViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLifecycleComposeApi::class)
 @Composable
 fun HomeScreen(modifier: Modifier) {
 
-    val catViewModel: CatViewModel = hiltViewModel()
-    val catViewState by catViewModel.state.collectAsStateWithLifecycle()
+    val tabsViewModel: TabsViewModel = hiltViewModel()
+    val tabsViewState by tabsViewModel.state.collectAsStateWithLifecycle()
+    //val catImageViewState by catViewModel.catImagesState.collectAsStateWithLifecycle()
 
-    val items: List<Int> = listOf(
+    /*val items: List<Int> = listOf(
         R.drawable.images_1,
         R.drawable.images_2,
         R.drawable.images_3,
@@ -54,7 +53,7 @@ fun HomeScreen(modifier: Modifier) {
         R.drawable.images_3,
         R.drawable.images_4,
         R.drawable.images_5,
-    )
+    )*/
 
     Scaffold(
         bottomBar = {
@@ -63,7 +62,10 @@ fun HomeScreen(modifier: Modifier) {
         containerColor = MaterialTheme.colorScheme.surface,
     ) {
         Column {
-            Tabs(modifier = Modifier, category = catViewState.category)
+            Tabs(
+                modifier = Modifier,
+                category = tabsViewState.category
+            )
             Column(
                 modifier = Modifier
                     .padding(4.dp)
@@ -75,12 +77,14 @@ fun HomeScreen(modifier: Modifier) {
                     numColumns = 2,
                     modifier = Modifier,
                 ) {
-                    items.forEach { icon ->
+                    /*
+                    catImageViewState.catImages.forEach { icon ->
                         PostCard(
                             modifier = Modifier,
-                            image = icon
+                            image = icon.url
                         )
                     }
+                   */
                 }
             }
         }

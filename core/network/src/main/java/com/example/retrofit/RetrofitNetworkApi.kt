@@ -1,14 +1,16 @@
 package com.example.retrofit
 
-import com.example.model.NetworkCategories
-import com.example.model.NetworkPost
+import com.example.model.NetworkCategory
 import retrofit2.http.GET
+
+const val END_POINT_CATEGORIES = "categories"
+//const val END_POINT = "images/search?limit=10"
 
 interface RetrofitNetworkApi {
 
-    @GET("END_POINT")
-    suspend fun getImages(): NetworkPost
+    @GET(END_POINT_CATEGORIES)
+    suspend fun getCatCategories(): List<NetworkCategory>
 
-    @GET("END_POINT")
-    suspend fun getCategories(): NetworkCategories
+    //@GET(END_POINT)
+    //suspend fun getCatImages(): List<Cat>
 }
