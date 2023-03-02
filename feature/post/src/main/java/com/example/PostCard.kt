@@ -10,10 +10,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.feature.post.R
 import com.example.ui.theme.PinterestCloneTheme
+import com.example.ui.theme.PostCardColumnPadding
+import com.example.ui.theme.PostCardRowPadding
 import com.example.ui.theme.Shapes
 import com.skydoves.landscapist.glide.GlideImage
 
@@ -25,13 +27,13 @@ fun PostCard(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(4.dp)
+            .padding(PostCardColumnPadding)
             .clip(Shapes.small)
             .background(MaterialTheme.colorScheme.surface)
     ) {
         GlideImage(
             imageModel = image,
-            contentDescription = "",
+            contentDescription = stringResource(R.string.image_description),
             previewPlaceholder = R.drawable.images_1,
             modifier = Modifier
                 .fillMaxWidth()
@@ -41,14 +43,13 @@ fun PostCard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
+                .padding(top = PostCardRowPadding, start = PostCardRowPadding, end = PostCardRowPadding),
             horizontalArrangement = Arrangement.End
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.more_icon),
-                contentDescription = "More options",
+                contentDescription = stringResource(R.string.more_options),
                 tint = MaterialTheme.colorScheme.onSurface,
-                //modifier = Modifier.weight(1f)
             )
         }
     }
@@ -59,6 +60,6 @@ fun PostCard(
 @Composable
 fun PostCardPreview() {
     PinterestCloneTheme {
-        //PostCard(modifier = Modifier, image = R.drawable.images_1)
+        PostCard(modifier = Modifier, image = R.drawable.images_1.toString())
     }
 }

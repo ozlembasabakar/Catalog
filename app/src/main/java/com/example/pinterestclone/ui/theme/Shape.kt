@@ -19,3 +19,6 @@ val TabLayoutDividerHeight = 3.dp
 val TabLayoutItemPadding = 4.dp
 val TabLayoutPadding = 4.dp
 val TabLayoutSpacerSize = 4.dp
+val TabItemWeight = 1f
+
+val HomeScreenColumnPadding = 4.dp
