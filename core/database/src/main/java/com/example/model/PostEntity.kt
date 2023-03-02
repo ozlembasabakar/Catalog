@@ -6,9 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "posts")
 data class PostEntity(
-    @PrimaryKey
-    @ColumnInfo(defaultValue = "")
-    val image: String,
-    @ColumnInfo(defaultValue = "")
-    val category: String,
+    @PrimaryKey val id: String,
+    @ColumnInfo(name = "height") val height: Int?,
+    @ColumnInfo(name = "url") val url: String?,
+    @ColumnInfo(name = "width") val width: Int?,
 )

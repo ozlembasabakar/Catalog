@@ -20,7 +20,7 @@ import com.skydoves.landscapist.glide.GlideImage
 @Composable
 fun PostCard(
     modifier: Modifier,
-    image: String,
+    image: String?,
 ) {
     Column(
         modifier = modifier
