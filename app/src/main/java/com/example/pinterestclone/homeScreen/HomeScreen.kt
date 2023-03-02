@@ -58,10 +58,10 @@ fun HomeScreen(modifier: Modifier) {
                     numColumns = 2,
                     modifier = Modifier,
                 ) {
-                    postViewState.image.forEach { icon ->
+                    postViewState.image.forEach {
                         PostCard(
                             modifier = Modifier,
-                            image = icon.url
+                            image = it.url
                         )
                     }
                 }

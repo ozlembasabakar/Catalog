@@ -14,6 +14,10 @@ class LocalDataSource @Inject constructor(
 
     private val coroutineScope = CoroutineScope(Dispatchers.Default)
 
+    fun getAllCatImages(): List<PostEntity> {
+        return postDao.getAllCatImages()
+    }
+
     private fun insertAllCatImages(postEntity: PostEntity) {
         coroutineScope.launch(Dispatchers.IO) {
             postDao.insertAllCatImages(postEntity = postEntity)

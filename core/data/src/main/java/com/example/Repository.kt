@@ -21,10 +21,20 @@ class Repository @Inject constructor(
 
     suspend fun getCatImages(): List<Post> {
 
-        networkDatasource.getCatImages().map { post->
+        networkDatasource.getCatImages().map { post ->
             saveToDb(networkPost = post)
         }
 
+        return localDataSource.getAllCatImages().map {
+            Post(
+                height = it.height,
+                id = it.id,
+                url = it.url,
+                width = it.width
+            )
+        }
+
+        /*
         return networkDatasource.getCatImages().map {
             Post(
                 id = it.id,
@@ -33,6 +43,7 @@ class Repository @Inject constructor(
                 width = it.width
             )
         }
+        */
     }
 
     private fun saveToDb(networkPost: NetworkPost) {
