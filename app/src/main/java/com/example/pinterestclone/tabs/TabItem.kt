@@ -11,10 +11,7 @@ import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.pinterestclone.ui.theme.PinterestCloneTheme
-import com.example.pinterestclone.ui.theme.TabLayoutDividerHeight
-import com.example.pinterestclone.ui.theme.TabLayoutItemHeight
-import com.example.pinterestclone.ui.theme.TabLayoutItemPadding
+import com.example.pinterestclone.ui.theme.*
 
 @Composable
 fun TabItem(category: String) {
@@ -32,13 +29,12 @@ fun TabItem(category: String) {
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier
                 .padding(horizontal = TabLayoutItemPadding)
-                .weight(1f)
+                .weight(TabItemWeight)
                 .wrapContentHeight(CenterVertically)
                 .wrapContentWidth(),
         )
         Box(
             modifier = Modifier
-                //.padding(top = TabLayoutItemPadding)
                 .height(TabLayoutDividerHeight)
                 .fillMaxWidth()
                 .clip(MaterialTheme.shapes.small)

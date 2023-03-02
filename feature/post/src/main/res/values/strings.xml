@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PostCard</string>
+    <string name="image_description">Cat image</string>
+    <string name="more_options">More options</string>
 </resources>
