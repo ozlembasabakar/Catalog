@@ -1,8 +1,8 @@
 package com.example
 
 import com.example.model.Category
-import com.example.model.NetworkPost
 import com.example.model.Post
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 @Suppress("UNREACHABLE_CODE")
@@ -10,6 +10,9 @@ class Repository @Inject constructor(
     private val networkDatasource: NetworkDatasource,
     private val localDataSource: LocalDataSource,
 ) {
+
+    private val coroutineScope = CoroutineScope(Dispatchers.Default)
+
     suspend fun getCategories(): List<Category> {
         return networkDatasource.getCatCategories().map {
             Category(
@@ -21,9 +24,7 @@ class Repository @Inject constructor(
 
     suspend fun getCatImages(): List<Post> {
 
-        networkDatasource.getCatImages().map { post ->
-            saveToDb(networkPost = post)
-        }
+        saveDataFromNetworkToDb()
 
         return localDataSource.getAllCatImages().map {
             Post(
@@ -46,7 +47,15 @@ class Repository @Inject constructor(
         */
     }
 
-    private fun saveToDb(networkPost: NetworkPost) {
-        localDataSource.saveToDb(networkPost)
+    private suspend fun saveDataFromNetworkToDb() {
+        coroutineScope.launch {
+            networkDatasource.getCatImages().map { post ->
+                saveToDb(post = post)
+            }
+        }
+    }
+
+    private fun saveToDb(post: Post) {
+        localDataSource.saveToDb(post)
     }
 }
