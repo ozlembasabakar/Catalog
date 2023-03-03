@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.StaggeredVerticalGrid
-import com.example.pinterestclone.bottombar.BottomBar
 import com.example.pinterestclone.tabs.Tabs
 import com.example.pinterestclone.ui.theme.PinterestCloneTheme
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -37,37 +36,38 @@ fun HomeScreen(modifier: Modifier) {
     val postViewState by postViewModel.state.collectAsStateWithLifecycle()
 
     Scaffold(
-        bottomBar = {
-            BottomBar(modifier = modifier)
-        },
+        //bottomBar = {
+            //BottomBar(modifier = modifier)
+        //},
         containerColor = MaterialTheme.colorScheme.surface,
-    ) {
-        Column {
-            Tabs(
-                modifier = Modifier,
-                category = tabsViewState.category
-            )
-            Column(
-                modifier = Modifier
-                    .padding(4.dp)
-                    .verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                StaggeredVerticalGrid(
-                    numColumns = 2,
-                    modifier = Modifier,
+        content = {
+            Column {
+                Tabs(
+                    modifier = modifier,
+                    category = tabsViewState.category
+                )
+                Column(
+                    modifier = modifier
+                        .padding(4.dp)
+                        .verticalScroll(rememberScrollState()),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    postViewState.image.forEach {
-                        PostCard(
-                            modifier = Modifier,
-                            image = it.url
-                        )
+                    StaggeredVerticalGrid(
+                        numColumns = 2,
+                        modifier = Modifier,
+                    ) {
+                        postViewState.image.forEach {
+                            PostCard(
+                                modifier = Modifier,
+                                image = it.url
+                            )
+                        }
                     }
                 }
             }
         }
-    }
+    )
 }
 
 @Preview(name = "LightMode", showSystemUi = true)
