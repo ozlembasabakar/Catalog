@@ -1,7 +1,7 @@
 package com.example
 
 import com.example.dao.PostDao
-import com.example.model.NetworkPost
+import com.example.model.Post
 import com.example.model.PostEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,12 +24,12 @@ class LocalDataSource @Inject constructor(
         }
     }
 
-    fun saveToDb(networkPost: NetworkPost) {
+    fun saveToDb(post: Post) {
         val postEntity = PostEntity(
-            id = networkPost.id,
-            height = networkPost.height,
-            url = networkPost.url,
-            width = networkPost.width
+            id = post.id,
+            height = post.height,
+            url = post.url,
+            width = post.width
         )
         insertAllCatImages(postEntity)
     }
