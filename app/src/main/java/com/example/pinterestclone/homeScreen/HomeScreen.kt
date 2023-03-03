@@ -13,7 +13,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.StaggeredVerticalGrid
 import com.example.pinterestclone.tabs.Tabs
 import com.example.pinterestclone.ui.theme.PinterestCloneTheme
@@ -23,6 +22,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.PostCard
 import com.example.PostViewModel
 import com.example.pinterestclone.tabs.TabsViewModel
+import com.example.pinterestclone.ui.theme.BottomBarItemSize
+import com.example.pinterestclone.ui.theme.BottomBarVerticalPadding
+import com.example.pinterestclone.ui.theme.HomeScreenColumnPadding
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLifecycleComposeApi::class)
