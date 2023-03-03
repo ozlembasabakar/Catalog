@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name" translatable="false">PinterestClone</string>
-    <string name="app_name_debug" translatable="false">PinterestCloneDebug</string>
+    <string name="app_name" translatable="false">Catalog</string>
+    <string name="app_name_debug" translatable="false">CatalogDebug</string>
     <string-array name="category">
         <item>Travel</item>
         <item>Animal</item>
