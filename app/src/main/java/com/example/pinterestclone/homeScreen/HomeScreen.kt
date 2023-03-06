@@ -13,15 +13,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.pinterestclone.tabs.Tabs
-import com.example.pinterestclone.ui.theme.PinterestCloneTheme
 import com.example.PostCard
 import com.example.model.Category
 import com.example.model.Post
 import com.example.pinterestclone.R
-import com.example.pinterestclone.ui.theme.HomeScreenHorizontalPadding
-import com.example.pinterestclone.ui.theme.HomeScreenStaggeredGridCells
-import com.example.pinterestclone.ui.theme.HomeScreenVerticalPadding
+import com.example.pinterestclone.tabs.Tabs
+import com.example.pinterestclone.ui.theme.*
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(
@@ -29,7 +26,11 @@ import com.example.pinterestclone.ui.theme.HomeScreenVerticalPadding
     ExperimentalFoundationApi::class
 )
 @Composable
-fun HomeScreen(modifier: Modifier, category: List<Category>, post: List<Post>) {
+fun HomeScreen(
+    modifier: Modifier,
+    category: List<Category>,
+    post: List<Post>,
+) {
     Scaffold(
         //bottomBar = {
         //BottomBar(modifier = modifier)
@@ -37,10 +38,16 @@ fun HomeScreen(modifier: Modifier, category: List<Category>, post: List<Post>) {
         containerColor = MaterialTheme.colorScheme.surface,
         content = {
             Column(
-                modifier = Modifier.padding(horizontal = HomeScreenHorizontalPadding),
-                ) {
+                modifier = Modifier
+                    .padding(
+                        horizontal = HomeScreenHorizontalPadding
+                    ),
+            ) {
                 Tabs(
-                    modifier = modifier,
+                    modifier = modifier
+                        .padding(
+                            top = TabsVerticalPadding
+                        ),
                     category = category
                 )
                 LazyVerticalStaggeredGrid(

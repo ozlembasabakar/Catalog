@@ -17,25 +17,27 @@ import com.example.pinterestclone.ui.theme.*
 fun TabItem(category: String) {
     Column(
         modifier = Modifier
-            .height(TabLayoutItemHeight)
+            .height(TabItemHeight)
             .background(MaterialTheme.colorScheme.surface)
-            .padding(TabLayoutItemPadding)
             .width(IntrinsicSize.Max),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Text(
             text = category,
+            style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier
-                .padding(horizontal = TabLayoutItemPadding)
-                .weight(TabItemWeight)
+                .padding(
+                    vertical = TabItemVerticalPadding,
+                    horizontal = TabItemHorizontalPadding
+                )
                 .wrapContentHeight(CenterVertically)
                 .wrapContentWidth(),
         )
         Box(
             modifier = Modifier
-                .height(TabLayoutDividerHeight)
+                .height(TabItemDividerHeight)
                 .fillMaxWidth()
                 .clip(MaterialTheme.shapes.small)
                 .background(MaterialTheme.colorScheme.onSurface),
