@@ -8,5 +8,4 @@ val Shapes = Shapes(
     small = RoundedCornerShape(12.dp),
 )
 
-val PostCardColumnPadding = 4.dp
-val PostCardRowPadding = 8.dp
+val PostCardRowPadding = 4.dp

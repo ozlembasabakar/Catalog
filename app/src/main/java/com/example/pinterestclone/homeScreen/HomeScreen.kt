@@ -2,71 +2,61 @@ package com.example.pinterestclone.homeScreen
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.StaggeredVerticalGrid
 import com.example.pinterestclone.tabs.Tabs
 import com.example.pinterestclone.ui.theme.PinterestCloneTheme
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.PostCard
-import com.example.PostViewModel
-import com.example.pinterestclone.tabs.TabsViewModel
-import com.example.pinterestclone.ui.theme.BottomBarItemSize
-import com.example.pinterestclone.ui.theme.BottomBarVerticalPadding
-import com.example.pinterestclone.ui.theme.HomeScreenColumnPadding
+import com.example.model.Category
+import com.example.model.Post
+import com.example.pinterestclone.R
+import com.example.pinterestclone.ui.theme.HomeScreenHorizontalPadding
+import com.example.pinterestclone.ui.theme.HomeScreenStaggeredGridCells
+import com.example.pinterestclone.ui.theme.HomeScreenVerticalPadding
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLifecycleComposeApi::class)
+@OptIn(
+    ExperimentalMaterial3Api::class,
+    ExperimentalFoundationApi::class
+)
 @Composable
-fun HomeScreen(modifier: Modifier) {
-
-    val tabsViewModel: TabsViewModel = hiltViewModel()
-    val tabsViewState by tabsViewModel.state.collectAsStateWithLifecycle()
-
-    val postViewModel: PostViewModel = hiltViewModel()
-    val postViewState by postViewModel.state.collectAsStateWithLifecycle()
-
+fun HomeScreen(modifier: Modifier, category: List<Category>, post: List<Post>) {
     Scaffold(
         //bottomBar = {
-            //BottomBar(modifier = modifier)
+        //BottomBar(modifier = modifier)
         //},
         containerColor = MaterialTheme.colorScheme.surface,
         content = {
-            Column {
+            Column(
+                modifier = Modifier.padding(horizontal = HomeScreenHorizontalPadding),
+                ) {
                 Tabs(
                     modifier = modifier,
-                    category = tabsViewState.category
+                    category = category
                 )
-                Column(
-                    modifier = modifier
-                        .padding(4.dp)
-                        .verticalScroll(rememberScrollState()),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    StaggeredVerticalGrid(
-                        numColumns = 2,
-                        modifier = Modifier,
-                    ) {
-                        postViewState.image.forEach {
+                LazyVerticalStaggeredGrid(
+                    columns = StaggeredGridCells.Fixed(HomeScreenStaggeredGridCells),
+                    horizontalArrangement = Arrangement.spacedBy(HomeScreenHorizontalPadding),
+                    verticalArrangement = Arrangement.spacedBy(HomeScreenVerticalPadding),
+                    content =
+                    {
+                        items(post) {
                             PostCard(
                                 modifier = Modifier,
                                 image = it.url
                             )
                         }
                     }
-                }
+                )
             }
         }
     )
@@ -77,6 +67,35 @@ fun HomeScreen(modifier: Modifier) {
 @Composable
 fun HomeScreenPreview() {
     PinterestCloneTheme {
-        HomeScreen(Modifier)
+
+        val category = listOf(
+            Category(id = 0, name = "Cat1"),
+            Category(id = 0, name = "Cat2"),
+            Category(id = 0, name = "Cat3"),
+            Category(id = 0, name = "Cat4"),
+            Category(id = 0, name = "Cat5"),
+            Category(id = 0, name = "Cat6"),
+            Category(id = 0, name = "Cat7"),
+            Category(id = 0, name = "Cat8"),
+        )
+        val post = listOf(
+            Post(height = 1, id = "1", url = R.drawable.images_1.toString(), width = 1),
+            Post(height = 1, id = "2", url = R.drawable.images_2.toString(), width = 1),
+            Post(height = 1, id = "3", url = R.drawable.images_3.toString(), width = 1),
+            Post(height = 1, id = "1", url = R.drawable.images_5.toString(), width = 1),
+            Post(height = 1, id = "1", url = R.drawable.images_4.toString(), width = 1),
+            Post(height = 1, id = "1", url = R.drawable.images_1.toString(), width = 1),
+            Post(height = 1, id = "1", url = R.drawable.images_2.toString(), width = 1),
+            Post(height = 1, id = "1", url = R.drawable.images_3.toString(), width = 1),
+            Post(height = 1, id = "1", url = R.drawable.images_4.toString(), width = 1),
+            Post(height = 1, id = "1", url = R.drawable.images_5.toString(), width = 1),
+            Post(height = 1, id = "1", url = R.drawable.images_1.toString(), width = 1),
+            Post(height = 1, id = "1", url = R.drawable.images_2.toString(), width = 1),
+            Post(height = 1, id = "1", url = R.drawable.images_3.toString(), width = 1),
+            Post(height = 1, id = "1", url = R.drawable.images_4.toString(), width = 1),
+            Post(height = 1, id = "1", url = R.drawable.images_5.toString(), width = 1),
+        )
+
+        HomeScreen(Modifier, category = category, post = post)
     }
 }

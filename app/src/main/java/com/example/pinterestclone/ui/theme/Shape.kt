@@ -5,9 +5,7 @@ import androidx.compose.material3.Shapes
 import androidx.compose.ui.unit.dp
 
 val Shapes = Shapes(
-    small = RoundedCornerShape(12.dp),
-    medium = RoundedCornerShape(4.dp),
-    large = RoundedCornerShape(0.dp)
+    small = RoundedCornerShape(12.dp)
 )
 
 val BottomBarVerticalPadding = 12.dp
@@ -21,4 +19,6 @@ val TabLayoutPadding = 4.dp
 val TabLayoutSpacerSize = 4.dp
 val TabItemWeight = 1f
 
-val HomeScreenColumnPadding = 4.dp
+val HomeScreenHorizontalPadding = 8.dp
+val HomeScreenVerticalPadding = 12.dp
+val HomeScreenStaggeredGridCells = 2

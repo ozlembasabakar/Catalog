@@ -14,7 +14,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.feature.post.R
 import com.example.ui.theme.PinterestCloneTheme
-import com.example.ui.theme.PostCardColumnPadding
 import com.example.ui.theme.PostCardRowPadding
 import com.example.ui.theme.Shapes
 import com.skydoves.landscapist.glide.GlideImage
@@ -27,7 +26,6 @@ fun PostCard(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(PostCardColumnPadding)
             .clip(Shapes.small)
             .background(MaterialTheme.colorScheme.surface)
     ) {
@@ -43,7 +41,11 @@ fun PostCard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = PostCardRowPadding, start = PostCardRowPadding, end = PostCardRowPadding),
+                .padding(
+                    start = PostCardRowPadding,
+                    end = PostCardRowPadding,
+                    top = PostCardRowPadding
+                ),
             horizontalArrangement = Arrangement.End
         ) {
             Icon(
