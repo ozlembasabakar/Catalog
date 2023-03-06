@@ -12,12 +12,13 @@ val BottomBarVerticalPadding = 12.dp
 val BottomBarHorizontalPadding = 16.dp
 val BottomBarItemSize = 40.dp
 
-val TabLayoutItemHeight = 40.dp
-val TabLayoutDividerHeight = 3.dp
-val TabLayoutItemPadding = 4.dp
-val TabLayoutPadding = 4.dp
-val TabLayoutSpacerSize = 4.dp
-val TabItemWeight = 1f
+val TabItemHeight = 40.dp
+val TabItemDividerHeight = 4.dp
+val TabItemVerticalPadding = 6.dp
+val TabItemHorizontalPadding = 6.dp
+val TabsVerticalPadding = 6.dp
+val TabsHorizontalPadding = 10.dp
+val TabsSpacerSize = 4.dp
 
 val HomeScreenHorizontalPadding = 8.dp
 val HomeScreenVerticalPadding = 12.dp

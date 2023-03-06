@@ -2,10 +2,11 @@ package com.example.pinterestclone.tabs
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
@@ -14,31 +15,48 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.pinterestclone.ui.theme.*
 
 @Composable
-fun TabItem(category: String) {
+fun TabItem(modifier: Modifier, category: String) {
+
+    var isSelected by remember {
+        mutableStateOf(false)
+    }
+
     Column(
-        modifier = Modifier
-            .height(TabLayoutItemHeight)
+        modifier = modifier
+            .height(TabItemHeight)
             .background(MaterialTheme.colorScheme.surface)
-            .padding(TabLayoutItemPadding)
-            .width(IntrinsicSize.Max),
+            .width(IntrinsicSize.Max)
+            .clickable(
+                onClick = {
+                    isSelected = !isSelected
+                }
+            ),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Text(
             text = category,
+            style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier
-                .padding(horizontal = TabLayoutItemPadding)
-                .weight(TabItemWeight)
+                .padding(
+                    vertical = TabItemVerticalPadding,
+                    horizontal = TabItemHorizontalPadding
+                )
                 .wrapContentHeight(CenterVertically)
                 .wrapContentWidth(),
         )
         Box(
             modifier = Modifier
-                .height(TabLayoutDividerHeight)
+                .height(TabItemDividerHeight)
                 .fillMaxWidth()
                 .clip(MaterialTheme.shapes.small)
-                .background(MaterialTheme.colorScheme.onSurface),
+                .background(
+                    when {
+                        isSelected -> MaterialTheme.colorScheme.onSurface
+                        else -> MaterialTheme.colorScheme.surface
+                    }
+                ),
         )
     }
 }
@@ -48,6 +66,10 @@ fun TabItem(category: String) {
 @Composable
 fun TabItemPreview() {
     PinterestCloneTheme {
-        TabItem(category = "Category")
+        TabItem(
+            modifier = Modifier,
+            category = "Category",
+            //onClick = {}
+        )
     }
 }
