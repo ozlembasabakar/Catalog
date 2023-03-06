@@ -17,6 +17,8 @@ import com.example.model.Post
 import com.example.pinterestclone.R
 import com.example.pinterestclone.tabs.Tabs
 import com.example.pinterestclone.ui.theme.*
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(
@@ -28,7 +30,11 @@ fun HomeScreen(
     modifier: Modifier,
     category: List<Category>,
     post: List<Post>,
+    onRefresh: () -> Unit,
+    isRefreshing: Boolean,
 ) {
+    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = isRefreshing)
+
     Scaffold(
         //bottomBar = {
         //BottomBar(modifier = modifier)
@@ -48,20 +54,25 @@ fun HomeScreen(
                         ),
                     category = category
                 )
-                LazyVerticalStaggeredGrid(
-                    columns = StaggeredGridCells.Fixed(HomeScreenStaggeredGridCells),
-                    horizontalArrangement = Arrangement.spacedBy(HomeScreenHorizontalPadding),
-                    verticalArrangement = Arrangement.spacedBy(HomeScreenVerticalPadding),
-                    content =
-                    {
-                        items(post) {
-                            PostCard(
-                                modifier = Modifier,
-                                image = it.url
-                            )
+                SwipeRefresh(
+                    state = swipeRefreshState,
+                    onRefresh = onRefresh
+                ) {
+                    LazyVerticalStaggeredGrid(
+                        columns = StaggeredGridCells.Fixed(HomeScreenStaggeredGridCells),
+                        horizontalArrangement = Arrangement.spacedBy(HomeScreenHorizontalPadding),
+                        verticalArrangement = Arrangement.spacedBy(HomeScreenVerticalPadding),
+                        content =
+                        {
+                            items(post) {
+                                PostCard(
+                                    modifier = Modifier,
+                                    image = it.url
+                                )
+                            }
                         }
-                    }
-                )
+                    )
+                }
             }
         }
     )
@@ -101,6 +112,6 @@ fun HomeScreenPreview() {
             Post(height = 1, id = "1", url = R.drawable.images_5.toString(), width = 1),
         )
 
-        HomeScreen(Modifier, category = category, post = post)
+        HomeScreen(Modifier, category = category, post = post, onRefresh = {}, isRefreshing = true)
     }
 }

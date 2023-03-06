@@ -100,5 +100,9 @@ dependencies {
     //Navigation
     implementation libs.navigation.compose
 
+    //LazyVerticalStaggeredGrid
     implementation libs.foundation
+
+    //Pull To Refresh
+    implementation libs.swiperefresh
 }

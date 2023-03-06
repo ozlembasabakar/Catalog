@@ -24,6 +24,8 @@ fun CatalogNavHost() {
     val postViewModel: PostViewModel = hiltViewModel()
     val postViewState by postViewModel.state.collectAsStateWithLifecycle()
 
+    val isRefreshing by postViewModel.isRefreshing.collectAsStateWithLifecycle()
+
     NavHost(
         modifier = Modifier,
         navController = navController,
@@ -33,7 +35,9 @@ fun CatalogNavHost() {
             HomeScreen(
                 modifier = Modifier,
                 category = tabsViewState.category,
-                post = postViewState.image
+                post = postViewState.image,
+                isRefreshing = isRefreshing,
+                onRefresh = postViewModel::fetchCatImagesFromRepository
             )
         }
     }

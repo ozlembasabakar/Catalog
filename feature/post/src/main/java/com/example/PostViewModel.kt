@@ -21,12 +21,16 @@ class PostViewModel @Inject constructor(
     private val _state = MutableStateFlow(PostViewState())
     val state: StateFlow<PostViewState> = _state.asStateFlow()
 
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
+
     init {
         fetchCatImagesFromRepository()
     }
 
-    private fun fetchCatImagesFromRepository() {
+    fun fetchCatImagesFromRepository() {
         viewModelScope.launch(Dispatchers.IO) {
+            _isRefreshing.value = true
             val image = repository.getCatImages()
 
             _state.update { currentState ->
@@ -34,6 +38,7 @@ class PostViewModel @Inject constructor(
                     image = image
                 )
             }
+            _isRefreshing.value = false
         }
     }
 }
