@@ -10,9 +10,6 @@ class Repository @Inject constructor(
     private val networkDatasource: NetworkDatasource,
     private val localDataSource: LocalDataSource,
 ) {
-
-    private val coroutineScope = CoroutineScope(Dispatchers.Default)
-
     suspend fun getCategories(): List<Category> {
         return networkDatasource.getCatCategories().map {
             Category(
@@ -48,10 +45,8 @@ class Repository @Inject constructor(
     }
 
     private suspend fun saveDataFromNetworkToDb() {
-        coroutineScope.launch {
-            networkDatasource.getCatImages().map { post ->
-                saveToDb(post = post)
-            }
+        networkDatasource.getCatImages().map { post ->
+            saveToDb(post = post)
         }
     }
 
