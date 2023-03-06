@@ -15,10 +15,9 @@ import com.example.PostCard
 import com.example.model.Category
 import com.example.model.Post
 import com.example.pinterestclone.R
+import com.example.pinterestclone.swiperefresh.CustomPullToRefresh
 import com.example.pinterestclone.tabs.Tabs
 import com.example.pinterestclone.ui.theme.*
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(
@@ -33,8 +32,6 @@ fun HomeScreen(
     onRefresh: () -> Unit,
     isRefreshing: Boolean,
 ) {
-    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = isRefreshing)
-
     Scaffold(
         //bottomBar = {
         //BottomBar(modifier = modifier)
@@ -54,8 +51,8 @@ fun HomeScreen(
                         ),
                     category = category
                 )
-                SwipeRefresh(
-                    state = swipeRefreshState,
+                CustomPullToRefresh(
+                    isRefreshing = isRefreshing,
                     onRefresh = onRefresh
                 ) {
                     LazyVerticalStaggeredGrid(
@@ -112,6 +109,12 @@ fun HomeScreenPreview() {
             Post(height = 1, id = "1", url = R.drawable.images_5.toString(), width = 1),
         )
 
-        HomeScreen(Modifier, category = category, post = post, onRefresh = {}, isRefreshing = true)
+        HomeScreen(
+            Modifier,
+            category = category,
+            post = post,
+            onRefresh = {},
+            isRefreshing = true
+        )
     }
 }
