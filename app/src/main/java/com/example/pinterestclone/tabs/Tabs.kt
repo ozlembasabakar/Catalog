@@ -3,9 +3,7 @@ package com.example.pinterestclone.tabs
 import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
@@ -15,7 +13,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.model.Category
 import com.example.pinterestclone.ui.theme.PinterestCloneTheme
 import com.example.pinterestclone.ui.theme.TabsHorizontalPadding
-import com.example.pinterestclone.ui.theme.TabsSpacerSize
 import com.example.pinterestclone.ui.theme.TabsVerticalPadding
 
 @Composable
@@ -25,15 +22,23 @@ fun Tabs(modifier: Modifier, category: List<Category>) {
             .background(MaterialTheme.colorScheme.surface)
             .padding(
                 vertical = TabsVerticalPadding,
-                horizontal = TabsHorizontalPadding),
-        horizontalArrangement = Arrangement.spacedBy(TabsHorizontalPadding
+                horizontal = TabsHorizontalPadding
+            ),
+        horizontalArrangement = Arrangement.spacedBy(
+            TabsHorizontalPadding
         ),
     ) {
+        item {
+            TabItem(
+                modifier = Modifier,
+                category = Category(100, "All").name
+            )
+        }
         items(category) { category ->
             TabItem(
+                modifier = Modifier,
                 category = category.name
             )
-            Spacer(modifier = Modifier.size(TabsSpacerSize))
         }
     }
 }
