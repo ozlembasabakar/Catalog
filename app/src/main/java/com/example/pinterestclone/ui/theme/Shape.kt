@@ -18,8 +18,10 @@ val TabItemVerticalPadding = 6.dp
 val TabItemHorizontalPadding = 6.dp
 val TabsVerticalPadding = 6.dp
 val TabsHorizontalPadding = 10.dp
-val TabsSpacerSize = 4.dp
 
 val HomeScreenHorizontalPadding = 8.dp
 val HomeScreenVerticalPadding = 12.dp
-val HomeScreenStaggeredGridCells = 2
+const val HomeScreenStaggeredGridCells = 2
+
+val CustomRefreshAnimationPadding = 12.dp
+val CustomRefreshAnimationSize = 80.dp

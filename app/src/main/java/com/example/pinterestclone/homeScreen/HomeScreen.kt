@@ -15,6 +15,7 @@ import com.example.PostCard
 import com.example.model.Category
 import com.example.model.Post
 import com.example.pinterestclone.R
+import com.example.pinterestclone.swiperefresh.CustomPullToRefresh
 import com.example.pinterestclone.tabs.Tabs
 import com.example.pinterestclone.ui.theme.*
 
@@ -28,6 +29,8 @@ fun HomeScreen(
     modifier: Modifier,
     category: List<Category>,
     post: List<Post>,
+    onRefresh: () -> Unit,
+    isRefreshing: Boolean,
 ) {
     Scaffold(
         //bottomBar = {
@@ -48,20 +51,25 @@ fun HomeScreen(
                         ),
                     category = category
                 )
-                LazyVerticalStaggeredGrid(
-                    columns = StaggeredGridCells.Fixed(HomeScreenStaggeredGridCells),
-                    horizontalArrangement = Arrangement.spacedBy(HomeScreenHorizontalPadding),
-                    verticalArrangement = Arrangement.spacedBy(HomeScreenVerticalPadding),
-                    content =
-                    {
-                        items(post) {
-                            PostCard(
-                                modifier = Modifier,
-                                image = it.url
-                            )
+                CustomPullToRefresh(
+                    isRefreshing = isRefreshing,
+                    onRefresh = onRefresh
+                ) {
+                    LazyVerticalStaggeredGrid(
+                        columns = StaggeredGridCells.Fixed(HomeScreenStaggeredGridCells),
+                        horizontalArrangement = Arrangement.spacedBy(HomeScreenHorizontalPadding),
+                        verticalArrangement = Arrangement.spacedBy(HomeScreenVerticalPadding),
+                        content =
+                        {
+                            items(post) {
+                                PostCard(
+                                    modifier = Modifier,
+                                    image = it.url
+                                )
+                            }
                         }
-                    }
-                )
+                    )
+                }
             }
         }
     )
@@ -101,6 +109,12 @@ fun HomeScreenPreview() {
             Post(height = 1, id = "1", url = R.drawable.images_5.toString(), width = 1),
         )
 
-        HomeScreen(Modifier, category = category, post = post)
+        HomeScreen(
+            Modifier,
+            category = category,
+            post = post,
+            onRefresh = {},
+            isRefreshing = true
+        )
     }
 }
