@@ -11,36 +11,40 @@ class Repository @Inject constructor(
     private val localDataSource: LocalDataSource,
 ) {
     suspend fun getCategories(): List<Category> {
-        return networkDatasource.getCatCategories()
+
+        saveCategoryDataFromNetworkToDb()
+
+        return localDataSource.getCategories().map {
+            it.toCategory()
+        }
     }
 
     suspend fun getCatImages(): List<Post> {
 
-        saveDataFromNetworkToDb()
+        savePostDataFromNetworkToDb()
 
         return localDataSource.getAllCatImages().map {
             it.toPost()
         }
-
-        /*
-        return networkDatasource.getCatImages().map {
-            Post(
-                id = it.id,
-                height = it.height,
-                url = it.url,
-                width = it.width
-            )
-        }
-        */
     }
 
-    private suspend fun saveDataFromNetworkToDb() {
+    private suspend fun savePostDataFromNetworkToDb() {
         networkDatasource.getCatImages().map { post ->
-            saveToDb(post = post)
+            savePostEntityToDb(post = post)
         }
     }
 
-    private fun saveToDb(post: Post) {
-        localDataSource.saveToDb(post)
+    private fun savePostEntityToDb(post: Post) {
+        localDataSource.savePostEntityToDb(post)
+    }
+
+    private suspend fun saveCategoryDataFromNetworkToDb() {
+        networkDatasource.getCatCategories().map { category ->
+            saveCategoryEntityToDb(category = category)
+        }
+    }
+
+    private fun saveCategoryEntityToDb(category: Category) {
+        localDataSource.saveCategoryEntityToDb(category)
     }
 }

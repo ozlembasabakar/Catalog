@@ -20,7 +20,18 @@ class DatabaseModule {
     ): PostDatabase = Room.databaseBuilder(
         context,
         PostDatabase::class.java,
-        "PinterestCloneApp",
+        "PostDatabase",
         )
+        .build()
+
+    @Provides
+    @Singleton
+    fun provideCategoryDatabase(
+        @ApplicationContext context: Context,
+    ): CategoryDatabase = Room.databaseBuilder(
+        context,
+        CategoryDatabase::class.java,
+        "CategoryDatabase",
+    )
         .build()
 }
