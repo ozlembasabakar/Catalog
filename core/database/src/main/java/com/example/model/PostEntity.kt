@@ -10,4 +10,13 @@ data class PostEntity(
     @ColumnInfo(name = "height") val height: Int?,
     @ColumnInfo(name = "url") val url: String?,
     @ColumnInfo(name = "width") val width: Int?,
-)
+) {
+    fun toPost(): Post {
+        return Post(
+            height = height,
+            id = id,
+            url = url,
+            width = width
+        )
+    }
+}

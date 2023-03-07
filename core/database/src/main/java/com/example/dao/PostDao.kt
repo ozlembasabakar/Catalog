@@ -8,7 +8,7 @@ import com.example.model.PostEntity
 
 @Dao
 interface PostDao {
-    @Query("SELECT * FROM posts ORDER BY random() LIMIT 50")
+    @Query("SELECT * FROM posts LIMIT 50")
     fun getAllCatImages(): List<PostEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

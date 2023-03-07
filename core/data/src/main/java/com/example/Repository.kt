@@ -11,12 +11,7 @@ class Repository @Inject constructor(
     private val localDataSource: LocalDataSource,
 ) {
     suspend fun getCategories(): List<Category> {
-        return networkDatasource.getCatCategories().map {
-            Category(
-                id = it.id,
-                name = it.name
-            )
-        }
+        return networkDatasource.getCatCategories()
     }
 
     suspend fun getCatImages(): List<Post> {
@@ -24,12 +19,7 @@ class Repository @Inject constructor(
         saveDataFromNetworkToDb()
 
         return localDataSource.getAllCatImages().map {
-            Post(
-                height = it.height,
-                id = it.id,
-                url = it.url,
-                width = it.width
-            )
+            it.toPost()
         }
 
         /*
