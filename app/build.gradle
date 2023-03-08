@@ -69,6 +69,7 @@ dependencies {
     implementation project(path: ':feature:post')
     implementation project(path: ':core:data')
     implementation project(path: ':core:model')
+    implementation project(path: ':core:domain')
 
     implementation libs.core.ktx
     implementation libs.lifecycle.runtime.ktx

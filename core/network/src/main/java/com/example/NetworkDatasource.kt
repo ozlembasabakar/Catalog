@@ -1,3 +1,4 @@
+/*
 package com.example
 
 import com.example.model.Category
@@ -19,4 +20,4 @@ class NetworkDatasource @Inject constructor(
             it.toPost()
         }
     }
-}
+}*/

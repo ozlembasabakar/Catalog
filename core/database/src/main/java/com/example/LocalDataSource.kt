@@ -1,3 +1,4 @@
+/*
 package com.example
 
 import com.example.dao.CategoryDao
@@ -56,3 +57,4 @@ class LocalDataSource @Inject constructor(
         inserCategories(categoryEntity)
     }
 }
+*/

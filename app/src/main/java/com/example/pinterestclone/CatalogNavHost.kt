@@ -37,7 +37,7 @@ fun CatalogNavHost() {
                 category = tabsViewState.category,
                 post = postViewState.image,
                 isRefreshing = isRefreshing,
-                onRefresh = postViewModel::fetchCatImagesFromRepository
+                onRefresh = postViewModel::fetchNewImages
             )
         }
     }

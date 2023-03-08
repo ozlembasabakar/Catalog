@@ -2,20 +2,18 @@ package com.example.pinterestclone.tabs
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.Repository
+import com.example.GetCategories
+import com.example.Resource
 import com.example.model.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class TabsViewModel @Inject constructor(
-    private val repository: Repository,
+    private val getCategories: GetCategories,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(TabsViewState())
@@ -27,13 +25,27 @@ class TabsViewModel @Inject constructor(
 
     private fun fetchCategoryDataFromRepository() {
         viewModelScope.launch(Dispatchers.IO) {
-            val category = repository.getCategories()
+            val category = getCategories
 
-            _state.update { currentState ->
-                currentState.copy(
-                    category = category
-                )
-            }
+            category()
+                .onEach { result ->
+                    when(result) {
+                        is Resource.Success -> {
+                            _state.update { currentState ->
+                                currentState.copy(
+                                    category = result.data ?: emptyList()
+                                )
+                            }
+                        }
+                        is Resource.Error -> {
+                            _state.update { currentState ->
+                                currentState.copy(
+                                    category = result.data ?: emptyList()
+                                )
+                            }
+                        }
+                    }
+                }.launchIn(this)
         }
     }
 }
