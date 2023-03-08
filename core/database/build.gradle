@@ -50,7 +50,6 @@ android {
 
 dependencies {
 
-    implementation project(path: ':core:network')
     implementation project(path: ':core:model')
 
     implementation libs.core.ktx

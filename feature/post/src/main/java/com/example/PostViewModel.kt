@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PostViewModel @Inject constructor(
-    private val getPostInfo: GetPostInfo,
+    private val repository: Repository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(PostViewState())
@@ -25,10 +25,10 @@ class PostViewModel @Inject constructor(
         fetchCatImagesFromRepository()
     }
 
-    fun fetchCatImagesFromRepository() {
+    private fun fetchCatImagesFromRepository() {
         viewModelScope.launch(Dispatchers.IO) {
             _isRefreshing.value = true
-            getPostInfo().collect {
+            repository.getPostInfo().collect {
                 _state.update { currentState ->
                     currentState.copy(
                         image = it
@@ -42,7 +42,7 @@ class PostViewModel @Inject constructor(
     fun fetchNewImages() {
         viewModelScope.launch {
             _isRefreshing.value = true
-            getPostInfo.getNewImages().onSuccess {
+            repository.getNewImages().onSuccess {
 
             }.onFailure {
                 Log.d("ozlem", "$it")

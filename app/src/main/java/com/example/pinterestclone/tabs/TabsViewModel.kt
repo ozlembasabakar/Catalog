@@ -1,19 +1,22 @@
 package com.example.pinterestclone.tabs
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.GetCategories
-import com.example.Resource
+import com.example.Repository
 import com.example.model.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class TabsViewModel @Inject constructor(
-    private val getCategories: GetCategories,
+    private val repository: Repository,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(TabsViewState())
@@ -25,27 +28,23 @@ class TabsViewModel @Inject constructor(
 
     private fun fetchCategoryDataFromRepository() {
         viewModelScope.launch(Dispatchers.IO) {
-            val category = getCategories
+            repository.getCategoriesFromDatabase().collect {
+                _state.update { currentState ->
+                    currentState.copy(
+                        category = it
+                    )
+                }
+            }
+        }
+    }
 
-            category()
-                .onEach { result ->
-                    when(result) {
-                        is Resource.Success -> {
-                            _state.update { currentState ->
-                                currentState.copy(
-                                    category = result.data ?: emptyList()
-                                )
-                            }
-                        }
-                        is Resource.Error -> {
-                            _state.update { currentState ->
-                                currentState.copy(
-                                    category = result.data ?: emptyList()
-                                )
-                            }
-                        }
-                    }
-                }.launchIn(this)
+    private fun fetchCategory() {
+        viewModelScope.launch {
+            repository.getCategoriesFromRetrofit().onSuccess {
+
+            }.onFailure {
+                Log.d("ozlem", "$it")
+            }
         }
     }
 }

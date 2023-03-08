@@ -1,52 +1,42 @@
 package com.example.repository.category
 
-import com.example.Resource
 import com.example.dao.CategoryDao
 import com.example.model.Category
 import com.example.model.CategoryEntity
 import com.example.retrofit.RetrofitNetworkApi
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import retrofit2.HttpException
-import java.io.IOException
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class CategoryRepositoryImpl @Inject constructor(
     private val networkApi: RetrofitNetworkApi,
-    private val categoryDao: CategoryDao
-): CategoryRepository {
+    private val categoryDao: CategoryDao,
+) : CategoryRepository {
 
-    override fun getCategories(): Flow<Resource<List<Category>>> = flow {
-        //emit(Resource.Loading())
+    override suspend fun getCategories(): Flow<List<Category>> {
+        val category: Flow<List<Category>> = categoryDao.getCategories().map {
+            it.map {
+                it.toCategory()
+            }
+        }
 
-        //val category = categoryDao.getCategories().map { it.toCategory() }
-        //emit(Resource.Loading(data = category))
+        return category
+    }
 
-        val category = categoryDao.getCategories().map { it.toCategory() }
-        emit(Resource.Success(category))
-
-        try {
-            val remoteCategory = networkApi.getCatCategories()
-            categoryDao.insertCategories(remoteCategory.map {
-                CategoryEntity(
-                    id = it.id,
-                    name = it.name
-                )
-            })
-        } catch(e: HttpException) {
-            emit(
-                Resource.Error(
-                    message = "Oops, something went wrong!",
-                    data = category
-                )
+    override suspend fun getNewCategories(): Result<Unit> {
+        return try {
+            val networkCategory = networkApi.getCatCategories()
+            categoryDao.insertCategories(
+                networkCategory.map {
+                    CategoryEntity(
+                        id = it.id,
+                        name = it.name
+                    )
+                }
             )
-        } catch(e: IOException) {
-            emit(
-                Resource.Error(
-                    message = "Couldn't reach server, check your internet connection.",
-                    data = category
-                )
-            )
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
         }
     }
 }

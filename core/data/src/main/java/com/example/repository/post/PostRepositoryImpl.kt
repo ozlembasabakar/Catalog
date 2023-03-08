@@ -14,7 +14,6 @@ class PostRepositoryImpl @Inject constructor(
 ) : PostRepository {
 
     override fun getPostInfo(): Flow<List<Post>> {
-        //emit(Resource.Loading())
 
         val postsInfo: Flow<List<Post>> = postDao.getAllCatImages().map {
             it.map {
@@ -22,38 +21,6 @@ class PostRepositoryImpl @Inject constructor(
             }
         }
         return postsInfo
-        /*
-        emit(Resource.Success(postsInfo))
-
-        try {
-            val remotePostsInfo = networkApi.getCatImages()
-            postDao.insertAllCatImages(remotePostsInfo.map {
-                PostEntity(
-                    height = it.height,
-                    id = it.id,
-                    url = it.url,
-                    width = it.width
-                )
-            })
-            emit(Resource.Success(remotePostsInfo.map { it.toPost() }))
-        } catch(e: HttpException) {
-            emit(
-                Resource.Error(
-                    message = "Oops, something went wrong!",
-                    data = postsInfo
-                )
-            )
-        } catch(e: IOException) {
-            emit(
-                Resource.Error(
-                    message = "Couldn't reach server, check your internet connection.",
-                    data = postsInfo
-                )
-            )
-        }
-
-        //val newPostInfos = postDao.getAllCatImages().map { it.toPost() }
-*/
     }
 
     override suspend fun getNewImages(): Result<Unit> {
@@ -73,6 +40,5 @@ class PostRepositoryImpl @Inject constructor(
         } catch (e: Exception) {
             return Result.failure(e)
         }
-
     }
 }
