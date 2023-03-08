@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.model.Category
@@ -17,6 +17,11 @@ import com.example.pinterestclone.ui.theme.TabsVerticalPadding
 
 @Composable
 fun Tabs(modifier: Modifier, category: List<Category>) {
+
+    var selectedItem by remember {
+        mutableStateOf("All")
+    }
+
     LazyRow(
         modifier = modifier
             .background(MaterialTheme.colorScheme.surface)
@@ -31,13 +36,21 @@ fun Tabs(modifier: Modifier, category: List<Category>) {
         item {
             TabItem(
                 modifier = Modifier,
-                category = Category(100, "All").name
+                category = Category(100, "All").name,
+                isSelected = selectedItem == "All",
+                onClick = {
+                    selectedItem = it
+                }
             )
         }
         items(category) { category ->
             TabItem(
                 modifier = Modifier,
-                category = category.name
+                category = category.name,
+                isSelected = selectedItem == category.name,
+                onClick = {
+                    selectedItem = it
+                }
             )
         }
     }

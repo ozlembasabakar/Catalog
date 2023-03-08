@@ -15,11 +15,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.pinterestclone.ui.theme.*
 
 @Composable
-fun TabItem(modifier: Modifier, category: String) {
-
-    var isSelected by remember {
-        mutableStateOf(false)
-    }
+fun TabItem(
+    modifier: Modifier,
+    category: String,
+    isSelected: Boolean,
+    onClick: (String) -> Unit,
+) {
 
     Column(
         modifier = modifier
@@ -28,7 +29,9 @@ fun TabItem(modifier: Modifier, category: String) {
             .width(IntrinsicSize.Max)
             .clickable(
                 onClick = {
-                    isSelected = !isSelected
+                    onClick(
+                        category
+                    )
                 }
             ),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -69,7 +72,8 @@ fun TabItemPreview() {
         TabItem(
             modifier = Modifier,
             category = "Category",
-            //onClick = {}
+            onClick = {},
+            isSelected = false
         )
     }
 }

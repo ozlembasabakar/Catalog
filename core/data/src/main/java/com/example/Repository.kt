@@ -2,55 +2,31 @@ package com.example
 
 import com.example.model.Category
 import com.example.model.Post
+import com.example.repository.category.CategoryRepository
+import com.example.repository.post.PostRepository
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @Suppress("UNREACHABLE_CODE")
 class Repository @Inject constructor(
-    private val networkDatasource: NetworkDatasource,
-    private val localDataSource: LocalDataSource,
+    private val categoryRepository: CategoryRepository,
+    private val postRepository: PostRepository,
 ) {
-    suspend fun getCategories(): List<Category> {
-        return networkDatasource.getCatCategories().map {
-            Category(
-                id = it.id,
-                name = it.name
-            )
-        }
+
+    suspend fun getCategoriesFromDatabase(): Flow<List<Category>> {
+        return categoryRepository.getCategories()
     }
 
-    suspend fun getCatImages(): List<Post> {
-
-        saveDataFromNetworkToDb()
-
-        return localDataSource.getAllCatImages().map {
-            Post(
-                height = it.height,
-                id = it.id,
-                url = it.url,
-                width = it.width
-            )
-        }
-
-        /*
-        return networkDatasource.getCatImages().map {
-            Post(
-                id = it.id,
-                height = it.height,
-                url = it.url,
-                width = it.width
-            )
-        }
-        */
+    fun getPostInfo(): Flow<List<Post>> {
+        return postRepository.getPostInfo()
     }
 
-    private suspend fun saveDataFromNetworkToDb() {
-        networkDatasource.getCatImages().map { post ->
-            saveToDb(post = post)
-        }
+    suspend fun getNewImages(): Result<Unit> {
+        return postRepository.getNewImages()
     }
 
-    private fun saveToDb(post: Post) {
-        localDataSource.saveToDb(post)
+    suspend fun getCategoriesFromRetrofit(): Result<Unit> {
+        return categoryRepository.getNewCategories()
     }
 }

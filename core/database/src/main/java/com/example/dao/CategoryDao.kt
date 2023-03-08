@@ -4,14 +4,16 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.model.PostEntity
+import com.example.model.CategoryEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface PostDao {
-    @Query("SELECT * FROM posts ORDER BY random() LIMIT 50")
-    fun getAllCatImages(): Flow<List<PostEntity>>
+interface CategoryDao {
+
+    @Query("SELECT * FROM categories")
+    fun getCategories(): Flow<List<CategoryEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllCatImages(postEntity: List<PostEntity>)
+    suspend fun insertCategories(categoryEntity: List<CategoryEntity>)
+
 }

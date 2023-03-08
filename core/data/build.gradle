@@ -73,4 +73,13 @@ dependencies {
     implementation libs.hilt.navigation.compose
     kapt libs.hilt.android.compiler
     kapt libs.hilt.hilt.compiler
+
+    //Retrofit
+    implementation libs.retrofit
+    implementation libs.converter.gson
+
+    //Room
+    implementation libs.room.runtime
+    kapt libs.room.compiler
+    implementation libs.room.ktx
 }

@@ -1,21 +1,18 @@
 package com.example
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.model.Post
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class PostViewModel @Inject constructor(
-    private val repository: Repository,
+    private val repository: Repository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(PostViewState())
@@ -28,15 +25,27 @@ class PostViewModel @Inject constructor(
         fetchCatImagesFromRepository()
     }
 
-    fun fetchCatImagesFromRepository() {
+    private fun fetchCatImagesFromRepository() {
         viewModelScope.launch(Dispatchers.IO) {
             _isRefreshing.value = true
-            val image = repository.getCatImages()
+            repository.getPostInfo().collect {
+                _state.update { currentState ->
+                    currentState.copy(
+                        image = it
+                    )
+                }
+                _isRefreshing.value = false
+            }
+        }
+    }
 
-            _state.update { currentState ->
-                currentState.copy(
-                    image = image
-                )
+    fun fetchNewImages() {
+        viewModelScope.launch {
+            _isRefreshing.value = true
+            repository.getNewImages().onSuccess {
+
+            }.onFailure {
+                Log.d("ozlem", "$it")
             }
             _isRefreshing.value = false
         }

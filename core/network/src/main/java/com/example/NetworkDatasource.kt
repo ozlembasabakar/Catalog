@@ -1,3 +1,4 @@
+/*
 package com.example
 
 import com.example.model.Category
@@ -9,22 +10,14 @@ class NetworkDatasource @Inject constructor(
     private val retrofitNetworkApi: RetrofitNetworkApi,
 ) {
     suspend fun getCatCategories(): List<Category> {
-        return retrofitNetworkApi.getCatCategories().map {networkCategory ->
-            Category(
-                id = networkCategory.id,
-                name = networkCategory.name
-            )
+        return retrofitNetworkApi.getCatCategories().map {
+            it.toCategory()
         }
     }
 
     suspend fun getCatImages(): List<Post> {
-        return retrofitNetworkApi.getCatImages().map {networkPost ->
-            Post(
-                height = networkPost.height,
-                id = networkPost.id,
-                url = networkPost.url,
-                width = networkPost.width
-            )
+        return retrofitNetworkApi.getCatImages().map {
+            it.toPost()
         }
     }
-}
+}*/

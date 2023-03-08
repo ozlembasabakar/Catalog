@@ -1,5 +1,6 @@
 package com.example.pinterestclone.tabs
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.Repository
@@ -27,12 +28,22 @@ class TabsViewModel @Inject constructor(
 
     private fun fetchCategoryDataFromRepository() {
         viewModelScope.launch(Dispatchers.IO) {
-            val category = repository.getCategories()
+            repository.getCategoriesFromDatabase().collect {
+                _state.update { currentState ->
+                    currentState.copy(
+                        category = it
+                    )
+                }
+            }
+        }
+    }
 
-            _state.update { currentState ->
-                currentState.copy(
-                    category = category
-                )
+    private fun fetchCategory() {
+        viewModelScope.launch {
+            repository.getCategoriesFromRetrofit().onSuccess {
+
+            }.onFailure {
+                Log.d("ozlem", "$it")
             }
         }
     }

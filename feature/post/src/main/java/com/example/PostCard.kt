@@ -12,12 +12,16 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.feature.post.R
 import com.example.ui.theme.PinterestCloneTheme
 import com.example.ui.theme.PostCardRowPadding
 import com.example.ui.theme.Shapes
-import com.skydoves.landscapist.glide.GlideImage
 
+private const val THUMBNAIL_DIMENSION = 50
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun PostCard(
     modifier: Modifier,
@@ -30,14 +34,18 @@ fun PostCard(
             .background(MaterialTheme.colorScheme.surface)
     ) {
         GlideImage(
-            imageModel = image,
+            model = image,
             contentDescription = stringResource(R.string.image_description),
-            previewPlaceholder = R.drawable.images_1,
+            //previewPlaceholder = R.drawable.images_1,
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(Shapes.small),
             contentScale = ContentScale.Crop
-        )
+        ) {
+            it.thumbnail(
+                it.clone().override(THUMBNAIL_DIMENSION)
+            ).diskCacheStrategy(DiskCacheStrategy.ALL)
+        }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
