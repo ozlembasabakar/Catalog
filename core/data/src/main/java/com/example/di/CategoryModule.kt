@@ -1,6 +1,7 @@
 package com.example.di
 
 import com.example.*
+import com.example.database.CategoryDatabase
 import com.example.repository.category.CategoryRepository
 import com.example.repository.category.CategoryRepositoryImpl
 import com.example.retrofit.RetrofitNetworkApi

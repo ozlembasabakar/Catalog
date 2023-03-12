@@ -2,6 +2,8 @@ package com.example
 
 import com.example.dao.CategoryDao
 import com.example.dao.PostDao
+import com.example.database.CategoryDatabase
+import com.example.database.PostDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
