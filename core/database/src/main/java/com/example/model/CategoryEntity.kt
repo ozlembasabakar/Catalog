@@ -8,11 +8,9 @@ import androidx.room.PrimaryKey
 data class CategoryEntity(
     @PrimaryKey val id: Int,
     @ColumnInfo(name = "name") val name: String
-) {
-    fun toCategory(): Category {
-        return Category(
-            id = id,
-            name = name
-        )
-    }
-}
+)
+
+fun CategoryEntity.asExternalModel() = Category(
+    id = id,
+    name = name
+)

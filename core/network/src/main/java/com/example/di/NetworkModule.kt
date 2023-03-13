@@ -1,5 +1,6 @@
 package com.example.di
 
+import com.example.core.network.BuildConfig
 import com.example.retrofit.RetrofitNetworkApi
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -23,13 +24,17 @@ object NetworkModule {
 
         val httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
 
-        return Retrofit.Builder().baseUrl("https://api.thecatapi.com/v1/")
-            .addConverterFactory(GsonConverterFactory.create(gson)).client(httpClient.build())
+        return Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .baseUrl(BuildConfig.BASE_URL)
+            .client(httpClient.build())
     }
 
     @Provides
     @Singleton
     fun provideApi(builder: Retrofit.Builder): RetrofitNetworkApi {
-        return builder.build().create(RetrofitNetworkApi::class.java)
+        return builder
+            .build()
+            .create(RetrofitNetworkApi::class.java)
     }
 }

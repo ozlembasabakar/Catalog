@@ -1,8 +1,7 @@
 package com.example.repository.post
 
 import com.example.dao.PostDao
-import com.example.model.Post
-import com.example.model.PostEntity
+import com.example.model.*
 import com.example.retrofit.RetrofitNetworkApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -16,9 +15,7 @@ class PostRepositoryImpl @Inject constructor(
     override fun getPostInfo(): Flow<List<Post>> {
 
         val postsInfo: Flow<List<Post>> = postDao.getAllCatImages().map {
-            it.map {
-                it.toPost()
-            }
+            it.map (PostEntity::asExternalModel)
         }
         return postsInfo
     }
@@ -27,14 +24,7 @@ class PostRepositoryImpl @Inject constructor(
         try {
             val networkImages = networkApi.getCatImages()
             postDao.insertAllCatImages(
-                networkImages.map {
-                    PostEntity(
-                        id = it.id,
-                        height = it.height,
-                        url = it.url,
-                        width = it.width
-                    )
-                }
+                networkImages.map (NetworkPost::asEntity)
             )
             return Result.success(Unit)
         } catch (e: Exception) {

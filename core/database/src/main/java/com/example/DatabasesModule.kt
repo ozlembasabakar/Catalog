@@ -2,6 +2,8 @@ package com.example
 
 import android.content.Context
 import androidx.room.Room
+import com.example.database.CategoryDatabase
+import com.example.database.PostDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class DatabaseModule {
+class DatabasesModule {
 
     @Provides
     @Singleton

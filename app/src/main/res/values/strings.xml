@@ -1,6 +1,8 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name" translatable="false">Catalog</string>
     <string name="app_name_debug" translatable="false">CatalogDebug</string>
+    <string name="bottombaritem">BottomBarItem</string>
+    <string name="toastMessage">Please check your network connection!</string>
     <string-array name="category">
         <item>Travel</item>
         <item>Animal</item>

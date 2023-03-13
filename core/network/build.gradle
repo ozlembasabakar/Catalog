@@ -24,8 +24,16 @@ android {
 
     buildTypes {
         release {
+            debuggable true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField "String", "BASE_URL", "\"https://api.thecatapi.com/v1/\""
+        }
+        debug {
+            debuggable true
+
+            buildConfigField "String", "BASE_URL", "\"https://api.thecatapi.com/v1/\""
         }
     }
     compileOptions {
