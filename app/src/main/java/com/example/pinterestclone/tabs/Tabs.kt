@@ -36,7 +36,7 @@ fun Tabs(modifier: Modifier, category: List<Category>) {
         item {
             TabItem(
                 modifier = Modifier,
-                category = Category(100, "All").name,
+                category = Category("100", "all", "All").title,
                 isSelected = selectedItem == "All",
                 onClick = {
                     selectedItem = it
@@ -46,8 +46,8 @@ fun Tabs(modifier: Modifier, category: List<Category>) {
         items(category) { category ->
             TabItem(
                 modifier = Modifier,
-                category = category.name,
-                isSelected = selectedItem == category.name,
+                category = category.title,
+                isSelected = selectedItem == category.title,
                 onClick = {
                     selectedItem = it
                 }
@@ -63,14 +63,14 @@ fun TabsPreview() {
     PinterestCloneTheme {
 
         val categories = listOf(
-            Category(id = 0, name = "Travel"),
-            Category(id = 0, name = "Animal"),
-            Category(id = 0, name = "Art"),
-            Category(id = 0, name = "Food"),
-            Category(id = 0, name = "Health"),
-            Category(id = 0, name = "Sport"),
-            Category(id = 0, name = "Game"),
-            Category(id = 0, name = "DIY"),
+            Category(id = "0", slug = "Travel", title = "Travel"),
+            Category(id = "0", slug = "Travel", title = "Animal"),
+            Category(id = "0", slug = "Travel", title = "Art"),
+            Category(id = "0", slug = "Travel", title = "Food"),
+            Category(id = "0", slug = "Travel", title = "Health"),
+            Category(id = "0", slug = "Travel", title = "Sport"),
+            Category(id = "0", slug = "Travel", title = "Game"),
+            Category(id = "0", slug = "Travel", title = "DIY"),
         )
 
         Tabs(

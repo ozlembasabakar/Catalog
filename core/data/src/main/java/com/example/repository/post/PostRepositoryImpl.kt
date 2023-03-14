@@ -1,34 +1,28 @@
 package com.example.repository.post
 
-import com.example.dao.PostDao
+import com.example.dao.PostInfoDao
 import com.example.model.*
 import com.example.retrofit.RetrofitNetworkApi
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class PostRepositoryImpl @Inject constructor(
     private val networkApi: RetrofitNetworkApi,
-    private val postDao: PostDao,
+    private val postInfoDao: PostInfoDao,
 ) : PostRepository {
 
-    override fun getPostInfo(): Flow<List<Post>> {
-
-        val postsInfo: Flow<List<Post>> = postDao.getAllCatImages().map {
-            it.map (PostEntity::asExternalModel)
-        }
+    override fun getPostInfo(): Flow<List<PostInfo>> {
+        val postsInfo: Flow<List<PostInfo>> = postInfoDao.getAllPostInfos()
         return postsInfo
     }
 
-    override suspend fun getNewImages(): Result<Unit> {
-        try {
+    override suspend fun getNewPostInfos(): Result<Unit> {
+        return try {
             val networkImages = networkApi.getCatImages()
-            postDao.insertAllCatImages(
-                networkImages.map (NetworkPost::asEntity)
-            )
-            return Result.success(Unit)
+            postInfoDao.insertAllPostInfos(networkImages)
+            Result.success(Unit)
         } catch (e: Exception) {
-            return Result.failure(e)
+            Result.failure(e)
         }
     }
 }

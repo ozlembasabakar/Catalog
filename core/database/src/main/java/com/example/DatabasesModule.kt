@@ -22,8 +22,9 @@ class DatabasesModule {
     ): PostDatabase = Room.databaseBuilder(
         context,
         PostDatabase::class.java,
-        "PostDatabase",
-        )
+        "PostInfoDatabase",
+    )
+        .allowMainThreadQueries()
         .build()
 
     @Provides
@@ -35,5 +36,6 @@ class DatabasesModule {
         CategoryDatabase::class.java,
         "CategoryDatabase",
     )
+        .allowMainThreadQueries()
         .build()
 }

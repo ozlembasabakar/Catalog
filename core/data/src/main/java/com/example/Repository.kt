@@ -1,7 +1,7 @@
 package com.example
 
 import com.example.model.Category
-import com.example.model.Post
+import com.example.model.PostInfo
 import com.example.repository.category.CategoryRepository
 import com.example.repository.post.PostRepository
 import kotlinx.coroutines.*
@@ -18,12 +18,12 @@ class Repository @Inject constructor(
         return categoryRepository.getCategories()
     }
 
-    fun getPostInfo(): Flow<List<Post>> {
+    fun getPostInfo(): Flow<List<PostInfo>> {
         return postRepository.getPostInfo()
     }
 
-    suspend fun getNewImages(): Result<Unit> {
-        return postRepository.getNewImages()
+    suspend fun getNewPostInfos(): Result<Unit> {
+        return postRepository.getNewPostInfos()
     }
 
     suspend fun getCategoriesFromRetrofit(): Result<Unit> {

@@ -77,9 +77,11 @@ dependencies {
     //Retrofit
     implementation libs.retrofit
     implementation libs.converter.gson
+    implementation libs.retrofit.kotlin.serialization
 
     //Room
     implementation libs.room.runtime
     kapt libs.room.compiler
     implementation libs.room.ktx
+    implementation libs.room.paging
 }

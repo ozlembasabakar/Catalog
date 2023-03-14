@@ -1,17 +1,21 @@
 package com.example.retrofit
 
-import com.example.model.NetworkCategory
-import com.example.model.NetworkPost
+import com.example.model.Category
+import com.example.model.PostInfo
 import retrofit2.http.GET
+import retrofit2.http.Query
 
-const val END_POINT_CATEGORIES = "categories"
-const val END_POINT = "images/search?limit=50&api_key=live_z259ntj4viM8MgW9w8hPcvOEEWRHaEPnIeTgVWJ0G1RDn1Xg3Tte6GpNI7Qa12ch"
+const val END_POINT_TOPICS = "topics?client_id=UVw0NbwzCo6hE8moV68b3uLhgWtCNHsgO-hxqr4SU2g"
+const val END_POINT_IMAGES_BY_TOPICS =
+    "/topics/nature/photos/?client_id=UVw0NbwzCo6hE8moV68b3uLhgWtCNHsgO-hxqr4SU2g"
 
 interface RetrofitNetworkApi {
 
-    @GET(END_POINT_CATEGORIES)
-    suspend fun getCatCategories(): List<NetworkCategory>
+    @GET(END_POINT_TOPICS)
+    suspend fun getCatCategories(): List<Category>
 
-    @GET(END_POINT)
-    suspend fun getCatImages(): List<NetworkPost>
+    @GET(END_POINT_IMAGES_BY_TOPICS)
+    suspend fun getCatImages(
+        @Query("per_page") perPage: Int = 50,
+    ): List<PostInfo>
 }

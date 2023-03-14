@@ -1,7 +1,7 @@
 package com.example
 
 import com.example.dao.CategoryDao
-import com.example.dao.PostDao
+import com.example.dao.PostInfoDao
 import com.example.database.CategoryDatabase
 import com.example.database.PostDatabase
 import dagger.Module
@@ -15,10 +15,11 @@ object DaosModule {
     @Provides
     fun providesPostDao(
         database: PostDatabase,
-    ): PostDao = database.postDao()
+    ): PostInfoDao = database.postDao()
 
     @Provides
     fun providesCategoryDao(
         database: CategoryDatabase,
     ): CategoryDao = database.categoryDao()
+
 }

@@ -19,7 +19,7 @@ class CategoryModule {
     @Singleton
     fun provideCategoryRepository(
         database: CategoryDatabase,
-        retrofitNetworkApi: RetrofitNetworkApi
+        retrofitNetworkApi: RetrofitNetworkApi,
     ): CategoryRepository {
         return CategoryRepositoryImpl(retrofitNetworkApi, database.categoryDao())
     }

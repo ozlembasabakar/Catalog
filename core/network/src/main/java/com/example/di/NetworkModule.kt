@@ -1,6 +1,5 @@
 package com.example.di
 
-import com.example.core.network.BuildConfig
 import com.example.retrofit.RetrofitNetworkApi
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -26,7 +25,7 @@ object NetworkModule {
 
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .baseUrl(BuildConfig.BASE_URL)
+            .baseUrl("https://api.unsplash.com/")
             .client(httpClient.build())
     }
 

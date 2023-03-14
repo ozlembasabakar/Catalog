@@ -3,16 +3,19 @@ package com.example
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.model.Post
+import com.example.model.PostInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class PostViewModel @Inject constructor(
-    private val repository: Repository
+    private val repository: Repository,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(PostViewState())
@@ -42,7 +45,7 @@ class PostViewModel @Inject constructor(
     fun fetchNewImages() {
         viewModelScope.launch {
             _isRefreshing.value = true
-            repository.getNewImages().onSuccess {
+            repository.getNewPostInfos().onSuccess {
 
             }.onFailure {
                 Log.d("ozlem", "$it")
@@ -53,5 +56,5 @@ class PostViewModel @Inject constructor(
 }
 
 data class PostViewState(
-    val image: List<Post> = emptyList(),
+    val image: List<PostInfo> = emptyList(),
 )
