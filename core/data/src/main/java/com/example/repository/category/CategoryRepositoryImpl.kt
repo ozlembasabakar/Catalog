@@ -12,6 +12,9 @@ class CategoryRepositoryImpl @Inject constructor(
 ) : CategoryRepository {
 
     override suspend fun getCategories(): Flow<List<Category>> {
+        val networkCategory = networkApi.getCatCategories()
+        categoryDao.insertCategories(networkCategory)
+
         val category: Flow<List<Category>> = categoryDao.getCategories()
 
         return category

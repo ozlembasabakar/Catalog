@@ -11,7 +11,10 @@ class PostRepositoryImpl @Inject constructor(
     private val postInfoDao: PostInfoDao,
 ) : PostRepository {
 
-    override fun getPostInfo(): Flow<List<PostInfo>> {
+    override suspend fun getPostInfo(): Flow<List<PostInfo>> {
+        val networkImages = networkApi.getCatImages()
+        postInfoDao.insertAllPostInfos(networkImages)
+
         val postsInfo: Flow<List<PostInfo>> = postInfoDao.getAllPostInfos()
         return postsInfo
     }

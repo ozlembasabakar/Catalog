@@ -18,7 +18,7 @@ class Repository @Inject constructor(
         return categoryRepository.getCategories()
     }
 
-    fun getPostInfo(): Flow<List<PostInfo>> {
+    suspend fun getPostInfo(): Flow<List<PostInfo>> {
         return postRepository.getPostInfo()
     }
 

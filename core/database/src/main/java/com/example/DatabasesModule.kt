@@ -2,7 +2,8 @@ package com.example
 
 import android.content.Context
 import androidx.room.Room
-import com.example.database.CategoryDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.database.PostDatabase
 import dagger.Module
 import dagger.Provides
@@ -15,6 +16,15 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class DatabasesModule {
 
+    val MIGRATION_1_2 = object : Migration(1, 2) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL(
+                "CREATE TABLE `categories` (`id` TEXT NOT NULL, `slug` TEXT NOT NULL, `title` TEXT NOT NULL, " +
+                        "PRIMARY KEY(`id`))"
+            )
+        }
+    }
+
     @Provides
     @Singleton
     fun providePostDatabase(
@@ -24,18 +34,8 @@ class DatabasesModule {
         PostDatabase::class.java,
         "PostInfoDatabase",
     )
-        .allowMainThreadQueries()
-        .build()
-
-    @Provides
-    @Singleton
-    fun provideCategoryDatabase(
-        @ApplicationContext context: Context,
-    ): CategoryDatabase = Room.databaseBuilder(
-        context,
-        CategoryDatabase::class.java,
-        "CategoryDatabase",
-    )
-        .allowMainThreadQueries()
+        .fallbackToDestructiveMigration()
+        //.allowMainThreadQueries()
+        .addMigrations(MIGRATION_1_2)
         .build()
 }

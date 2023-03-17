@@ -1,7 +1,7 @@
 package com.example.di
 
 import com.example.*
-import com.example.database.CategoryDatabase
+import com.example.database.PostDatabase
 import com.example.repository.category.CategoryRepository
 import com.example.repository.category.CategoryRepositoryImpl
 import com.example.retrofit.RetrofitNetworkApi
@@ -18,7 +18,7 @@ class CategoryModule {
     @Provides
     @Singleton
     fun provideCategoryRepository(
-        database: CategoryDatabase,
+        database: PostDatabase,
         retrofitNetworkApi: RetrofitNetworkApi,
     ): CategoryRepository {
         return CategoryRepositoryImpl(retrofitNetworkApi, database.categoryDao())
