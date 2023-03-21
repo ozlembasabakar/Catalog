@@ -14,7 +14,7 @@ import com.example.PostViewModel
 import com.example.pinterestclone.homeScreen.HomeScreen
 import com.example.pinterestclone.tabs.TabsViewModel
 
-@SuppressLint("UnrememberedMutableState", "StateFlowValueCalledInComposition")
+@SuppressLint("UnrememberedMutableState", "StateFlowValueCalledInComposition", "RememberReturnType")
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun CatalogNavHost() {
@@ -23,11 +23,6 @@ fun CatalogNavHost() {
 
     val tabsViewModel: TabsViewModel = hiltViewModel()
     val tabsViewState by tabsViewModel.state.collectAsStateWithLifecycle()
-
-    val postViewModel: PostViewModel = hiltViewModel()
-    val postViewState by postViewModel.state.collectAsStateWithLifecycle()
-
-    val isRefreshing by postViewModel.isRefreshing.collectAsStateWithLifecycle()
 
     val topics = mutableStateOf(
         tabsViewModel.selectedItem.value
@@ -40,6 +35,26 @@ fun CatalogNavHost() {
         .split(")")[0]
     Log.d("ozlem", topics)
 
+    val postViewModel: PostViewModel = hiltViewModel()
+    val postViewState by postViewModel.state.collectAsStateWithLifecycle()
+
+    val isRefreshing by postViewModel.isRefreshing.collectAsStateWithLifecycle()
+
+    LaunchedEffect(topics) {
+        when (topics) {
+            "wallpapers" -> postViewModel.networkCall("wallpapers")
+            "3d-renders" -> postViewModel.networkCall("3d-renders")
+            "travel" -> postViewModel.networkCall("travel")
+            "nature" -> postViewModel.networkCall("nature")
+            "street-photography" -> postViewModel.networkCall("street-photography")
+            "experimental" -> postViewModel.networkCall("experimental")
+            "animals" -> postViewModel.networkCall("animals")
+            "textures-patterns" -> postViewModel.networkCall("textures-patterns")
+            "fashion-beauty" -> postViewModel.networkCall("fashion-beauty")
+            else -> postViewModel.networkCall("architecture-interior")
+
+        }
+    }
     NavHost(
         modifier = Modifier,
         navController = navController,
