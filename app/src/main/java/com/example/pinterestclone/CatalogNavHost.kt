@@ -1,6 +1,7 @@
 package com.example.pinterestclone
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -13,7 +14,7 @@ import com.example.PostViewModel
 import com.example.pinterestclone.homeScreen.HomeScreen
 import com.example.pinterestclone.tabs.TabsViewModel
 
-@SuppressLint("UnrememberedMutableState")
+@SuppressLint("UnrememberedMutableState", "StateFlowValueCalledInComposition")
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun CatalogNavHost() {
@@ -28,6 +29,17 @@ fun CatalogNavHost() {
 
     val isRefreshing by postViewModel.isRefreshing.collectAsStateWithLifecycle()
 
+    val topics = mutableStateOf(
+        tabsViewModel.selectedItem.value
+    ).toString()
+        .lowercase()
+        .replace("mutablestate(value=", "")
+        .replace(" & ", "-")
+        .replace(" ", "-")
+        .replace("interiors", "interior")
+        .split(")")[0]
+    Log.d("ozlem", topics)
+
     NavHost(
         modifier = Modifier,
         navController = navController,
@@ -39,7 +51,9 @@ fun CatalogNavHost() {
                 category = tabsViewState.category,
                 post = postViewState.image,
                 isRefreshing = isRefreshing,
-                onRefresh = postViewModel::fetchNewImages,
+                onRefresh = {
+                    postViewModel.networkCall(topics)
+                },
                 selectedItem = tabsViewModel.selectedItem
             )
         }

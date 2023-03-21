@@ -53,6 +53,19 @@ class PostViewModel @Inject constructor(
             _isRefreshing.value = false
         }
     }
+
+    fun networkCall(topicPhotos: String) {
+        viewModelScope.launch {
+            _isRefreshing.value = true
+            val networkCall = repository.networkCall(topicPhotos)
+            _state.update {
+                it.copy(
+                    image = networkCall
+                )
+            }
+            _isRefreshing.value = false
+        }
+    }
 }
 
 data class PostViewState(

@@ -82,4 +82,7 @@ dependencies {
     implementation libs.hilt.navigation.compose
     kapt libs.hilt.android.compiler
     kapt libs.hilt.hilt.compiler
+
+    //Gson Converter
+    implementation libs.converter.gson
 }

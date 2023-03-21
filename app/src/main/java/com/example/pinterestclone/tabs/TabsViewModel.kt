@@ -23,7 +23,7 @@ class TabsViewModel @Inject constructor(
     private val _state = MutableStateFlow(TabsViewState())
     val state: StateFlow<TabsViewState> = _state.asStateFlow()
 
-    val selectedItem = mutableStateOf("All")
+    val selectedItem = mutableStateOf("Wallpapers")
 
     init {
         fetchCategoryDataFromRepository()

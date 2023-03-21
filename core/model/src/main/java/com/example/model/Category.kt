@@ -1,5 +1,6 @@
 package com.example.model
 
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
@@ -10,4 +11,5 @@ data class Category(
     @PrimaryKey val id: String,
     val slug: String,
     val title: String,
+    @Embedded var links: Links? = Links(),
 )

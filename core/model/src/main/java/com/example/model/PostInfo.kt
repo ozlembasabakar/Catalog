@@ -8,9 +8,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 @Entity(tableName = "unsplash_image_table")
 data class PostInfo(
-    @PrimaryKey(autoGenerate = false)
-    val id: String,
-    @Embedded
-    val urls: Urls,
+    @PrimaryKey(autoGenerate = false) val id: String,
+    @Embedded val urls: Urls,
     val likes: Int,
 )

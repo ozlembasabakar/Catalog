@@ -35,7 +35,7 @@ fun Tabs(
             TabsHorizontalPadding
         ),
     ) {
-        item {
+        /*item {
             TabItem(
                 modifier = Modifier,
                 category = Category("100", "all", "All").title,
@@ -44,7 +44,7 @@ fun Tabs(
                     selectedItem.value = it
                 }
             )
-        }
+        }*/
         items(category) { category ->
             TabItem(
                 modifier = Modifier,

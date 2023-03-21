@@ -20,7 +20,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.PostCard
 import com.example.model.Category
 import com.example.model.PostInfo
-import com.example.model.Urls
 import com.example.pinterestclone.R
 import com.example.pinterestclone.swiperefresh.CustomPullToRefresh
 import com.example.pinterestclone.tabs.Tabs
@@ -80,7 +79,7 @@ fun HomeScreen(
                     content =
                     {
                         items(post.size) {
-                            PostCard(modifier = modifier, image = post[it].urls.regular)
+                            PostCard(modifier = modifier, image = post[it].urls.small)
                         }
                     }
                 )
@@ -120,7 +119,7 @@ private fun checkForInternet(context: Context): Boolean {
 fun HomeScreenPreview() {
     PinterestCloneTheme {
 
-        val category = listOf(
+/*        val category = listOf(
             Category(id = "0", title = "Cat1", slug = ""),
             Category(id = "0", title = "Cat1", slug = ""),
             Category(id = "0", title = "Cat1", slug = ""),
@@ -158,6 +157,6 @@ fun HomeScreenPreview() {
             post = post,
             onRefresh = {},
             isRefreshing = true
-        )
+        )*/
     }
 }

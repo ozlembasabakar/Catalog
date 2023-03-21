@@ -1,7 +1,7 @@
 package com.example.repository.post
 
 import com.example.dao.PostInfoDao
-import com.example.model.*
+import com.example.model.PostInfo
 import com.example.retrofit.RetrofitNetworkApi
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -27,5 +27,9 @@ class PostRepositoryImpl @Inject constructor(
         } catch (e: Exception) {
             Result.failure(e)
         }
+    }
+
+    override suspend fun networkCall(topic: String): List<PostInfo> {
+        return networkApi.networkCall(topic)
     }
 }

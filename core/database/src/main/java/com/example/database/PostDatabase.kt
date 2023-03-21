@@ -9,7 +9,7 @@ import com.example.model.PostInfo
 
 @Database(
     entities = [PostInfo::class, Category::class],
-    version = 2,
+    version = 3,
     exportSchema = true,
 )
 abstract class PostDatabase : RoomDatabase() {

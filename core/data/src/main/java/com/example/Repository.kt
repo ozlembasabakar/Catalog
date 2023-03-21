@@ -29,4 +29,8 @@ class Repository @Inject constructor(
     suspend fun getCategoriesFromRetrofit(): Result<Unit> {
         return categoryRepository.getNewCategories()
     }
+
+    suspend fun networkCall(topic: String): List<PostInfo> {
+        return postRepository.networkCall(topic)
+    }
 }

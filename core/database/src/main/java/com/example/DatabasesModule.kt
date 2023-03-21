@@ -25,6 +25,14 @@ class DatabasesModule {
         }
     }
 
+    val MIGRATION_2_3 = object : Migration(2, 3) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL(
+                "ALTER TABLE 'categories' ADD COLUMN 'photos' TEXT"
+            )
+        }
+    }
+
     @Provides
     @Singleton
     fun providePostDatabase(
@@ -36,6 +44,6 @@ class DatabasesModule {
     )
         .fallbackToDestructiveMigration()
         //.allowMainThreadQueries()
-        .addMigrations(MIGRATION_1_2)
+        .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
         .build()
 }
