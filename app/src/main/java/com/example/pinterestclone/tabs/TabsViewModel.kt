@@ -1,6 +1,7 @@
 package com.example.pinterestclone.tabs
 
 import android.util.Log
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.Repository
@@ -21,6 +22,8 @@ class TabsViewModel @Inject constructor(
 
     private val _state = MutableStateFlow(TabsViewState())
     val state: StateFlow<TabsViewState> = _state.asStateFlow()
+
+    val selectedItem = mutableStateOf("All")
 
     init {
         fetchCategoryDataFromRepository()

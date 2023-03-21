@@ -1,5 +1,6 @@
 package com.example.pinterestclone
 
+import android.annotation.SuppressLint
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -12,6 +13,7 @@ import com.example.PostViewModel
 import com.example.pinterestclone.homeScreen.HomeScreen
 import com.example.pinterestclone.tabs.TabsViewModel
 
+@SuppressLint("UnrememberedMutableState")
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun CatalogNavHost() {
@@ -37,7 +39,8 @@ fun CatalogNavHost() {
                 category = tabsViewState.category,
                 post = postViewState.image,
                 isRefreshing = isRefreshing,
-                onRefresh = postViewModel::fetchNewImages
+                onRefresh = postViewModel::fetchNewImages,
+                selectedItem = tabsViewModel.selectedItem
             )
         }
     }

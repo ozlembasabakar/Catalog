@@ -38,6 +38,7 @@ fun HomeScreen(
     post: List<PostInfo>,
     onRefresh: () -> Unit,
     isRefreshing: Boolean,
+    selectedItem: MutableState<String>,
 ) {
 
     val context = LocalContext.current
@@ -65,7 +66,8 @@ fun HomeScreen(
                     .padding(
                         top = TabsVerticalPadding
                     ),
-                category = category
+                category = category,
+                selectedItem = selectedItem
             )
             CustomPullToRefresh(
                 isRefreshing = isRefreshing,

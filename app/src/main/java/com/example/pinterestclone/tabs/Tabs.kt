@@ -1,5 +1,6 @@
 package com.example.pinterestclone.tabs
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -15,12 +16,13 @@ import com.example.pinterestclone.ui.theme.PinterestCloneTheme
 import com.example.pinterestclone.ui.theme.TabsHorizontalPadding
 import com.example.pinterestclone.ui.theme.TabsVerticalPadding
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun Tabs(modifier: Modifier, category: List<Category>) {
-
-    var selectedItem by remember {
-        mutableStateOf("All")
-    }
+fun Tabs(
+    modifier: Modifier,
+    category: List<Category>,
+    selectedItem: MutableState<String>,
+) {
 
     LazyRow(
         modifier = modifier
@@ -37,9 +39,9 @@ fun Tabs(modifier: Modifier, category: List<Category>) {
             TabItem(
                 modifier = Modifier,
                 category = Category("100", "all", "All").title,
-                isSelected = selectedItem == "All",
+                isSelected = selectedItem.value == "All",
                 onClick = {
-                    selectedItem = it
+                    selectedItem.value = it
                 }
             )
         }
@@ -47,9 +49,9 @@ fun Tabs(modifier: Modifier, category: List<Category>) {
             TabItem(
                 modifier = Modifier,
                 category = category.title,
-                isSelected = selectedItem == category.title,
+                isSelected = selectedItem.value == category.title,
                 onClick = {
-                    selectedItem = it
+                    selectedItem.value = it
                 }
             )
         }
@@ -62,8 +64,8 @@ fun Tabs(modifier: Modifier, category: List<Category>) {
 fun TabsPreview() {
     PinterestCloneTheme {
 
-        val categories = listOf(
-            Category(id = "0", slug = "Travel", title = "Travel"),
+/*        val categories = listOf(
+            Category(id = "0", slug = "Travel", title = "Travel", ),
             Category(id = "0", slug = "Travel", title = "Animal"),
             Category(id = "0", slug = "Travel", title = "Art"),
             Category(id = "0", slug = "Travel", title = "Food"),
@@ -76,7 +78,7 @@ fun TabsPreview() {
         Tabs(
             modifier = Modifier,
             category = categories
-        )
+        )*/
     }
 }
 
