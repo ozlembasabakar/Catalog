@@ -2,6 +2,7 @@ package com.example
 
 import com.example.model.Category
 import com.example.model.PostInfo
+import com.example.model.PostInfoWithCategory
 import com.example.repository.category.CategoryRepository
 import com.example.repository.post.PostRepository
 import kotlinx.coroutines.*
@@ -32,5 +33,9 @@ class Repository @Inject constructor(
 
     suspend fun networkCall(topic: String): List<PostInfo> {
         return postRepository.networkCall(topic)
+    }
+
+    suspend fun postWithTopics(topic: String): List<PostInfoWithCategory> {
+        return postRepository.postWithTopics(topic)
     }
 }

@@ -6,20 +6,23 @@ import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.PostCard
 import com.example.model.Category
-import com.example.model.PostInfo
+import com.example.model.PostInfoWithCategory
 import com.example.pinterestclone.R
 import com.example.pinterestclone.swiperefresh.CustomPullToRefresh
 import com.example.pinterestclone.tabs.Tabs
@@ -34,11 +37,13 @@ import com.example.pinterestclone.ui.theme.*
 fun HomeScreen(
     modifier: Modifier,
     category: List<Category>,
-    post: List<PostInfo>,
+    post: List<PostInfoWithCategory>,
     onRefresh: () -> Unit,
     isRefreshing: Boolean,
     selectedItem: MutableState<String>,
 ) {
+
+    Log.d("ozlem", "HomeScreen: ${post.size}")
 
     val context = LocalContext.current
 
@@ -64,7 +69,8 @@ fun HomeScreen(
                 modifier = modifier
                     .padding(
                         top = TabsVerticalPadding
-                    ),
+                    )
+                    .testTag("tabs"),
                 category = category,
                 selectedItem = selectedItem
             )
@@ -78,8 +84,13 @@ fun HomeScreen(
                     verticalArrangement = Arrangement.spacedBy(HomeScreenVerticalPadding),
                     content =
                     {
-                        items(post.size) {
-                            PostCard(modifier = modifier, image = post[it].urls.small)
+                        items(post) {
+                            PostCard(
+                                modifier = modifier,
+                                image = it.url,
+                                likes = it.likes,
+                                description = it.description
+                            )
                         }
                     }
                 )

@@ -13,7 +13,9 @@ const val END_POINT_IMAGES_BY_TOPICS =
 interface RetrofitNetworkApi {
 
     @GET(END_POINT_TOPICS)
-    suspend fun getCatCategories(): List<Category>
+    suspend fun getCatCategories(
+        @Query("per_page") perPage: Int = 10,
+    ): List<Category>
 
     @GET(END_POINT_IMAGES_BY_TOPICS)
     suspend fun getCatImages(
@@ -23,5 +25,6 @@ interface RetrofitNetworkApi {
     @GET("/topics/{topic}/photos/?client_id=UVw0NbwzCo6hE8moV68b3uLhgWtCNHsgO-hxqr4SU2g")
     suspend fun networkCall(
         @Path("topic") topic: String,
+        @Query("per_page") perPage: Int = 20,
     ): List<PostInfo>
 }

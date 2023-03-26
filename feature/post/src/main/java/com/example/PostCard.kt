@@ -5,9 +5,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -21,11 +24,14 @@ import com.example.ui.theme.PostCardRowPadding
 import com.example.ui.theme.Shapes
 
 private const val THUMBNAIL_DIMENSION = 50
+
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun PostCard(
     modifier: Modifier,
     image: String?,
+    likes: Int,
+    description: String?,
 ) {
     Column(
         modifier = modifier
@@ -46,6 +52,9 @@ fun PostCard(
                 it.clone().override(THUMBNAIL_DIMENSION)
             ).diskCacheStrategy(DiskCacheStrategy.ALL)
         }
+        if (description != null) {
+            Text(text = description, color = MaterialTheme.colorScheme.onSurface)
+        }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -54,8 +63,22 @@ fun PostCard(
                     end = PostCardRowPadding,
                     top = PostCardRowPadding
                 ),
-            horizontalArrangement = Arrangement.End
+            verticalAlignment = Alignment.CenterVertically
         ) {
+            Row {
+                Icon(
+                    painter = painterResource(id = R.drawable.heart),
+                    contentDescription = "Likes",
+                    tint = if (likes == 0) MaterialTheme.colorScheme.surface else Color.Red,
+                    modifier = Modifier.padding(end = PostCardRowPadding)
+                )
+                Text(
+                    text = "$likes",
+                    color = if (likes == 0) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.padding(start = PostCardRowPadding)
+                )
+            }
+            Spacer(modifier = Modifier.weight(1f))
             Icon(
                 painter = painterResource(id = R.drawable.more_icon),
                 contentDescription = stringResource(R.string.more_options),
@@ -70,6 +93,11 @@ fun PostCard(
 @Composable
 fun PostCardPreview() {
     PinterestCloneTheme {
-        PostCard(modifier = Modifier, image = R.drawable.images_1.toString())
+        PostCard(
+            modifier = Modifier,
+            image = R.drawable.images_1.toString(),
+            likes = 27,
+            description = "Description"
+        )
     }
 }

@@ -11,4 +11,5 @@ data class PostInfo(
     @PrimaryKey(autoGenerate = false) val id: String,
     @Embedded val urls: Urls,
     val likes: Int,
+    val alt_description: String?,
 )

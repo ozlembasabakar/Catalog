@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 4,
-    "identityHash": "7c6560bacb7e75dc5cd719f503d245a8",
+    "version": 5,
+    "identityHash": "9d67ecacf6f27583e81888c2a9b5011d",
     "entities": [
       {
         "tableName": "unsplash_image_table",
@@ -79,12 +79,50 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "post_info_with_topics",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`topic` TEXT NOT NULL, `url` TEXT NOT NULL, `likes` INTEGER NOT NULL, `description` TEXT, PRIMARY KEY(`topic`))",
+        "fields": [
+          {
+            "fieldPath": "topic",
+            "columnName": "topic",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "url",
+            "columnName": "url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "likes",
+            "columnName": "likes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "topic"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7c6560bacb7e75dc5cd719f503d245a8')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9d67ecacf6f27583e81888c2a9b5011d')"
     ]
   }
 }

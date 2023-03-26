@@ -33,28 +33,23 @@ fun CatalogNavHost() {
         .replace(" ", "-")
         .replace("interiors", "interior")
         .split(")")[0]
-    Log.d("ozlem", topics)
+    Log.d("ozlem", "topic: $topics")
 
     val postViewModel: PostViewModel = hiltViewModel()
     val postViewState by postViewModel.state.collectAsStateWithLifecycle()
+    val postWithTopicsViewState by postViewModel.stateWithTopics.collectAsStateWithLifecycle()
 
     val isRefreshing by postViewModel.isRefreshing.collectAsStateWithLifecycle()
 
+    Log.d("ozlem", "postWithTopicsViewState: ${postWithTopicsViewState.info}")
+
     LaunchedEffect(topics) {
         when (topics) {
-            "wallpapers" -> postViewModel.networkCall("wallpapers")
-            "3d-renders" -> postViewModel.networkCall("3d-renders")
-            "travel" -> postViewModel.networkCall("travel")
-            "nature" -> postViewModel.networkCall("nature")
-            "street-photography" -> postViewModel.networkCall("street-photography")
-            "experimental" -> postViewModel.networkCall("experimental")
-            "animals" -> postViewModel.networkCall("animals")
-            "textures-patterns" -> postViewModel.networkCall("textures-patterns")
-            "fashion-beauty" -> postViewModel.networkCall("fashion-beauty")
-            else -> postViewModel.networkCall("architecture-interior")
-
+            //"all" -> postViewModel.fetchCatImagesFromRepository()
+            topics -> postViewModel.postWithTopics(topics)
         }
     }
+
     NavHost(
         modifier = Modifier,
         navController = navController,
@@ -64,10 +59,15 @@ fun CatalogNavHost() {
             HomeScreen(
                 modifier = Modifier,
                 category = tabsViewState.category,
-                post = postViewState.image,
+                post = postWithTopicsViewState.info,
                 isRefreshing = isRefreshing,
                 onRefresh = {
-                    postViewModel.networkCall(topics)
+                    if (tabsViewModel.selectedItem.value == "All") {
+                        postViewModel.fetchNewImages()
+                    } else {
+                        postViewModel.networkCall(topics)
+                    }
+                    Log.d("ozlem", "selectedItem: ${tabsViewModel.selectedItem.value}")
                 },
                 selectedItem = tabsViewModel.selectedItem
             )

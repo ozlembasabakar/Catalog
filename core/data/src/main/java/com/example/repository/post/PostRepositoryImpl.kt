@@ -2,6 +2,7 @@ package com.example.repository.post
 
 import com.example.dao.PostInfoDao
 import com.example.model.PostInfo
+import com.example.model.PostInfoWithCategory
 import com.example.retrofit.RetrofitNetworkApi
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -31,5 +32,21 @@ class PostRepositoryImpl @Inject constructor(
 
     override suspend fun networkCall(topic: String): List<PostInfo> {
         return networkApi.networkCall(topic)
+    }
+
+    override suspend fun postWithTopics(topic: String): List<PostInfoWithCategory> {
+        //postInfoDao.deleteAllPostInfosWithTopics()
+        val networkCallInfo = networkApi.networkCall(topic).map {
+            PostInfoWithCategory(
+                id = it.id,
+                category = topic,
+                url = it.urls.small,
+                likes = it.likes,
+                description = it.alt_description
+            )
+        }
+        postInfoDao.insertAllPostInfoWithTopics(networkCallInfo)
+
+        return postInfoDao.getAllPostInfosWithTopics(topic)
     }
 }

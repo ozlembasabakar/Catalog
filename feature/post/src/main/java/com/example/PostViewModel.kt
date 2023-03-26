@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.model.PostInfo
+import com.example.model.PostInfoWithCategory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,23 +22,24 @@ class PostViewModel @Inject constructor(
     private val _state = MutableStateFlow(PostViewState())
     val state: StateFlow<PostViewState> = _state.asStateFlow()
 
+    private val _stateWithTopics = MutableStateFlow(PostWithCategoryViewState())
+    val stateWithTopics: StateFlow<PostWithCategoryViewState> = _stateWithTopics.asStateFlow()
+
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
 
     init {
-        fetchCatImagesFromRepository()
+        //fetchCatImagesFromRepository()
     }
 
-    private fun fetchCatImagesFromRepository() {
+    fun fetchCatImagesFromRepository() {
         viewModelScope.launch(Dispatchers.IO) {
-            _isRefreshing.value = true
             repository.getPostInfo().collect {
                 _state.update { currentState ->
                     currentState.copy(
                         image = it
                     )
                 }
-                _isRefreshing.value = false
             }
         }
     }
@@ -54,20 +56,33 @@ class PostViewModel @Inject constructor(
         }
     }
 
-    fun networkCall(topicPhotos: String) {
+    fun networkCall(topic: String) {
         viewModelScope.launch {
-            _isRefreshing.value = true
-            val networkCall = repository.networkCall(topicPhotos)
+            val networkCall = repository.networkCall(topic)
             _state.update {
                 it.copy(
                     image = networkCall
                 )
             }
-            _isRefreshing.value = false
+        }
+    }
+
+    fun postWithTopics(topic: String) {
+        viewModelScope.launch(Dispatchers.Default) {
+            val info = repository.postWithTopics(topic)
+            _stateWithTopics.update { currentState ->
+                currentState.copy(
+                    info = info
+                )
+            }
         }
     }
 }
 
 data class PostViewState(
     val image: List<PostInfo> = emptyList(),
+)
+
+data class PostWithCategoryViewState(
+    val info: List<PostInfoWithCategory> = emptyList(),
 )

@@ -74,7 +74,6 @@ dependencies {
     implementation libs.room.runtime
     kapt libs.room.compiler
     implementation libs.room.ktx
-    implementation libs.room.paging
 
     //Dagger-Hilt
     implementation libs.hilt.android
