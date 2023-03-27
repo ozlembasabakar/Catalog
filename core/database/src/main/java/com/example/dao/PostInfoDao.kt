@@ -18,10 +18,10 @@ interface PostInfoDao {
         postInfoWithTopics: List<PostInfoWithCategory>,
     )
 
-    @Query("SELECT * FROM post_info_with_category WHERE category = :category LIMIT 10")
+    @Query("SELECT * FROM post_info_with_category WHERE category = :category ORDER BY random() LIMIT 10")
     fun getAllPostInfosWithTopics(
         category: String,
-    ): List<PostInfoWithCategory>
+    ): Flow<List<PostInfoWithCategory>>
 
     @Query("DELETE FROM post_info_with_category")
     fun deleteAllPostInfosWithTopics()

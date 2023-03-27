@@ -30,23 +30,42 @@ class PostRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun networkCall(topic: String): List<PostInfo> {
-        return networkApi.networkCall(topic)
-    }
-
-    override suspend fun postWithTopics(topic: String): List<PostInfoWithCategory> {
-        //postInfoDao.deleteAllPostInfosWithTopics()
-        val networkCallInfo = networkApi.networkCall(topic).map {
+    override suspend fun networkCall(category: String): List<PostInfoWithCategory> {
+        val networkImages = networkApi.networkCall(category).map {
             PostInfoWithCategory(
                 id = it.id,
-                category = topic,
+                category = category,
                 url = it.urls.small,
                 likes = it.likes,
                 description = it.alt_description
             )
         }
-        postInfoDao.insertAllPostInfoWithTopics(networkCallInfo)
+        postInfoDao.insertAllPostInfoWithTopics(networkImages)
+        return networkImages
+    }
 
-        return postInfoDao.getAllPostInfosWithTopics(topic)
+    override suspend fun getPostWithTopics(topic: String): Flow<List<PostInfoWithCategory>> {
+        val postsInfo: Flow<List<PostInfoWithCategory>> =
+            postInfoDao.getAllPostInfosWithTopics(topic)
+
+        return postsInfo
+    }
+
+    override suspend fun getNewPostWithTopics(category: String): Result<Unit> {
+        return try {
+            val networkImages = networkApi.networkCall(category).map {
+                PostInfoWithCategory(
+                    id = it.id,
+                    category = category,
+                    url = it.urls.small,
+                    likes = it.likes,
+                    description = it.alt_description
+                )
+            }
+            postInfoDao.insertAllPostInfoWithTopics(networkImages)
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 }

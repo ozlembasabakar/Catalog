@@ -7,10 +7,7 @@ import com.example.model.PostInfo
 import com.example.model.PostInfoWithCategory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,10 +25,6 @@ class PostViewModel @Inject constructor(
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
 
-    init {
-        //fetchCatImagesFromRepository()
-    }
-
     fun fetchCatImagesFromRepository() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.getPostInfo().collect {
@@ -44,36 +37,37 @@ class PostViewModel @Inject constructor(
         }
     }
 
-    fun fetchNewImages() {
+    fun getNewPostWithTopics(category: String) {
+        _isRefreshing.value = true
         viewModelScope.launch {
-            _isRefreshing.value = true
-            repository.getNewPostInfos().onSuccess {
+            repository.getNewPostWithTopics(category).onSuccess {
 
             }.onFailure {
                 Log.d("ozlem", "$it")
             }
-            _isRefreshing.value = false
         }
+        _isRefreshing.value = false
     }
 
     fun networkCall(topic: String) {
         viewModelScope.launch {
             val networkCall = repository.networkCall(topic)
-            _state.update {
+            _stateWithTopics.update {
                 it.copy(
-                    image = networkCall
+                    info = networkCall
                 )
             }
         }
     }
 
-    fun postWithTopics(topic: String) {
-        viewModelScope.launch(Dispatchers.Default) {
-            val info = repository.postWithTopics(topic)
-            _stateWithTopics.update { currentState ->
-                currentState.copy(
-                    info = info
-                )
+    fun getPostWithTopics(topic: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getPostWithTopics(topic).collect {
+                _stateWithTopics.update { currentState ->
+                    currentState.copy(
+                        info = it
+                    )
+                }
             }
         }
     }

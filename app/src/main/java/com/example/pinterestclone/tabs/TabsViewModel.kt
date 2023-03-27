@@ -1,6 +1,5 @@
 package com.example.pinterestclone.tabs
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -26,10 +25,10 @@ class TabsViewModel @Inject constructor(
     val selectedItem = mutableStateOf("Wallpapers")
 
     init {
-        fetchCategoryDataFromRepository()
+        fetchCategory()
     }
 
-    private fun fetchCategoryDataFromRepository() {
+    fun fetchCategoryDataFromRepository() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.getCategoriesFromDatabase().collect {
                 _state.update { currentState ->
@@ -44,9 +43,9 @@ class TabsViewModel @Inject constructor(
     private fun fetchCategory() {
         viewModelScope.launch {
             repository.getCategoriesFromRetrofit().onSuccess {
-
+                fetchCategoryDataFromRepository()
             }.onFailure {
-                Log.d("ozlem", "$it")
+                //Log.d("ozlem", "$it")
             }
         }
     }

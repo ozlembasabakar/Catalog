@@ -31,11 +31,15 @@ class Repository @Inject constructor(
         return categoryRepository.getNewCategories()
     }
 
-    suspend fun networkCall(topic: String): List<PostInfo> {
+    suspend fun networkCall(topic: String): List<PostInfoWithCategory> {
         return postRepository.networkCall(topic)
     }
 
-    suspend fun postWithTopics(topic: String): List<PostInfoWithCategory> {
-        return postRepository.postWithTopics(topic)
+    suspend fun getPostWithTopics(topic: String): Flow<List<PostInfoWithCategory>> {
+        return postRepository.getPostWithTopics(topic)
+    }
+
+    suspend fun getNewPostWithTopics(category: String): Result<Unit> {
+        return postRepository.getNewPostWithTopics(category)
     }
 }

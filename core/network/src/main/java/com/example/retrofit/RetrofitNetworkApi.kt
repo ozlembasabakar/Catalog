@@ -25,6 +25,6 @@ interface RetrofitNetworkApi {
     @GET("/topics/{topic}/photos/?client_id=UVw0NbwzCo6hE8moV68b3uLhgWtCNHsgO-hxqr4SU2g")
     suspend fun networkCall(
         @Path("topic") topic: String,
-        @Query("per_page") perPage: Int = 20,
+        @Query("per_page") perPage: Int = 50,
     ): List<PostInfo>
 }
