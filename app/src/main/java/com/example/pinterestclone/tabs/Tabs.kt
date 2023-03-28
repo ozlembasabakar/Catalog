@@ -35,16 +35,6 @@ fun Tabs(
             TabsHorizontalPadding
         ),
     ) {
-        /*item {
-            TabItem(
-                modifier = Modifier,
-                category = Category("100", "all", "All").title,
-                isSelected = selectedItem.value == "All",
-                onClick = {
-                    selectedItem.value = it
-                }
-            )
-        }*/
         items(category) { category ->
             TabItem(
                 modifier = Modifier,
@@ -64,8 +54,11 @@ fun Tabs(
 fun TabsPreview() {
     PinterestCloneTheme {
 
-/*        val categories = listOf(
-            Category(id = "0", slug = "Travel", title = "Travel", ),
+        val selectedItem = remember {
+            mutableStateOf("Animal")
+        }
+        val categories = listOf(
+            Category(id = "0", slug = "Travel", title = "Travel"),
             Category(id = "0", slug = "Travel", title = "Animal"),
             Category(id = "0", slug = "Travel", title = "Art"),
             Category(id = "0", slug = "Travel", title = "Food"),
@@ -77,8 +70,9 @@ fun TabsPreview() {
 
         Tabs(
             modifier = Modifier,
-            category = categories
-        )*/
+            category = categories,
+            selectedItem = selectedItem
+        )
     }
 }
 

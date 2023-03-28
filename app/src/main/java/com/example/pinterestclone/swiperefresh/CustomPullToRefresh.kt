@@ -29,7 +29,7 @@ fun CustomPullToRefresh(
     content: @Composable () -> Unit,
 ) {
 
-    val pullState = rememberSwipeRefreshState(isRefreshing = isRefreshing)
+    val pullState = rememberSwipeRefreshState(isRefreshing)
     var offset by remember { mutableStateOf(0) }
     val animatedOffset by animateIntAsState(
         targetValue = offset,

@@ -6,7 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
@@ -60,6 +60,20 @@ fun TabItem(
                         else -> MaterialTheme.colorScheme.surface
                     }
                 ),
+        )
+    }
+}
+
+@Preview(name = "LightMode")
+@Preview(name = "DarkMode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun TabItemPreview_isSelected() {
+    PinterestCloneTheme {
+        TabItem(
+            modifier = Modifier,
+            category = "Category",
+            onClick = {},
+            isSelected = true
         )
     }
 }

@@ -3,11 +3,14 @@ package com.example
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.model.PostInfo
 import com.example.model.PostInfoWithCategory
+import com.example.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,54 +19,52 @@ class PostViewModel @Inject constructor(
     private val repository: Repository,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(PostViewState())
-    val state: StateFlow<PostViewState> = _state.asStateFlow()
-
-    private val _stateWithTopics = MutableStateFlow(PostWithCategoryViewState())
-    val stateWithTopics: StateFlow<PostWithCategoryViewState> = _stateWithTopics.asStateFlow()
+    private val _state = MutableStateFlow(PostWithCategoryViewState())
+    val state: StateFlow<PostWithCategoryViewState> = _state.asStateFlow()
 
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
 
-    fun fetchCatImagesFromRepository() {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.getPostInfo().collect {
-                _state.update { currentState ->
-                    currentState.copy(
-                        image = it
-                    )
-                }
-            }
+    init {
+        val categories = listOf(
+            "wallpapers",
+            "3d-renders",
+            "travel",
+            "nature",
+            "street-photography",
+            "experimental",
+            "textures-patterns",
+            "animals",
+            "architecture-interior",
+            "fashion-beauty"
+        )
+        categories.forEach {
+            getAllPostsInfoByCategoryFromNetwork(it)
         }
     }
 
-    fun getNewPostWithTopics(category: String) {
-        _isRefreshing.value = true
-        viewModelScope.launch {
-            repository.getNewPostWithTopics(category).onSuccess {
+    fun insertNewPostsInfoByCategory(category: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _isRefreshing.value = true
+            repository.insertNewPostsInfoByCategory(category).onSuccess {
 
             }.onFailure {
-                Log.d("ozlem", "$it")
+                Log.d("ozlem", "insertNewPostsInfoByCategory: $it")
             }
+            _isRefreshing.value = false
         }
-        _isRefreshing.value = false
     }
 
-    fun networkCall(topic: String) {
+    fun getAllPostsInfoByCategoryFromNetwork(category: String) {
         viewModelScope.launch {
-            val networkCall = repository.networkCall(topic)
-            _stateWithTopics.update {
-                it.copy(
-                    info = networkCall
-                )
-            }
+            repository.getAllPostsInfoByCategoryFromNetwork(category)
         }
     }
 
-    fun getPostWithTopics(topic: String) {
+    fun getAllPostsInfoByCategoryFromDatabase(category: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getPostWithTopics(topic).collect {
-                _stateWithTopics.update { currentState ->
+            repository.getAllPostsInfoByCategoryFromDatabase(category).collect {
+                _state.update { currentState ->
                     currentState.copy(
                         info = it
                     )
@@ -72,10 +73,6 @@ class PostViewModel @Inject constructor(
         }
     }
 }
-
-data class PostViewState(
-    val image: List<PostInfo> = emptyList(),
-)
 
 data class PostWithCategoryViewState(
     val info: List<PostInfoWithCategory> = emptyList(),

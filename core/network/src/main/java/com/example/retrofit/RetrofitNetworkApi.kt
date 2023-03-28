@@ -6,25 +6,20 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-const val END_POINT_TOPICS = "topics?client_id=UVw0NbwzCo6hE8moV68b3uLhgWtCNHsgO-hxqr4SU2g"
-const val END_POINT_IMAGES_BY_TOPICS =
-    "/topics/nature/photos/?client_id=UVw0NbwzCo6hE8moV68b3uLhgWtCNHsgO-hxqr4SU2g"
+const val END_POINT_ALL_CATEGORIES = "topics?client_id=UVw0NbwzCo6hE8moV68b3uLhgWtCNHsgO-hxqr4SU2g"
+const val END_POINT_ALL_PHOTOS_BY_CATEGORIES =
+    "/topics/{category}/photos/?client_id=UVw0NbwzCo6hE8moV68b3uLhgWtCNHsgO-hxqr4SU2g"
 
 interface RetrofitNetworkApi {
 
-    @GET(END_POINT_TOPICS)
-    suspend fun getCatCategories(
+    @GET(END_POINT_ALL_CATEGORIES)
+    suspend fun getAllCategories(
         @Query("per_page") perPage: Int = 10,
     ): List<Category>
 
-    @GET(END_POINT_IMAGES_BY_TOPICS)
-    suspend fun getCatImages(
-        @Query("per_page") perPage: Int = 50,
-    ): List<PostInfo>
-
-    @GET("/topics/{topic}/photos/?client_id=UVw0NbwzCo6hE8moV68b3uLhgWtCNHsgO-hxqr4SU2g")
-    suspend fun networkCall(
-        @Path("topic") topic: String,
-        @Query("per_page") perPage: Int = 50,
+    @GET(END_POINT_ALL_PHOTOS_BY_CATEGORIES)
+    suspend fun getAllPostsInfoByCategory(
+        @Path("category") category: String,
+        @Query("per_page") perPage: Int = 20,
     ): List<PostInfo>
 }

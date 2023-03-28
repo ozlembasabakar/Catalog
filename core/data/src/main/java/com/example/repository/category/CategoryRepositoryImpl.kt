@@ -11,16 +11,16 @@ class CategoryRepositoryImpl @Inject constructor(
     private val categoryDao: CategoryDao,
 ) : CategoryRepository {
 
-    override suspend fun getCategories(): Flow<List<Category>> {
-        val category: Flow<List<Category>> = categoryDao.getCategories()
+    override suspend fun getAllCategoriesFromDatabase(): Flow<List<Category>> {
+        val category: Flow<List<Category>> = categoryDao.getAllCategories()
 
         return category
     }
 
-    override suspend fun getNewCategories(): Result<Unit> {
+    override suspend fun insertNewCategories(): Result<Unit> {
         return try {
-            val networkCategory = networkApi.getCatCategories()
-            categoryDao.insertCategories(networkCategory)
+            val networkCategory = networkApi.getAllCategories()
+            categoryDao.insertAllCategories(networkCategory)
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)

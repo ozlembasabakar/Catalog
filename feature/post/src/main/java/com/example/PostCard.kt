@@ -1,5 +1,6 @@
 package com.example
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -25,6 +26,7 @@ import com.example.ui.theme.Shapes
 
 private const val THUMBNAIL_DIMENSION = 50
 
+@SuppressLint("CheckResult")
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun PostCard(
@@ -42,11 +44,10 @@ fun PostCard(
         GlideImage(
             model = image,
             contentDescription = stringResource(R.string.image_description),
-            //previewPlaceholder = R.drawable.images_1,
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(Shapes.small),
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
         ) {
             it.thumbnail(
                 it.clone().override(THUMBNAIL_DIMENSION)
@@ -68,7 +69,7 @@ fun PostCard(
             Row {
                 Icon(
                     painter = painterResource(id = R.drawable.heart),
-                    contentDescription = "Likes",
+                    contentDescription = stringResource(R.string.likes),
                     tint = if (likes == 0) MaterialTheme.colorScheme.surface else Color.Red,
                     modifier = Modifier.padding(end = PostCardRowPadding)
                 )
@@ -88,6 +89,51 @@ fun PostCard(
     }
 }
 
+
+@Preview(name = "LightMode")
+@Preview(name = "DarkMode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun PostCardPreview_WithDescriptionAndLikes() {
+    PinterestCloneTheme {
+        PostCard(
+            modifier = Modifier,
+            image = R.drawable.images_1.toString(),
+            likes = 1,
+            description = "Description"
+        )
+    }
+}
+
+/*
+
+@Preview(name = "LightMode")
+@Preview(name = "DarkMode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun PostCardPreview_WithDescription() {
+    PinterestCloneTheme {
+        PostCard(
+            modifier = Modifier,
+            image = R.drawable.images_1.toString(),
+            likes = 0,
+            description = "Description"
+        )
+    }
+}
+
+@Preview(name = "LightMode")
+@Preview(name = "DarkMode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun PostCardPreview_WithLikes() {
+    PinterestCloneTheme {
+        PostCard(
+            modifier = Modifier,
+            image = R.drawable.images_1.toString(),
+            likes = 27,
+            description = ""
+        )
+    }
+}
+
 @Preview(name = "LightMode")
 @Preview(name = "DarkMode", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
@@ -96,8 +142,9 @@ fun PostCardPreview() {
         PostCard(
             modifier = Modifier,
             image = R.drawable.images_1.toString(),
-            likes = 27,
-            description = "Description"
+            likes = 0,
+            description = ""
         )
     }
 }
+*/

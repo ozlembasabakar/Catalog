@@ -11,11 +11,11 @@ import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.PostCard
 import com.example.model.Category
 import com.example.model.PostInfoWithCategory
+import com.example.pinterestclone.R
 import com.example.pinterestclone.swiperefresh.CustomPullToRefresh
 import com.example.pinterestclone.tabs.Tabs
 import com.example.pinterestclone.ui.theme.*
@@ -38,9 +38,6 @@ fun HomeScreen(
     Log.d("ozlem", "HomeScreen: ${post.size}")
 
     Scaffold(
-        //bottomBar = {
-        //BottomBar(modifier = modifier)
-        //},
         containerColor = MaterialTheme.colorScheme.surface,
     ) {
         Column(
@@ -53,8 +50,7 @@ fun HomeScreen(
                 modifier = modifier
                     .padding(
                         top = TabsVerticalPadding
-                    )
-                    .testTag("tabs"),
+                    ),
                 category = category,
                 selectedItem = selectedItem
             )
@@ -89,36 +85,106 @@ fun HomeScreen(
 fun HomeScreenPreview() {
     PinterestCloneTheme {
 
-/*        val category = listOf(
-            Category(id = "0", title = "Cat1", slug = ""),
-            Category(id = "0", title = "Cat1", slug = ""),
-            Category(id = "0", title = "Cat1", slug = ""),
-            Category(id = "0", title = "Cat1", slug = ""),
-            Category(id = "0", title = "Cat1", slug = ""),
-            Category(id = "0", title = "Cat1", slug = ""),
-            Category(id = "0", title = "Cat1", slug = ""),
-            Category(id = "0", title = "Cat1", slug = ""),
-            Category(id = "0", title = "Cat1", slug = ""),
-            Category(id = "0", title = "Cat1", slug = ""),
+        val selectedItem = remember {
+            mutableStateOf("Category1")
+        }
+        val category = listOf(
+            Category(id = "0", title = "Category1", slug = ""),
+            Category(id = "0", title = "Category2", slug = ""),
+            Category(id = "0", title = "Category3", slug = ""),
+            Category(id = "0", title = "Category4", slug = ""),
+            Category(id = "0", title = "Category5", slug = ""),
+            Category(id = "0", title = "Category6", slug = ""),
+            Category(id = "0", title = "Category7", slug = ""),
+            Category(id = "0", title = "Category8", slug = ""),
+            Category(id = "0", title = "Category9", slug = ""),
+            Category(id = "0", title = "Category10", slug = ""),
         )
         val post = listOf(
-            PostInfo(id = "1", urls = Urls(R.drawable.images_1.toString()), likes = 1),
-            PostInfo(id = "1", urls = Urls(R.drawable.images_2.toString()), likes = 1),
-            PostInfo(id = "1", urls = Urls(R.drawable.images_3.toString()), likes = 1),
-            PostInfo(id = "1", urls = Urls(R.drawable.images_4.toString()), likes = 1),
-            PostInfo(id = "1", urls = Urls(R.drawable.images_5.toString()), likes = 1),
-            PostInfo(id = "1", urls = Urls(R.drawable.images_1.toString()), likes = 1),
-            PostInfo(id = "1", urls = Urls(R.drawable.images_2.toString()), likes = 1),
-            PostInfo(id = "1", urls = Urls(R.drawable.images_3.toString()), likes = 1),
-            PostInfo(id = "1", urls = Urls(R.drawable.images_4.toString()), likes = 1),
-            PostInfo(id = "1", urls = Urls(R.drawable.images_5.toString()), likes = 1),
-            PostInfo(id = "1", urls = Urls(R.drawable.images_1.toString()), likes = 1),
-            PostInfo(id = "1", urls = Urls(R.drawable.images_2.toString()), likes = 1),
-            PostInfo(id = "1", urls = Urls(R.drawable.images_3.toString()), likes = 1),
-            PostInfo(id = "1", urls = Urls(R.drawable.images_4.toString()), likes = 1),
-            PostInfo(id = "1", urls = Urls(R.drawable.images_5.toString()), likes = 1),
-            PostInfo(id = "1", urls = Urls(R.drawable.images_1.toString()), likes = 1),
-            PostInfo(id = "1", urls = Urls(R.drawable.images_2.toString()), likes = 1),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_1.toString(),
+                likes = 1,
+                category = "Category1",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_2.toString(),
+                likes = 1,
+                category = "Category2",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_3.toString(),
+                likes = 1,
+                category = "Category3",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_4.toString(),
+                likes = 1,
+                category = "Category4",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_5.toString(),
+                likes = 1,
+                category = "Category5",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_1.toString(),
+                likes = 1,
+                category = "Category6",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_2.toString(),
+                likes = 1,
+                category = "Category7",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_3.toString(),
+                likes = 1,
+                category = "Category8",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_4.toString(),
+                likes = 1,
+                category = "Category9",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_5.toString(),
+                likes = 1,
+                category = "Category10",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_1.toString(),
+                likes = 1,
+                category = "Category11",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_2.toString(),
+                likes = 1,
+                category = "Category12",
+                description = ""
+            ),
         )
 
         HomeScreen(
@@ -126,7 +192,8 @@ fun HomeScreenPreview() {
             category = category,
             post = post,
             onRefresh = {},
-            isRefreshing = true
-        )*/
+            isRefreshing = false,
+            selectedItem = selectedItem
+        )
     }
 }
