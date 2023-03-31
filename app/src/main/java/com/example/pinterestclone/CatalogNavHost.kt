@@ -2,24 +2,29 @@ package com.example.pinterestclone
 
 import android.annotation.SuppressLint
 import android.util.Log
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.PostViewModel
+import com.example.pinterestclone.common.checkForInternet
 import com.example.pinterestclone.homeScreen.HomeScreen
 import com.example.pinterestclone.tabs.TabsViewModel
 
 @SuppressLint("UnrememberedMutableState", "StateFlowValueCalledInComposition", "RememberReturnType")
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun CatalogNavHost() {
 
     val navController = rememberNavController()
+
+    val context = LocalContext.current
 
     val tabsViewModel: TabsViewModel = hiltViewModel()
     val tabsViewState by tabsViewModel.state.collectAsStateWithLifecycle()
@@ -43,9 +48,10 @@ fun CatalogNavHost() {
     LaunchedEffect(category) {
         tabsViewModel.getAllCategoriesFromDatabase()
         postViewModel.getAllPostsInfoByCategoryFromDatabase(category)
-    }
 
-    Log.d("ozlem", "postWithTopicsViewState in LaunchedEffect: ${postWithTopicsViewState.info}")
+        if (checkForInternet(context))
+            postViewModel.getAllPostsInfoByCategoryFromNetwork(category)
+    }
 
     NavHost(
         modifier = Modifier,
@@ -59,10 +65,17 @@ fun CatalogNavHost() {
                 post = postWithTopicsViewState.info,
                 isRefreshing = isRefreshing,
                 onRefresh = {
-                    Log.d("ozlem", "postWithTopicsViewState in onRefresh: ${postWithTopicsViewState.info}")
+                    Log.d(
+                        "ozlem",
+                        "postWithTopicsViewState in onRefresh: ${postWithTopicsViewState.info}"
+                    )
                     postViewModel.insertNewPostsInfoByCategory(category)
                 },
                 selectedItem = tabsViewModel.selectedItem,
+            )
+            Log.d(
+                "ozlem",
+                "postWithTopicsViewState in LaunchedEffect: ${postWithTopicsViewState.info}"
             )
         }
     }

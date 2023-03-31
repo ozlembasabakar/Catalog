@@ -1,6 +1,8 @@
 package com.example.model
 
-@kotlinx.serialization.Serializable
-data class Links (
-    var photos : String? = null
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class Links(
+    var photos: String? = null,
 )

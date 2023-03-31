@@ -61,7 +61,7 @@ fun HomeScreen(
                 LazyVerticalStaggeredGrid(
                     columns = StaggeredGridCells.Fixed(HomeScreenStaggeredGridCells),
                     horizontalArrangement = Arrangement.spacedBy(HomeScreenHorizontalPadding),
-                    verticalArrangement = Arrangement.spacedBy(HomeScreenVerticalPadding),
+                    verticalItemSpacing = HomeScreenVerticalPadding,
                     content =
                     {
                         items(post) {

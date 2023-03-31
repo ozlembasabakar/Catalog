@@ -54,6 +54,9 @@ dependencies {
     implementation project(path: ':core:model')
     implementation project(path: ':core:database')
 
+    implementation platform(libs.androidx.compose.bom)
+    androidTestImplementation platform(libs.androidx.compose.bom)
+
     implementation libs.core.ktx
     implementation libs.lifecycle.runtime.ktx
     implementation libs.activity.compose

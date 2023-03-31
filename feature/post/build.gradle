@@ -47,7 +47,7 @@ android {
     }
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
         kotlinOptions {
-            freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+            freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
         }
     }
 }
@@ -56,6 +56,9 @@ dependencies {
 
     implementation project(path: ':core:data')
     implementation project(path: ':core:model')
+
+    implementation platform(libs.androidx.compose.bom)
+    androidTestImplementation platform(libs.androidx.compose.bom)
 
     implementation libs.core.ktx
     implementation libs.lifecycle.runtime.ktx

@@ -1,11 +1,11 @@
 [versions]
-gradleplugin = "7.3.1"
-kotlin = "1.6.10"
-compose = "1.1.1"
+gradleplugin = "7.4.0"
+kotlin = "1.8.0"
+compose = "1.4.0"
 core-ktx = "1.7.0"
 lifecycle-runtime-ktx = "2.3.1"
 lifecycle-runtime = "2.6.0-alpha01"
-activity-compose = "1.3.1"
+activity-compose = "1.7.0"
 material3 = "1.0.1"
 junit = "4.13.2"
 ext-junit = "1.1.5"
@@ -23,21 +23,23 @@ foundation = "1.3.1"
 swiperefresh = "0.27.0"
 retrofitKotlinxSerializationJson = "0.8.0"
 kotlinxSerializationJson = "1.4.1"
+androidxComposeBom = "2023.03.00"
 
 [libraries]
-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle-runtime" }
-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
-compose-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "compose" }
-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose" }
-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "compose" }
-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "compose" }
-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "compose" }
-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
+core-ktx = { group = "androidx.core", name = "core-ktx" }
+lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx" }
+lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose" }
+activity-compose = { group = "androidx.activity", name = "activity-compose" }
+compose-ui = { group = "androidx.compose.ui", name = "ui" }
+compose-ui-test = { group = "androidx.compose.ui", name = "ui-test" }
+compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+material3 = { group = "androidx.compose.material3", name = "material3" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "ext-junit" }
-espresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
+ext-junit = { group = "androidx.test.ext", name = "junit" }
+espresso = { group = "androidx.test.espresso", name = "espresso-core" }
 splash-screen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splash-screen" }
 system-ui-controller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "system-ui-controller" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "dagger-hilt" }
@@ -52,10 +54,11 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 glide = { group = "com.github.bumptech.glide", name = "compose", version.ref = "glide" }
 navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose" }
-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "foundation" }
+foundation = { group = "androidx.compose.foundation", name = "foundation" }
 swiperefresh = { group = "com.google.accompanist", name = "accompanist-swiperefresh", version.ref = "swiperefresh" }
 retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxSerializationJson" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "gradleplugin" }

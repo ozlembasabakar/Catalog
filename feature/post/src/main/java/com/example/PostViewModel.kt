@@ -25,24 +25,6 @@ class PostViewModel @Inject constructor(
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
 
-    init {
-        val categories = listOf(
-            "wallpapers",
-            "3d-renders",
-            "travel",
-            "nature",
-            "street-photography",
-            "experimental",
-            "textures-patterns",
-            "animals",
-            "architecture-interior",
-            "fashion-beauty"
-        )
-        categories.forEach {
-            getAllPostsInfoByCategoryFromNetwork(it)
-        }
-    }
-
     fun insertNewPostsInfoByCategory(category: String) {
         viewModelScope.launch(Dispatchers.IO) {
             _isRefreshing.value = true

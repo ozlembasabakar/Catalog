@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -46,12 +47,14 @@ fun PostCard(
             contentDescription = stringResource(R.string.image_description),
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(Shapes.small),
+                .clip(Shapes.small)
+                .testTag("GlideImage"),
             contentScale = ContentScale.Crop,
         ) {
             it.thumbnail(
                 it.clone().override(THUMBNAIL_DIMENSION)
             ).diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.placeholder)
         }
         if (description != null) {
             Text(text = description, color = MaterialTheme.colorScheme.onSurface)
@@ -71,7 +74,7 @@ fun PostCard(
                     painter = painterResource(id = R.drawable.heart),
                     contentDescription = stringResource(R.string.likes),
                     tint = if (likes == 0) MaterialTheme.colorScheme.surface else Color.Red,
-                    modifier = Modifier.padding(end = PostCardRowPadding)
+                    modifier = Modifier.padding(end = PostCardRowPadding).testTag("PostCardLikes")
                 )
                 Text(
                     text = "$likes",
