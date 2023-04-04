@@ -1,10 +1,9 @@
 package com.example.repository.category
 
 import com.example.dao.CategoryDao
-import com.example.model.*
+import com.example.model.Category
 import com.example.retrofit.RetrofitNetworkApi
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class CategoryRepositoryImpl @Inject constructor(
@@ -12,20 +11,16 @@ class CategoryRepositoryImpl @Inject constructor(
     private val categoryDao: CategoryDao,
 ) : CategoryRepository {
 
-    override suspend fun getCategories(): Flow<List<Category>> {
-        val category: Flow<List<Category>> = categoryDao.getCategories().map {
-            it.map (CategoryEntity::asExternalModel)
-        }
+    override suspend fun getAllCategoriesFromDatabase(): Flow<List<Category>> {
+        val category: Flow<List<Category>> = categoryDao.getAllCategories()
 
         return category
     }
 
-    override suspend fun getNewCategories(): Result<Unit> {
+    override suspend fun insertNewCategories(): Result<Unit> {
         return try {
-            val networkCategory = networkApi.getCatCategories()
-            categoryDao.insertCategories(
-                networkCategory.map (NetworkCategory::asEntity)
-            )
+            val networkCategory = networkApi.getAllCategories()
+            categoryDao.insertAllCategories(networkCategory)
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)

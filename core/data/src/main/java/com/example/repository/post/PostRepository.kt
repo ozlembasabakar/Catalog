@@ -1,9 +1,10 @@
 package com.example.repository.post
 
-import com.example.model.Post
+import com.example.model.PostInfoWithCategory
 import kotlinx.coroutines.flow.Flow
 
 interface PostRepository {
-    fun getPostInfo(): Flow<List<Post>>
-    suspend fun getNewImages(): Result<Unit>
+    suspend fun getAllPostsInfoByCategoryFromNetwork(category: String): List<PostInfoWithCategory>
+    suspend fun getAllPostsInfoByCategoryFromDatabase(category: String): Flow<List<PostInfoWithCategory>>
+    suspend fun insertNewPostsInfoByCategory(category: String): Result<Unit>
 }

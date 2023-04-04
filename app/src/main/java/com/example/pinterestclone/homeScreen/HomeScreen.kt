@@ -1,12 +1,8 @@
 package com.example.pinterestclone.homeScreen
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.res.Configuration
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
-import android.widget.Toast
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
@@ -15,12 +11,10 @@ import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.PostCard
 import com.example.model.Category
-import com.example.model.Post
+import com.example.model.PostInfoWithCategory
 import com.example.pinterestclone.R
 import com.example.pinterestclone.swiperefresh.CustomPullToRefresh
 import com.example.pinterestclone.tabs.Tabs
@@ -35,83 +29,53 @@ import com.example.pinterestclone.ui.theme.*
 fun HomeScreen(
     modifier: Modifier,
     category: List<Category>,
-    post: List<Post>,
+    post: List<PostInfoWithCategory>,
     onRefresh: () -> Unit,
     isRefreshing: Boolean,
+    selectedItem: MutableState<String>,
 ) {
 
-    val context= LocalContext.current
-
-    if (!checkForInternet(context)) {
-        Toast
-            .makeText(context, stringResource(R.string.toastMessage), Toast.LENGTH_LONG)
-            .show()
-    }
+    Log.d("ozlem", "HomeScreen: ${post.size}")
 
     Scaffold(
-        //bottomBar = {
-        //BottomBar(modifier = modifier)
-        //},
         containerColor = MaterialTheme.colorScheme.surface,
-        content = {
-            Column(
-                modifier = Modifier
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(
+                    horizontal = HomeScreenHorizontalPadding
+                ),
+        ) {
+            Tabs(
+                modifier = modifier
                     .padding(
-                        horizontal = HomeScreenHorizontalPadding
+                        top = TabsVerticalPadding
                     ),
+                category = category,
+                selectedItem = selectedItem
+            )
+            CustomPullToRefresh(
+                isRefreshing = isRefreshing,
+                onRefresh = onRefresh
             ) {
-                Tabs(
-                    modifier = modifier
-                        .padding(
-                            top = TabsVerticalPadding
-                        ),
-                    category = category
-                )
-                CustomPullToRefresh(
-                    isRefreshing = isRefreshing,
-                    onRefresh = onRefresh
-                ) {
-                    LazyVerticalStaggeredGrid(
-                        columns = StaggeredGridCells.Fixed(HomeScreenStaggeredGridCells),
-                        horizontalArrangement = Arrangement.spacedBy(HomeScreenHorizontalPadding),
-                        verticalArrangement = Arrangement.spacedBy(HomeScreenVerticalPadding),
-                        content =
-                        {
-                            items(post) {
-                                PostCard(
-                                    modifier = Modifier,
-                                    image = it.url
-                                )
-                            }
+                LazyVerticalStaggeredGrid(
+                    columns = StaggeredGridCells.Fixed(HomeScreenStaggeredGridCells),
+                    horizontalArrangement = Arrangement.spacedBy(HomeScreenHorizontalPadding),
+                    verticalItemSpacing = HomeScreenVerticalPadding,
+                    content =
+                    {
+                        items(post) {
+                            PostCard(
+                                modifier = modifier,
+                                image = it.url,
+                                likes = it.likes,
+                                description = it.description
+                            )
                         }
-                    )
-                }
+                    }
+                )
             }
         }
-    )
-}
-
-private fun checkForInternet(context: Context): Boolean {
-
-    val connectivityManager =
-        context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
-        val network = connectivityManager.activeNetwork ?: return false
-
-        val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
-
-        return when {
-            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-            else -> false
-        }
-    } else {
-        @Suppress("DEPRECATION") val networkInfo =
-            connectivityManager.activeNetworkInfo ?: return false
-        @Suppress("DEPRECATION")
-        return networkInfo.isConnected
     }
 }
 
@@ -121,32 +85,106 @@ private fun checkForInternet(context: Context): Boolean {
 fun HomeScreenPreview() {
     PinterestCloneTheme {
 
+        val selectedItem = remember {
+            mutableStateOf("Category1")
+        }
         val category = listOf(
-            Category(id = 0, name = "Cat1"),
-            Category(id = 0, name = "Cat2"),
-            Category(id = 0, name = "Cat3"),
-            Category(id = 0, name = "Cat4"),
-            Category(id = 0, name = "Cat5"),
-            Category(id = 0, name = "Cat6"),
-            Category(id = 0, name = "Cat7"),
-            Category(id = 0, name = "Cat8"),
+            Category(id = "0", title = "Category1", slug = ""),
+            Category(id = "0", title = "Category2", slug = ""),
+            Category(id = "0", title = "Category3", slug = ""),
+            Category(id = "0", title = "Category4", slug = ""),
+            Category(id = "0", title = "Category5", slug = ""),
+            Category(id = "0", title = "Category6", slug = ""),
+            Category(id = "0", title = "Category7", slug = ""),
+            Category(id = "0", title = "Category8", slug = ""),
+            Category(id = "0", title = "Category9", slug = ""),
+            Category(id = "0", title = "Category10", slug = ""),
         )
         val post = listOf(
-            Post(height = 1, id = "1", url = R.drawable.images_1.toString(), width = 1),
-            Post(height = 1, id = "2", url = R.drawable.images_2.toString(), width = 1),
-            Post(height = 1, id = "3", url = R.drawable.images_3.toString(), width = 1),
-            Post(height = 1, id = "1", url = R.drawable.images_5.toString(), width = 1),
-            Post(height = 1, id = "1", url = R.drawable.images_4.toString(), width = 1),
-            Post(height = 1, id = "1", url = R.drawable.images_1.toString(), width = 1),
-            Post(height = 1, id = "1", url = R.drawable.images_2.toString(), width = 1),
-            Post(height = 1, id = "1", url = R.drawable.images_3.toString(), width = 1),
-            Post(height = 1, id = "1", url = R.drawable.images_4.toString(), width = 1),
-            Post(height = 1, id = "1", url = R.drawable.images_5.toString(), width = 1),
-            Post(height = 1, id = "1", url = R.drawable.images_1.toString(), width = 1),
-            Post(height = 1, id = "1", url = R.drawable.images_2.toString(), width = 1),
-            Post(height = 1, id = "1", url = R.drawable.images_3.toString(), width = 1),
-            Post(height = 1, id = "1", url = R.drawable.images_4.toString(), width = 1),
-            Post(height = 1, id = "1", url = R.drawable.images_5.toString(), width = 1),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_1.toString(),
+                likes = 1,
+                category = "Category1",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_2.toString(),
+                likes = 1,
+                category = "Category2",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_3.toString(),
+                likes = 1,
+                category = "Category3",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_4.toString(),
+                likes = 1,
+                category = "Category4",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_5.toString(),
+                likes = 1,
+                category = "Category5",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_1.toString(),
+                likes = 1,
+                category = "Category6",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_2.toString(),
+                likes = 1,
+                category = "Category7",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_3.toString(),
+                likes = 1,
+                category = "Category8",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_4.toString(),
+                likes = 1,
+                category = "Category9",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_5.toString(),
+                likes = 1,
+                category = "Category10",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_1.toString(),
+                likes = 1,
+                category = "Category11",
+                description = ""
+            ),
+            PostInfoWithCategory(
+                id = "1",
+                url = R.drawable.images_2.toString(),
+                likes = 1,
+                category = "Category12",
+                description = ""
+            ),
         )
 
         HomeScreen(
@@ -154,7 +192,8 @@ fun HomeScreenPreview() {
             category = category,
             post = post,
             onRefresh = {},
-            isRefreshing = true
+            isRefreshing = false,
+            selectedItem = selectedItem
         )
     }
 }

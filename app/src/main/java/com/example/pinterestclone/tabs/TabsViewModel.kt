@@ -1,9 +1,10 @@
 package com.example.pinterestclone.tabs
 
 import android.util.Log
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.Repository
+import com.example.repository.Repository
 import com.example.model.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -22,13 +23,15 @@ class TabsViewModel @Inject constructor(
     private val _state = MutableStateFlow(TabsViewState())
     val state: StateFlow<TabsViewState> = _state.asStateFlow()
 
+    val selectedItem = mutableStateOf("Wallpapers")
+
     init {
-        fetchCategoryDataFromRepository()
+        insertNewCategories()
     }
 
-    private fun fetchCategoryDataFromRepository() {
+    fun getAllCategoriesFromDatabase() {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getCategoriesFromDatabase().collect {
+            repository.getAllCategoriesFromDatabase().collect {
                 _state.update { currentState ->
                     currentState.copy(
                         category = it
@@ -38,12 +41,12 @@ class TabsViewModel @Inject constructor(
         }
     }
 
-    private fun fetchCategory() {
+    private fun insertNewCategories() {
         viewModelScope.launch {
-            repository.getCategoriesFromRetrofit().onSuccess {
-
+            repository.insertNewCategories().onSuccess {
+                getAllCategoriesFromDatabase()
             }.onFailure {
-                Log.d("ozlem", "$it")
+                Log.d("ozlem", "insertNewCategories: $it")
             }
         }
     }

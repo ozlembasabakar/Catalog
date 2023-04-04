@@ -20,6 +20,11 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     buildTypes {
@@ -52,6 +57,9 @@ dependencies {
 
     implementation project(path: ':core:model')
 
+    implementation platform(libs.androidx.compose.bom)
+    androidTestImplementation platform(libs.androidx.compose.bom)
+
     implementation libs.core.ktx
     implementation libs.lifecycle.runtime.ktx
     implementation libs.activity.compose
@@ -76,4 +84,7 @@ dependencies {
     implementation libs.hilt.navigation.compose
     kapt libs.hilt.android.compiler
     kapt libs.hilt.hilt.compiler
+
+    //Gson Converter
+    implementation libs.converter.gson
 }
