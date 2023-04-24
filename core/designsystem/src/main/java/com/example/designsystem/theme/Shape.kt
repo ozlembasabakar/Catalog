@@ -1,12 +1,14 @@
-package com.example.pinterestclone.ui.theme
+package com.example.designsystem.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Shapes
 import androidx.compose.ui.unit.dp
 
 val Shapes = Shapes(
-    small = RoundedCornerShape(12.dp)
+    small = RoundedCornerShape(12.dp),
 )
+
+val PostCardRowPadding = 4.dp
 
 val BottomBarVerticalPadding = 12.dp
 val BottomBarHorizontalPadding = 16.dp

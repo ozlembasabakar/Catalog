@@ -56,6 +56,7 @@ dependencies {
 
     implementation project(path: ':core:data')
     implementation project(path: ':core:model')
+    implementation project(path: ':core:designsystem')
 
     implementation platform(libs.androidx.compose.bom)
     androidTestImplementation platform(libs.androidx.compose.bom)

@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.pinterestclone.ui.theme.*
+import com.example.designsystem.theme.*
 
 @Composable
 fun TabItem(

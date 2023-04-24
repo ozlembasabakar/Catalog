@@ -11,10 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.pinterestclone.R
-import com.example.pinterestclone.ui.theme.BottomBarHorizontalPadding
-import com.example.pinterestclone.ui.theme.BottomBarVerticalPadding
-import com.example.ui.theme.PinterestCloneTheme
+import com.example.designsystem.icon.AppIcons
+import com.example.designsystem.theme.BottomBarHorizontalPadding
+import com.example.designsystem.theme.BottomBarVerticalPadding
+import com.example.designsystem.theme.PinterestCloneTheme
 
 @Composable
 fun BottomBar(modifier: Modifier) {
@@ -26,9 +26,9 @@ fun BottomBar(modifier: Modifier) {
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        BottomBarItem(modifier = modifier, icon = R.drawable.home_icon)
-        BottomBarItem(modifier = modifier, icon = R.drawable.search_icon)
-        BottomBarItem(modifier = modifier, icon = R.drawable.profile_icon)
+        BottomBarItem(modifier = modifier, icon = AppIcons.HomeIcon)
+        BottomBarItem(modifier = modifier, icon = AppIcons.SearchIcon)
+        BottomBarItem(modifier = modifier, icon = AppIcons.ProfileIcon)
     }
 }
 

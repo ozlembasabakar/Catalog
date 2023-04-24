@@ -14,10 +14,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.pinterestclone.R
-import com.example.pinterestclone.ui.theme.BottomBarItemSize
-import com.example.ui.theme.PinterestCloneTheme
-import com.example.ui.theme.Shapes
+import com.example.designsystem.theme.BottomBarItemSize
+import com.example.designsystem.theme.PinterestCloneTheme
+import com.example.designsystem.theme.Shapes
+import com.example.designsystem.R
+import com.example.designsystem.icon.AppIcons
 
 @Composable
 fun BottomBarItem(
@@ -45,6 +46,6 @@ fun BottomBarItem(
 @Composable
 fun BottomBarItemPreview() {
     PinterestCloneTheme {
-        BottomBarItem(Modifier, icon = R.drawable.home_icon)
+        BottomBarItem(Modifier, icon = AppIcons.HomeIcon)
     }
 }

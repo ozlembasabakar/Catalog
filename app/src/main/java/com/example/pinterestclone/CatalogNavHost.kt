@@ -7,14 +7,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.PostViewModel
-import com.example.pinterestclone.common.checkForInternet
 import com.example.pinterestclone.homeScreen.HomeScreen
 import com.example.pinterestclone.tabs.TabsViewModel
 
@@ -23,8 +21,6 @@ import com.example.pinterestclone.tabs.TabsViewModel
 fun CatalogNavHost() {
 
     val navController = rememberNavController()
-
-    val context = LocalContext.current
 
     val tabsViewModel: TabsViewModel = hiltViewModel()
     val tabsViewState by tabsViewModel.state.collectAsStateWithLifecycle()
@@ -48,9 +44,6 @@ fun CatalogNavHost() {
     LaunchedEffect(category) {
         tabsViewModel.getAllCategoriesFromDatabase()
         postViewModel.getAllPostsInfoByCategoryFromDatabase(category)
-
-        if (checkForInternet(context))
-            postViewModel.getAllPostsInfoByCategoryFromNetwork(category)
     }
 
     NavHost(

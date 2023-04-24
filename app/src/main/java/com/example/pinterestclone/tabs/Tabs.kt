@@ -11,10 +11,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.designsystem.theme.PinterestCloneTheme
+import com.example.designsystem.theme.TabsHorizontalPadding
+import com.example.designsystem.theme.TabsVerticalPadding
 import com.example.model.Category
-import com.example.pinterestclone.ui.theme.PinterestCloneTheme
-import com.example.pinterestclone.ui.theme.TabsHorizontalPadding
-import com.example.pinterestclone.ui.theme.TabsVerticalPadding
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable

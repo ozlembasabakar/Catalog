@@ -13,12 +13,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.PostCard
+import com.example.designsystem.icon.AppIcons
+import com.example.designsystem.theme.*
 import com.example.model.Category
 import com.example.model.PostInfoWithCategory
-import com.example.pinterestclone.R
 import com.example.pinterestclone.swiperefresh.CustomPullToRefresh
 import com.example.pinterestclone.tabs.Tabs
-import com.example.pinterestclone.ui.theme.*
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(
@@ -103,84 +103,84 @@ fun HomeScreenPreview() {
         val post = listOf(
             PostInfoWithCategory(
                 id = "1",
-                url = R.drawable.images_1.toString(),
+                url = AppIcons.PseudoImageOne.toString(),
                 likes = 1,
                 category = "Category1",
                 description = ""
             ),
             PostInfoWithCategory(
                 id = "1",
-                url = R.drawable.images_2.toString(),
+                url = AppIcons.PseudoImageTwo.toString(),
                 likes = 1,
                 category = "Category2",
                 description = ""
             ),
             PostInfoWithCategory(
                 id = "1",
-                url = R.drawable.images_3.toString(),
+                url = AppIcons.PseudoImageThree.toString(),
                 likes = 1,
                 category = "Category3",
                 description = ""
             ),
             PostInfoWithCategory(
                 id = "1",
-                url = R.drawable.images_4.toString(),
+                url = AppIcons.PseudoImageFour.toString(),
                 likes = 1,
                 category = "Category4",
                 description = ""
             ),
             PostInfoWithCategory(
                 id = "1",
-                url = R.drawable.images_5.toString(),
+                url = AppIcons.PseudoImageFive.toString(),
                 likes = 1,
                 category = "Category5",
                 description = ""
             ),
             PostInfoWithCategory(
                 id = "1",
-                url = R.drawable.images_1.toString(),
+                url = AppIcons.PseudoImageOne.toString(),
                 likes = 1,
                 category = "Category6",
                 description = ""
             ),
             PostInfoWithCategory(
                 id = "1",
-                url = R.drawable.images_2.toString(),
+                url = AppIcons.PseudoImageTwo.toString(),
                 likes = 1,
                 category = "Category7",
                 description = ""
             ),
             PostInfoWithCategory(
                 id = "1",
-                url = R.drawable.images_3.toString(),
+                url = AppIcons.PseudoImageThree.toString(),
                 likes = 1,
                 category = "Category8",
                 description = ""
             ),
             PostInfoWithCategory(
                 id = "1",
-                url = R.drawable.images_4.toString(),
+                url = AppIcons.PseudoImageFour.toString(),
                 likes = 1,
                 category = "Category9",
                 description = ""
             ),
             PostInfoWithCategory(
                 id = "1",
-                url = R.drawable.images_5.toString(),
+                url = AppIcons.PseudoImageFive.toString(),
                 likes = 1,
                 category = "Category10",
                 description = ""
             ),
             PostInfoWithCategory(
                 id = "1",
-                url = R.drawable.images_1.toString(),
+                url = AppIcons.PseudoImageOne.toString(),
                 likes = 1,
                 category = "Category11",
                 description = ""
             ),
             PostInfoWithCategory(
                 id = "1",
-                url = R.drawable.images_2.toString(),
+                url = AppIcons.PseudoImageTwo.toString(),
                 likes = 1,
                 category = "Category12",
                 description = ""

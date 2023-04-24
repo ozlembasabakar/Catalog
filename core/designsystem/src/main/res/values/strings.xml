@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">DesignSystem</string>
+    <string name="app_name" translatable="false">Catalog</string>
+    <string name="app_name_debug" translatable="false">CatalogDebug</string>
+
+    <string name="bottombaritem">BottomBarItem</string>
+
+    <string-array name="category">
+        <item>Travel</item>
+        <item>Animal</item>
+        <item>Art</item>
+        <item>Food</item>
+        <item>Health</item>
+        <item>Sport</item>
+        <item>Game</item>
+        <item>DIY</item>
+    </string-array>
+
+    <string name="image_description">Post image</string>
+    <string name="more_options">More options</string>
+    <string name="likes">Likes</string>
+
 </resources>
