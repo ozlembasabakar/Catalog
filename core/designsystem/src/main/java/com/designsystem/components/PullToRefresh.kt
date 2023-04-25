@@ -1,4 +1,4 @@
-package com.example.pinterestclone.swiperefresh
+package com.designsystem.components
 
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
@@ -6,7 +6,10 @@ import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -22,7 +25,7 @@ import kotlin.math.roundToInt
 
 @ExperimentalFoundationApi
 @Composable
-fun CustomPullToRefresh(
+fun PullToRefresh(
     modifier: Modifier = Modifier,
     isRefreshing: Boolean,
     onRefresh: () -> Unit,
@@ -61,7 +64,7 @@ fun CustomPullToRefresh(
             Modifier
                 .background(color = MaterialTheme.colorScheme.surface)
         ) {
-            CustomRefreshAnimation(
+            PullToRefreshAnimation(
                 modifier = Modifier
                     .align(Alignment.TopCenter)
                     .wrapContentWidth(),

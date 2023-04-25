@@ -1,8 +1,10 @@
 package com.example
 
 import android.util.Log
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.model.Category
 import com.example.model.PostInfoWithCategory
 import com.example.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,15 +17,26 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PostViewModel @Inject constructor(
+class PostScreenViewModel @Inject constructor(
     private val repository: Repository,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(PostWithCategoryViewState())
-    val state: StateFlow<PostWithCategoryViewState> = _state.asStateFlow()
+    private val _postState = MutableStateFlow(PostWithCategoryViewState())
+    val postState: StateFlow<PostWithCategoryViewState> = _postState.asStateFlow()
 
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
+
+
+    private val _tabsState = MutableStateFlow(TabsViewState())
+    val tabsState: StateFlow<TabsViewState> = _tabsState.asStateFlow()
+
+    val selectedItem = mutableStateOf("Fashion & Beauty")
+
+    init {
+        insertNewCategories()
+        getAllCategoriesFromDatabase()
+    }
 
     fun insertNewPostsInfoByCategory(category: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -46,7 +59,7 @@ class PostViewModel @Inject constructor(
     fun getAllPostsInfoByCategoryFromDatabase(category: String) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.getAllPostsInfoByCategoryFromDatabase(category).collect {
-                _state.update { currentState ->
+                _postState.update { currentState ->
                     currentState.copy(
                         info = it
                     )
@@ -54,7 +67,33 @@ class PostViewModel @Inject constructor(
             }
         }
     }
+
+    private fun getAllCategoriesFromDatabase() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getAllCategoriesFromDatabase().collect {
+                _tabsState.update { currentState ->
+                    currentState.copy(
+                        category = it
+                    )
+                }
+            }
+        }
+    }
+
+    private fun insertNewCategories() {
+        viewModelScope.launch {
+            repository.insertNewCategories().onSuccess {
+                getAllCategoriesFromDatabase()
+            }.onFailure {
+                Log.d("ozlem", "insertNewCategories: $it")
+            }
+        }
+    }
 }
+
+data class TabsViewState(
+    val category: List<Category> = emptyList(),
+)
 
 data class PostWithCategoryViewState(
     val info: List<PostInfoWithCategory> = emptyList(),

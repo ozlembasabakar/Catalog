@@ -1,4 +1,4 @@
-package com.example.pinterestclone.bottombar
+package com.designsystem.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
@@ -14,20 +14,20 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.designsystem.theme.BottomBarItemSize
-import com.example.designsystem.theme.PinterestCloneTheme
-import com.example.designsystem.theme.Shapes
+import com.designsystem.theme.IconButtonSize
+import com.designsystem.theme.PinterestCloneTheme
+import com.designsystem.theme.Shapes
 import com.example.designsystem.R
-import com.example.designsystem.icon.AppIcons
+import com.designsystem.icon.AppIcons
 
 @Composable
-fun BottomBarItem(
+fun IconButton(
     modifier: Modifier,
     icon: Int,
 ) {
     Box(
         modifier = modifier
-            .size(BottomBarItemSize)
+            .size(IconButtonSize)
             .fillMaxSize()
             .clip(shape = Shapes.small)
             .background(MaterialTheme.colorScheme.surface),
@@ -35,7 +35,7 @@ fun BottomBarItem(
     ) {
         Icon(
             painter = painterResource(id = icon),
-            contentDescription = stringResource(R.string.bottombaritem),
+            contentDescription = stringResource(R.string.iconbutton),
             tint = MaterialTheme.colorScheme.onSurface
         )
     }
@@ -46,6 +46,6 @@ fun BottomBarItem(
 @Composable
 fun BottomBarItemPreview() {
     PinterestCloneTheme {
-        BottomBarItem(Modifier, icon = AppIcons.HomeIcon)
+        IconButton(Modifier, icon = AppIcons.HomeIcon)
     }
 }

@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">Catalog</string>
     <string name="app_name_debug" translatable="false">CatalogDebug</string>
 
-    <string name="bottombaritem">BottomBarItem</string>
+    <string name="iconbutton">IconButton</string>
 
     <string-array name="category">
         <item>Travel</item>

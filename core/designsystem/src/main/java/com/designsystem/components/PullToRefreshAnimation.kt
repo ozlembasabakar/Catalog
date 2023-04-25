@@ -1,4 +1,4 @@
-package com.example.pinterestclone.swiperefresh
+package com.designsystem.components
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -21,12 +21,12 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
-import com.example.designsystem.icon.AppIcons
-import com.example.designsystem.theme.CustomRefreshAnimationPadding
-import com.example.designsystem.theme.CustomRefreshAnimationSize
+import com.designsystem.icon.AppIcons
+import com.designsystem.theme.PullToRefreshAnimationPadding
+import com.designsystem.theme.PullToRefreshAnimationSize
 
 @Composable
-fun CustomRefreshAnimation(
+fun PullToRefreshAnimation(
     modifier: Modifier = Modifier,
     isRefreshing: () -> Boolean,
     willRefresh: () -> Boolean,
@@ -34,8 +34,8 @@ fun CustomRefreshAnimation(
 ) {
     Box(
         modifier = modifier
-            .size(CustomRefreshAnimationSize)
-            .padding(CustomRefreshAnimationPadding),
+            .size(PullToRefreshAnimationSize)
+            .padding(PullToRefreshAnimationPadding),
         contentAlignment = Alignment.Center
     ) {
         CircleWithRing(
@@ -104,7 +104,7 @@ fun CircleWithRing(
                 painter = painterResource(id = AppIcons.SwipeRefreshLoadingArrow),
                 contentDescription = null,
                 modifier = Modifier
-                    .padding(CustomRefreshAnimationPadding)
+                    .padding(PullToRefreshAnimationPadding)
                     .rotate(rotation)
                     .align(Alignment.Center)
                     .scale(offsetProgress)

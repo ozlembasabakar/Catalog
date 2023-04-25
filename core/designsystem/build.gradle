@@ -49,6 +49,8 @@ android {
 
 dependencies {
 
+    implementation project(path: ':core:model')
+
     implementation platform(libs.androidx.compose.bom)
     androidTestImplementation platform(libs.androidx.compose.bom)
 
@@ -70,4 +72,10 @@ dependencies {
 
     //Splash Screen API
     implementation libs.splash.screen
+
+    //Pull To Refresh
+    implementation libs.swiperefresh
+
+    //Glide
+    implementation libs.glide
 }

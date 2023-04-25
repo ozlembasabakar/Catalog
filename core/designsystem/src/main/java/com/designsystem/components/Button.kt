@@ -1,4 +1,4 @@
-package com.example.pinterestclone.tabs
+package com.designsystem.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
@@ -12,25 +12,25 @@ import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.designsystem.theme.*
+import com.designsystem.theme.*
 
 @Composable
-fun TabItem(
+fun Button(
     modifier: Modifier,
-    category: String,
+    text: String,
     isSelected: Boolean,
     onClick: (String) -> Unit,
 ) {
 
     Column(
         modifier = modifier
-            .height(TabItemHeight)
+            .height(ButtonHeight)
             .background(MaterialTheme.colorScheme.surface)
             .width(IntrinsicSize.Max)
             .clickable(
                 onClick = {
                     onClick(
-                        category
+                        text
                     )
                 }
             ),
@@ -38,20 +38,20 @@ fun TabItem(
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = category,
+            text = text,
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier
                 .padding(
-                    vertical = TabItemVerticalPadding,
-                    horizontal = TabItemHorizontalPadding
+                    vertical = ButtonVerticalPadding,
+                    horizontal = ButtonHorizontalPadding
                 )
                 .wrapContentHeight(CenterVertically)
                 .wrapContentWidth(),
         )
         Box(
             modifier = Modifier
-                .height(TabItemDividerHeight)
+                .height(ButtonDividerHeight)
                 .fillMaxWidth()
                 .clip(MaterialTheme.shapes.small)
                 .background(
@@ -69,9 +69,9 @@ fun TabItem(
 @Composable
 fun TabItemPreview_isSelected() {
     PinterestCloneTheme {
-        TabItem(
+        Button(
             modifier = Modifier,
-            category = "Category",
+            text = "Category",
             onClick = {},
             isSelected = true
         )
@@ -83,9 +83,9 @@ fun TabItemPreview_isSelected() {
 @Composable
 fun TabItemPreview() {
     PinterestCloneTheme {
-        TabItem(
+        Button(
             modifier = Modifier,
-            category = "Category",
+            text = "Category",
             onClick = {},
             isSelected = false
         )

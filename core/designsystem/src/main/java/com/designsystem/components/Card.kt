@@ -1,4 +1,4 @@
-package com.example
+package com.designsystem.components
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
@@ -19,21 +19,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.example.designsystem.icon.AppIcons
-import com.example.designsystem.theme.Heart
-import com.example.designsystem.theme.PinterestCloneTheme
+import com.designsystem.icon.AppIcons
+import com.designsystem.theme.Heart
+import com.designsystem.theme.PinterestCloneTheme
 import com.example.designsystem.R
-import com.example.designsystem.theme.PostCardRowPadding
-import com.example.designsystem.theme.Shapes
+import com.designsystem.theme.CardRowPadding
+import com.designsystem.theme.Shapes
 
 private const val THUMBNAIL_DIMENSION = 50
 
 @SuppressLint("CheckResult")
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun PostCard(
+fun Card(
     modifier: Modifier,
-    image: String?,
+    model: String?,
     likes: Int,
     description: String?,
 ) {
@@ -44,7 +44,7 @@ fun PostCard(
             .background(MaterialTheme.colorScheme.surface)
     ) {
         GlideImage(
-            model = image,
+            model = model,
             contentDescription = stringResource(R.string.image_description),
             modifier = Modifier
                 .fillMaxWidth()
@@ -64,9 +64,9 @@ fun PostCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    start = PostCardRowPadding,
-                    end = PostCardRowPadding,
-                    top = PostCardRowPadding
+                    start = CardRowPadding,
+                    end = CardRowPadding,
+                    top = CardRowPadding
                 ),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -76,13 +76,13 @@ fun PostCard(
                         painter = painterResource(id = AppIcons.HeartIcon),
                         contentDescription = stringResource(R.string.likes),
                         tint = Heart,
-                        modifier = Modifier.padding(end = PostCardRowPadding)
+                        modifier = Modifier.padding(end = CardRowPadding)
                             .testTag("PostCardLikes")
                     )
                     Text(
                         text = "$likes",
                         color = MaterialTheme.colorScheme.onSurface,
-                        modifier = Modifier.padding(start = PostCardRowPadding)
+                        modifier = Modifier.padding(start = CardRowPadding)
                     )
                 }
             }
@@ -102,9 +102,9 @@ fun PostCard(
 @Composable
 fun PostCardPreview_WithDescriptionAndLikes() {
     PinterestCloneTheme {
-        PostCard(
+        Card(
             modifier = Modifier,
-            image = AppIcons.PseudoImageOne.toString(),
+            model = AppIcons.PseudoImageOne.toString(),
             likes = 1,
             description = "Description"
         )

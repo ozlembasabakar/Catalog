@@ -1,4 +1,4 @@
-package com.example.designsystem.icon
+package com.designsystem.icon
 
 import com.example.designsystem.R
 

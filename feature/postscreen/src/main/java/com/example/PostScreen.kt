@@ -1,8 +1,7 @@
-package com.example.pinterestclone.homeScreen
+package com.example
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
-import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
@@ -12,13 +11,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.PostCard
-import com.example.designsystem.icon.AppIcons
-import com.example.designsystem.theme.*
+import com.designsystem.components.Card
+import com.designsystem.components.PullToRefresh
+import com.designsystem.components.Tabs
+import com.designsystem.icon.AppIcons
+import com.designsystem.theme.*
 import com.example.model.Category
 import com.example.model.PostInfoWithCategory
-import com.example.pinterestclone.swiperefresh.CustomPullToRefresh
-import com.example.pinterestclone.tabs.Tabs
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(
@@ -26,7 +25,7 @@ import com.example.pinterestclone.tabs.Tabs
     ExperimentalFoundationApi::class
 )
 @Composable
-fun HomeScreen(
+fun PostScreen(
     modifier: Modifier,
     category: List<Category>,
     post: List<PostInfoWithCategory>,
@@ -34,8 +33,6 @@ fun HomeScreen(
     isRefreshing: Boolean,
     selectedItem: MutableState<String>,
 ) {
-
-    Log.d("ozlem", "HomeScreen: ${post.size}")
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.surface,
@@ -54,7 +51,7 @@ fun HomeScreen(
                 category = category,
                 selectedItem = selectedItem
             )
-            CustomPullToRefresh(
+            PullToRefresh(
                 isRefreshing = isRefreshing,
                 onRefresh = onRefresh
             ) {
@@ -65,9 +62,9 @@ fun HomeScreen(
                     content =
                     {
                         items(post) {
-                            PostCard(
+                            Card(
                                 modifier = modifier,
-                                image = it.url,
+                                model = it.url,
                                 likes = it.likes,
                                 description = it.description
                             )
@@ -82,7 +79,7 @@ fun HomeScreen(
 @Preview(name = "LightMode", showSystemUi = true)
 @Preview(name = "DarkMode", uiMode = Configuration.UI_MODE_NIGHT_YES, showSystemUi = true)
 @Composable
-fun HomeScreenPreview() {
+fun PostScreenPreview() {
     PinterestCloneTheme {
 
         val selectedItem = remember {
@@ -187,7 +184,7 @@ fun HomeScreenPreview() {
             ),
         )
 
-        HomeScreen(
+        PostScreen(
             Modifier,
             category = category,
             post = post,

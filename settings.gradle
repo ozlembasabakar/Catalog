@@ -14,7 +14,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "PinterestClone"
 include ':app'
-include ':feature:post'
+include ':feature:postscreen'
 include ':core:network'
 include ':core:data'
 include ':core:model'

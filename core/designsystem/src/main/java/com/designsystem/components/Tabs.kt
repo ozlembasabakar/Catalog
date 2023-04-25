@@ -1,4 +1,4 @@
-package com.example.pinterestclone.tabs
+package com.designsystem.components
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
@@ -11,9 +11,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.designsystem.theme.PinterestCloneTheme
-import com.example.designsystem.theme.TabsHorizontalPadding
-import com.example.designsystem.theme.TabsVerticalPadding
+import com.designsystem.theme.PinterestCloneTheme
+import com.designsystem.theme.TabsHorizontalPadding
+import com.designsystem.theme.TabsVerticalPadding
 import com.example.model.Category
 
 @SuppressLint("StateFlowValueCalledInComposition")
@@ -36,9 +36,9 @@ fun Tabs(
         ),
     ) {
         items(category) { category ->
-            TabItem(
+            Button(
                 modifier = Modifier,
-                category = category.title,
+                text = category.title,
                 isSelected = selectedItem.value == category.title,
                 onClick = {
                     selectedItem.value = it
