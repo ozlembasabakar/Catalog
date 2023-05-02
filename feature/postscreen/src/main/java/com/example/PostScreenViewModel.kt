@@ -24,12 +24,11 @@ class PostScreenViewModel @Inject constructor(
     private val _postState = MutableStateFlow(PostWithCategoryViewState())
     val postState: StateFlow<PostWithCategoryViewState> = _postState.asStateFlow()
 
-    private val _isRefreshing = MutableStateFlow(false)
-    val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
-
-
     private val _tabsState = MutableStateFlow(TabsViewState())
     val tabsState: StateFlow<TabsViewState> = _tabsState.asStateFlow()
+
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
 
     val selectedItem = mutableStateOf("Fashion & Beauty")
 

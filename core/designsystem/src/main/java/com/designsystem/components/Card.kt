@@ -1,6 +1,5 @@
 package com.designsystem.components
 
-import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -20,15 +19,14 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.designsystem.icon.AppIcons
+import com.designsystem.theme.CardRowPadding
 import com.designsystem.theme.Heart
 import com.designsystem.theme.PinterestCloneTheme
-import com.example.designsystem.R
-import com.designsystem.theme.CardRowPadding
 import com.designsystem.theme.Shapes
+import com.example.designsystem.R
 
 private const val THUMBNAIL_DIMENSION = 50
 
-@SuppressLint("CheckResult")
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun Card(
@@ -76,7 +74,8 @@ fun Card(
                         painter = painterResource(id = AppIcons.HeartIcon),
                         contentDescription = stringResource(R.string.likes),
                         tint = Heart,
-                        modifier = Modifier.padding(end = CardRowPadding)
+                        modifier = Modifier
+                            .padding(end = CardRowPadding)
                             .testTag("PostCardLikes")
                     )
                     Text(
