@@ -24,7 +24,7 @@ val TabsHorizontalPadding = 10.dp
 
 val HomeScreenHorizontalPadding = 8.dp
 val HomeScreenVerticalPadding = 12.dp
-val HomeScreenStaggeredGridCells = 2
+const val HomeScreenStaggeredGridCells = 2
 
 val PullToRefreshAnimationPadding = 12.dp
 val PullToRefreshAnimationSize = 80.dp

@@ -4,11 +4,9 @@ import com.example.model.Category
 import com.example.model.PostInfoWithCategory
 import com.example.repository.category.CategoryRepository
 import com.example.repository.post.PostRepository
-import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-@Suppress("UNREACHABLE_CODE")
 class Repository @Inject constructor(
     private val categoryRepository: CategoryRepository,
     private val postRepository: PostRepository,
