@@ -1,22 +1,18 @@
 package com.example.pinterestclone
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.PostViewModel
-import com.example.pinterestclone.common.checkForInternet
-import com.example.pinterestclone.homeScreen.HomeScreen
-import com.example.pinterestclone.tabs.TabsViewModel
+import com.example.PostScreen
+import com.example.PostScreenViewModel
 
 @SuppressLint("UnrememberedMutableState", "StateFlowValueCalledInComposition", "RememberReturnType")
 @Composable
@@ -24,17 +20,14 @@ fun CatalogNavHost() {
 
     val navController = rememberNavController()
 
-    val context = LocalContext.current
+    val postScreenViewModel: PostScreenViewModel = hiltViewModel()
 
-    val tabsViewModel: TabsViewModel = hiltViewModel()
-    val tabsViewState by tabsViewModel.state.collectAsStateWithLifecycle()
-
-    val postViewModel: PostViewModel = hiltViewModel()
-    val postWithTopicsViewState by postViewModel.state.collectAsStateWithLifecycle()
-    val isRefreshing by postViewModel.isRefreshing.collectAsStateWithLifecycle()
+    val tabsViewState by postScreenViewModel.tabsState.collectAsStateWithLifecycle()
+    val postWithTopicsViewState by postScreenViewModel.postState.collectAsStateWithLifecycle()
+    val isRefreshing by postScreenViewModel.isRefreshing.collectAsStateWithLifecycle()
 
     val category = mutableStateOf(
-        tabsViewModel.selectedItem.value
+        postScreenViewModel.selectedItem.value
     ).toString()
         .lowercase()
         .replace("mutablestate(value=", "")
@@ -43,14 +36,8 @@ fun CatalogNavHost() {
         .replace("interiors", "interior")
         .split(")")[0]
 
-    Log.d("ozlem", "category: $category")
-
     LaunchedEffect(category) {
-        tabsViewModel.getAllCategoriesFromDatabase()
-        postViewModel.getAllPostsInfoByCategoryFromDatabase(category)
-
-        if (checkForInternet(context))
-            postViewModel.getAllPostsInfoByCategoryFromNetwork(category)
+        postScreenViewModel.getAllPostsInfoByCategoryFromDatabase(category)
     }
 
     NavHost(
@@ -59,23 +46,15 @@ fun CatalogNavHost() {
         startDestination = Screen.HomeScreen.route
     ) {
         composable(Screen.HomeScreen.route) {
-            HomeScreen(
+            PostScreen(
                 modifier = Modifier,
                 category = tabsViewState.category,
                 post = postWithTopicsViewState.info,
                 isRefreshing = isRefreshing,
                 onRefresh = {
-                    Log.d(
-                        "ozlem",
-                        "postWithTopicsViewState in onRefresh: ${postWithTopicsViewState.info}"
-                    )
-                    postViewModel.insertNewPostsInfoByCategory(category)
+                    postScreenViewModel.insertNewPostsInfoByCategory(category)
                 },
-                selectedItem = tabsViewModel.selectedItem,
-            )
-            Log.d(
-                "ozlem",
-                "postWithTopicsViewState in LaunchedEffect: ${postWithTopicsViewState.info}"
+                selectedItem = postScreenViewModel.selectedItem,
             )
         }
     }

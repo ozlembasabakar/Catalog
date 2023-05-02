@@ -1,16 +1,15 @@
 plugins {
-    alias libs.plugins.android.application
+    alias libs.plugins.android.library
     alias libs.plugins.kotlin.android
     alias libs.plugins.kotlin.kapt
-    alias libs.plugins.dagger.hilt
 }
 
 android {
-    namespace 'com.example.pinterestclone'
+    namespace 'com.example.designsystem'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.pinterestclone"
+        //applicationId "com.example.designsystem"
         minSdk 21
         targetSdk 33
         versionCode 1
@@ -24,24 +23,8 @@ android {
 
     buildTypes {
         release {
-            debuggable true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [
-                    appIcon     : "@mipmap/ic_launcher",
-                    appIconRound: "@mipmap/ic_launcher",
-                    appName     : "@string/app_name",
-                    appTheme    : "@style/Theme.App.Starting"
-            ]
-        }
-        debug {
-            debuggable true
-            manifestPlaceholders = [
-                    appIcon     : "@mipmap/ic_launcher_debug",
-                    appIconRound: "@mipmap/ic_launcher_debug",
-                    appName     : "@string/app_name_debug",
-                    appTheme    : "@style/Theme.App.Starting"
-            ]
         }
     }
     compileOptions {
@@ -66,17 +49,13 @@ android {
 
 dependencies {
 
-    implementation project(path: ':feature:postscreen')
-    implementation project(path: ':core:data')
     implementation project(path: ':core:model')
-    implementation project(path: ':core:designsystem')
 
     implementation platform(libs.androidx.compose.bom)
     androidTestImplementation platform(libs.androidx.compose.bom)
 
     implementation libs.core.ktx
     implementation libs.lifecycle.runtime.ktx
-    implementation libs.lifecycle.runtime
     implementation libs.activity.compose
     implementation libs.compose.ui
     implementation libs.compose.ui.tooling.preview
@@ -87,27 +66,16 @@ dependencies {
     androidTestImplementation libs.compose.ui.test.junit4
     debugImplementation libs.compose.ui.tooling
     debugImplementation libs.compose.ui.test.manifest
-    androidTestImplementation libs.compose.ui.test
-
-    //Splash Screen API
-    implementation libs.splash.screen
 
     //System UI Controller
     implementation libs.system.ui.controller
 
-    //Dagger-Hilt
-    implementation libs.hilt.android
-    kapt libs.dagger.hilt.compiler
-    implementation libs.hilt.navigation.compose
-    kapt libs.hilt.android.compiler
-    kapt libs.hilt.hilt.compiler
-
-    //Navigation
-    implementation libs.navigation.compose
-
-    //LazyVerticalStaggeredGrid
-    implementation libs.foundation
+    //Splash Screen API
+    implementation libs.splash.screen
 
     //Pull To Refresh
     implementation libs.swiperefresh
+
+    //Glide
+    implementation libs.glide
 }
