@@ -123,26 +123,20 @@ Core module contains code and specific dependencies between other modules in the
   <tr>
    <td><code>app</code>
    </td>
-   <td>It includes basic UI components and navigation. It brings together the elements necessary for the application to work properly.
+   <td>It includes navigation. It brings together the elements necessary for the application to work properly.
    </td>
    <td><code>MainActivity</code><br>
    <code>CatalogNavHost</code><br>
      <code>CatalogApplication</code><br>
-     <code>HomeScreen</code><br>
-     <code>Tabs</code><br>
-     <code>- TabItem</code><br>
-     <code>- TabsViewModel</code><br>
-     <code>SwipeRefresh</code><br>
-     <code>Common</code><br>
      <code>CatalogApplication</code><br>
    </td>
   </tr>
   <tr>
-   <td><code>feature:post</code><br></td>
+   <td><code>feature:postscreen</code><br></td>
    <td>The structure that will be shown on the home screen.  It has the ViewModel structure, from which it can receive the data for the screen display. ViewModel also makes data accessible by gaining access to it from other sources.<br>
    </td>
-   <td><code>PostCard</code><br>
-   <code>PostCardViewModel</code>
+   <td><code>PostScreen</code><br>
+   <code>PostScreenViewModel</code>
    </td>
   </tr>
   <tr>
@@ -161,9 +155,20 @@ Core module contains code and specific dependencies between other modules in the
    <td>Local database storage using Room.
    </td>
    <td><code>PostDatabase</code><br>
-   <code>DatabaseMigrations</code><br>
    <code>Dao</code> classes
    </td>
+  </tr>
+  
+  <tr>
+   <td><code>core:designsystem</code>
+   </td>
+   <td>Components, icons and theme components used throughout the app.
+   </td>
+      <td>
+     <code>componenets</code> classes<br>
+    <code>icon</code> classes<br>
+    <code>theme</code> classes
+    </td>
   </tr>
   <tr>
    <td><code>core:network</code>
@@ -187,4 +192,3 @@ Core module contains code and specific dependencies between other modules in the
    </td>
   </tr>
 </table>
-
